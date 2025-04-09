@@ -1,0 +1,216 @@
+from pyspark.sql import SparkSession
+
+# Start Spark
+spark = SparkSession.builder.appName("BroadcastRDD").getOrCreate()
+sc = spark.sparkContext
+
+# Sample RDD: (user_id, country_code)
+users_rdd = sc.parallelize([
+    (1, "US"),
+    (2, "IN"),
+    (3, "FR"),
+    (4, "DE")
+])
+
+# Small dictionary: country_code -> country_name
+country_dict = {
+    "US": "United States",
+    "IN": "India",
+    "FR": "France",
+    "DE": "Germany"
+}
+
+# Broadcast the dictionary
+broadcast_countries = sc.broadcast(country_dict)
+
+# Map the RDD to add country names
+def add_country_name(record):
+    user_id, code = record
+    country_name = broadcast_countries.value.get(code, "Unknown")
+    return (user_id, code, country_name)
+
+enriched_rdd = users_rdd.map(add_country_name)
+
+# Show result
+for row in enriched_rdd.collect():
+    print(row)
+
+----------------------------------------
+users_rdd = sc.parallelize([
+    (1, "US"),
+    (2, "IN"),
+    (3, "FR"),
+    (4, "DE"),
+    (5, "CN")
+])
+
+# List of allowed country codes
+allowed_countries = ["US", "IN", "FR"]
+
+# Broadcast it
+broadcast_allowed = sc.broadcast(allowed_countries)
+
+# Filter using broadcast
+filtered_rdd = users_rdd.filter(lambda x: x[1] in broadcast_allowed.value)
+
+print(filtered_rdd.collect())
+-----------------------------------------------------
+# Sales data RDD
+sales_rdd = sc.parallelize([
+    (101, 2),
+    (102, 1),
+    (103, 5),
+    (101, 3),
+    (102, 2)
+])
+
+# Product prices
+price_map = {
+    101: 10.0,
+    102: 20.0,
+    103: 15.0
+}
+
+# Broadcast the price list
+broadcast_prices = sc.broadcast(price_map)
+
+# Map to (product_id, total_value)
+sales_value_rdd = sales_rdd.map(lambda x: (x[0], x[1] * broadcast_prices.value.get(x[0], 0)))
+
+# Reduce to get total per product
+total_value_rdd = sales_value_rdd.reduceByKey(lambda x, y: x + y)
+
+print(total_value_rdd.collect())
+----------------------------------------------------------------------
+transactions_rdd = sc.parallelize([
+    (1, 100),
+    (2, 200),
+    (3, 150)
+])
+
+# Global setting: currency
+config = {"currency": "USD"}
+
+# Broadcast the config
+broadcast_config = sc.broadcast(config)
+
+# Add currency field
+updated_rdd = transactions_rdd.map(lambda x: (x[0], x[1], broadcast_config.value["currency"]))
+
+print(updated_rdd.collect())
+
+
+-----------------------------------------------------------------------------------------------------------
+An accumulator is a shared variable that workers can only add to.
+
+The driver can read the final value.
+
+The executors can only update (increment) it.
+
+🧠 Common use cases:
+Counting bad records during data cleaning
+
+Tracking number of rows processed
+
+Debugging logic with side counters
+
+Key Rules:
+Write-only for workers (executors).
+
+Read-only for driver (you can read final value after action like .collect() or .count()).
+
+Used only for side-effects, not for logic (since updates are not guaranteed to be seen immediately).
+
+
+--------------------------------------------------------------------------------------
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName("AccumulatorExample").getOrCreate()
+sc = spark.sparkContext
+
+# RDD with some bad records (missing age)
+data_rdd = sc.parallelize([
+    "Alice,30",
+    "Bob,25",
+    "Charlie,",
+    "David,40"
+])
+
+# Create an accumulator
+bad_record_counter = sc.accumulator(0)
+
+# Function to parse and count bad records
+def parse_record(line):
+    parts = line.split(",")
+    if len(parts) != 2 or not parts[1].isdigit():
+        bad_record_counter.add(1)
+        return None
+    return (parts[0], int(parts[1]))
+
+# Transform the RDD
+parsed_rdd = data_rdd.map(parse_record).filter(lambda x: x is not None)
+
+# Trigger action
+print(parsed_rdd.collect())
+
+# Now we can read the accumulator
+print(f"Bad records count: {bad_record_counter.value}")
+------------------------------------------------------
+
+When you perform transformations (like .map, .filter, etc.), Spark builds a lineage of operations. Every time you trigger an action (like .collect()), Spark recomputes the RDD from scratch — unless you persist it.
+
+So if you're reusing an RDD multiple times:
+Use .persist() or .cache() to avoid recomputation and improve performance.
+
+persist() vs .cache()
+Method	Storage Level	What it does
+.cache()	MEMORY_ONLY	Stores RDD in memory
+.persist()	You choose (e.g. MEMORY_AND_DISK)	Gives more control over where to store
+
+
+
+
+row_counter = sc.accumulator(0)
+
+rdd = sc.parallelize([10, 20, 30, 40, 50])
+
+def process(x):
+    row_counter.add(1)
+    return x * 2
+
+rdd2 = rdd.map(process)
+
+print(rdd2.collect())  # Triggers the computation
+print(f"Rows processed: {row_counter.value}")
+
+------------------------------------
+rdd = sc.parallelize([1, 2, 3, 4, 5])
+
+# Transform RDD
+squared_rdd = rdd.map(lambda x: x * x)
+
+# Cache the result for reuse
+squared_rdd.cache()
+
+# First action: triggers computation and caching
+print("Sum:", squared_rdd.sum())
+
+# Second action: uses cached data
+print("Count:", squared_rdd.count())
+
+-------------------------------------------------------------------------
+
+from pyspark import StorageLevel
+
+rdd = sc.parallelize(range(1, 6))
+double_rdd = rdd.map(lambda x: x * 2)
+
+# Persist in memory, and disk if not enough memory
+double_rdd.persist(StorageLevel.MEMORY_AND_DISK)
+
+# Trigger and reuse
+print(double_rdd.collect())
+print(double_rdd.reduce(lambda x, y: x + y))
+
+double_rdd.unpersist()
+

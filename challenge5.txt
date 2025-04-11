@@ -1,0 +1,79 @@
+[
+    ("Alice", 85),
+    ("Bob", 90),
+    ("Alice", 95),
+    ("Bob", 80),
+    ("Charlie", 70),
+    ("Charlie", 75),
+    ("Alice", 100),
+    ("Bob", 60)
+]
+-------------------
+1,50
+2,100
+1,25
+3,75
+2,150
+1,75
+Create an RDD from the input data.
+
+Transform it into key-value pairs: (customer_id, amount_spent).
+
+Use groupByKey() to group transactions by customer.
+
+Calculate total amount spent per customer.
+
+Collect and display the results.
+
+----------------------------------------
+1,50
+2,100
+1,25
+3,75
+2,150
+1,75
+
+Create an RDD from this input data.
+
+Convert it into key-value pairs: (customer_id, amount_spent).
+
+Use reduceByKey() to calculate total spent by each customer.
+
+Sort the results by total spent in descending order.
+
+Print out the results.
+-----------------------------------------------------------
+[
+    ("Alice", 85),
+    ("Bob", 90),
+    ("Alice", 95),
+    ("Bob", 80),
+    ("Charlie", 70),
+    ("Charlie", 75),
+    ("Alice", 100),
+    ("Bob", 60)
+]
+
+Create an RDD from the sample data.
+
+Use aggregateByKey() to compute:
+
+Maximum score per student
+
+Minimum score per student
+
+Return results as (student_name, (max_score, min_score))
+
+Sort the output by student name alphabetically.
+
+--------------------------------------------------------------
+
+Create an RDD from this data.
+
+Swap key-value pairs so the number of purchases becomes the key.
+
+Use sortByKey() to sort products by purchase count in descending order.
+
+Swap the result back to (product_name, count) format.
+
+Return the top 3 most popular products.

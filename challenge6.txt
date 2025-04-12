@@ -1,0 +1,134 @@
+1: Create a DataFrame from a List of Tuples
+Description:
+You are given a list of employee records in the format:
+[("Alice", 30, "HR"), ("Bob", 45, "Finance"), ("Charlie", 25, "IT")]
+Create a PySpark DataFrame with column names: ["Name", "Age", "Department"]
+
+2 Challenge 2: Create a DataFrame from a CSV File
+CSV file named products.csv with the following structure:
+
+product_id,product_name,price
+
+3 Create a DataFrame from the following list of dictionaries:
+
+data = [{"id": 101, "score": 88.5}, {"id": 102, "score": 92.3}]
+
+4 Create a DataFrame from RDD
+
+RDD with data:
+
+rdd = spark.sparkContext.parallelize([
+    ("Tom", "A", 90),
+    ("Jerry", "B", 80),
+    ("Spike", "C", 70)
+])
+
+5You have a DataFrame of orders with the following schema:
+
++---------+--------+--------+
+|order_id |amount  |status  |
++---------+--------+--------+
+|1        |150     |shipped |
+|2        |75      |pending |
+|3        |200     |shipped |
+
+Filter and return only the orders where the amount is greater than 100.
+
+6 Filter orders where status == 'shipped'.
+
+7 Using this DataFrame:
+
++------+---+--------+
+|name  |age|country |
++------+---+--------+
+|Alice |30 |USA     |
+|Bob   |45 |UK      |
+|Chloe |22 |USA     |
+Task:ter rows where age > 25 AND country == 'USA'.
+
+8 
++------+-------+
+|name  |salary |
++------+-------+
+|John  |50000  |
+|Emma  |null   |
+|Liam  |45000  |
+Task:
+Filter and return rows where salary is NOT null.
+
+9 +-------+----+
+| name  | age|
++-------+----+
+| Alice | 25 |
+| Bob   | 30 |
+
+Add a new column called "country" and set the value to "USA" for all rows using .withColumn().
+10 --------+--------+
+| item   | price  |
++--------+--------+
+| Apple  | 1.5    |
+| Banana | 0.75   |
+
+Add a new column called "price_with_tax" assuming a 10% tax rate.
+
+11 
++--------+-------+
+| user_id| points|
++--------+-------+
+| 101    | "45"  |
+| 102    | "30"  |
+Task:
+Convert the "points" column from string to integer using .withColumn() and cast().
+
+12 
++-------------------+
+| email             |
++-------------------+
+| alice@gmail.com   |
+| bob@yahoo.com     |
+Task:
+Create a new column "domain" that extracts the domain (after the @ symbol) using .withColumn() and split() or substr().
+
+13 Rename Columns Using withColumnRenamed()
+Data:
+
+
++---------+-------+-------+
+| first   | last  | age   |
++---------+-------+-------+
+| Alice   | Smith | 30    |
+| Bob     | Brown | 25    |
+Task:
+Rename the columns to:
+
+first -> first_name
+
+last -> last_name
+
+age -> age_years
+
+14 
+Drop a Column
+
++----------+---------+--------+---------+
+| user_id  | username| email  | country |
++----------+---------+--------+---------+
+| 1        | john    | john@example.com | USA |
+| 2        | jane    | jane@example.com | UK  |
+
+15 Rename and Drop Columns Together
+Data:
+
++--------+---------+---------+
+| emp_id | emp_name| salary  |
++--------+---------+---------+
+| 101    | Alice   | 50000   |
+| 102    | Bob     | 60000   |
+Task:
+
+Rename the "emp_id" column to "employee_id".
+
+Drop the "salary" column from the DataFrame.
+
+
+

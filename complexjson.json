@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "name": "Alice",
+  "address": {
+    "street": "123 Main St",
+    "city": "Wonderland",
+    "zip": "12345"
+  },
+  "orders": [
+    {
+      "order_id": "A001",
+      "amount": 250.5
+    },
+    {
+      "order_id": "A002",
+      "amount": 125.0
+    }
+  ]
+}

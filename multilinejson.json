@@ -1,0 +1,30 @@
+[
+  {
+    "Name": {
+      "First Name": "John",
+      "Last Name": "Doe"
+    },
+    "Address": {
+      "Building No": "123",
+      "Street Name": "Main Street",
+      "Pin Code": "12345",
+      "City": "Metropolis",
+      "State": "California",
+      "Country": "United States"
+    }
+  },
+  {
+    "Name": {
+      "First Name": "Alice",
+      "Last Name": "Smith"
+    },
+    "Address": {
+      "Building No": "456",
+      "Street Name": "Oak Avenue",
+      "Pin Code": "54321",
+      "City": "Smalltown",
+      "State": "New York",
+      "Country": "United States"
+    }
+  }
+]

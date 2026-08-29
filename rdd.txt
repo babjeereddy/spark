@@ -1,0 +1,989 @@
+1. RDD Basics
+Interview focus
+
+Students should know:
+
+What is RDD?
+Why is RDD fault tolerant?
+RDD is immutable
+Lazy evaluation
+Transformation vs Action
+Partitioning
+Lineage
+Distributed processing
+Hands-on
+
+Create an RDD:
+
+from pyspark import SparkContext
+
+sc = SparkContext("local[*]", "RDDExample")
+
+numbers = sc.parallelize([10, 20, 30, 40, 50])
+
+print(numbers.collect())
+print(numbers.count())
+Practice
+Create RDD from a Python list.
+Create RDD using textFile().
+Find number of records.
+Find first 5 records.
+Find maximum value.
+Find minimum value.
+Find number of partitions.
+2. map()
+Concept
+
+map() applies a function to every element.
+
+Hands-on
+numbers = sc.parallelize([1, 2, 3, 4, 5])
+
+result = numbers.map(lambda x: x * 2)
+
+print(result.collect())
+
+Output:
+
+[2, 4, 6, 8, 10]
+Interview Hands-on
+
+Given:
+
+10, 20, 30, 40, 50
+
+Perform:
+
+Multiply every number by 10.
+Add 5 to every number.
+Convert every string to uppercase.
+Extract employee names from tuples.
+Calculate salary after 10% increment.
+3. filter()
+Concept
+
+Used to select records based on a condition.
+
+numbers = sc.parallelize([10, 15, 20, 25, 30])
+
+result = numbers.filter(lambda x: x > 20)
+
+print(result.collect())
+
+Output:
+
+[25, 30]
+Hands-on
+
+Given employee data:
+
+employees = sc.parallelize([
+    ("John", 50000),
+    ("David", 70000),
+    ("Smith", 40000),
+    ("James", 90000)
+])
+
+Tasks:
+
+Find employees earning > 50,000.
+Find employees earning < 60,000.
+Find employees whose name starts with J.
+Find employees earning between 50,000 and 80,000.
+4. flatMap()
+Interview difference
+
+map() → one input can produce one output.
+
+flatMap() → one input can produce zero, one, or many outputs.
+
+Hands-on
+data = sc.parallelize([
+    "Spark is fast",
+    "Spark is powerful",
+    "PySpark is useful"
+])
+
+words = data.flatMap(lambda x: x.split())
+
+print(words.collect())
+
+Output:
+
+['Spark', 'is', 'fast', 'Spark', 'is', 'powerful', 'PySpark', 'is', 'useful']
+Hands-on tasks
+Split sentences into words.
+Count words.
+Extract email IDs.
+Extract numbers from strings.
+Convert nested lists into a single list.
+5. mapValues()
+Important interview point
+
+mapValues() works only on Pair RDDs.
+
+It modifies the value, while keeping the key unchanged.
+
+data = sc.parallelize([
+    ("IT", 100),
+    ("HR", 200),
+    ("Finance", 300)
+])
+
+result = data.mapValues(lambda x: x * 2)
+
+print(result.collect())
+
+Output:
+
+[
+ ("IT", 200),
+ ("HR", 400),
+ ("Finance", 600)
+]
+Hands-on
+
+Given:
+
+sales = sc.parallelize([
+    ("India", 1000),
+    ("USA", 2000),
+    ("UK", 1500)
+])
+
+Perform:
+
+Increase sales by 10%.
+Convert dollars to rupees.
+Apply 18% GST.
+Add a fixed bonus of 500.
+6. groupByKey()
+Concept
+
+Groups all values belonging to the same key.
+
+data = sc.parallelize([
+    ("IT", 100),
+    ("HR", 200),
+    ("IT", 300),
+    ("HR", 400)
+])
+
+result = data.groupByKey()
+
+print(result.mapValues(list).collect())
+
+Output:
+
+[
+ ("IT", [100, 300]),
+ ("HR", [200, 400])
+]
+Hands-on
+
+Given:
+
+("India", 100)
+("USA", 200)
+("India", 300)
+("UK", 400)
+("USA", 500)
+
+Tasks:
+
+Group sales by country.
+Group employees by department.
+Group products by category.
+Find average salary after grouping.
+Interview question
+
+Why is reduceByKey() generally preferred over groupByKey() for aggregation?
+
+Expected answer:
+
+reduceByKey() performs map-side/local aggregation, which reduces the amount of data shuffled across the network.
+
+7. reduceByKey()
+Very important interview topic 
+
+Used to aggregate values having the same key.
+
+data = sc.parallelize([
+    ("IT", 100),
+    ("HR", 200),
+    ("IT", 300),
+    ("HR", 400)
+])
+
+result = data.reduceByKey(lambda a, b: a + b)
+
+print(result.collect())
+
+Output:
+
+[("IT", 400), ("HR", 600)]
+Hands-on
+
+Given:
+
+sales = sc.parallelize([
+    ("Laptop", 1000),
+    ("Mobile", 500),
+    ("Laptop", 2000),
+    ("Mobile", 1000),
+    ("Tablet", 1500)
+])
+
+Find:
+
+Total sales per product.
+Maximum sale per product.
+Minimum sale per product.
+Total quantity per product.
+Total sales per department.
+8. sortByKey()
+Concept
+
+Sorts a Pair RDD based on the key.
+
+data = sc.parallelize([
+    (30, "C"),
+    (10, "A"),
+    (20, "B")
+])
+
+print(data.sortByKey().collect())
+
+Output:
+
+[(10, 'A'), (20, 'B'), (30, 'C')]
+Descending
+result = data.sortByKey(ascending=False)
+
+print(result.collect())
+Hands-on
+Sort employees by employee ID.
+Sort products by product ID.
+Sort sales amounts in descending order.
+Sort departments alphabetically.
+Find top 5 keys.
+9. join()
+ Interview Topic
+
+Used to join two Pair RDDs based on the key.
+
+employees = sc.parallelize([
+    (1, "John"),
+    (2, "David"),
+    (3, "Smith")
+])
+
+departments = sc.parallelize([
+    (1, "IT"),
+    (2, "HR"),
+    (3, "Finance")
+])
+
+result = employees.join(departments)
+
+print(result.collect())
+
+Output:
+
+[
+ (1, ("John", "IT")),
+ (2, ("David", "HR")),
+ (3, ("Smith", "Finance"))
+]
+Hands-on
+
+Create:
+
+Employee RDD
+
+emp_id, name, dept_id
+
+Department RDD
+
+dept_id, dept_name
+
+Tasks:
+
+Join employee and department.
+Find employees in IT.
+Find employees in Finance.
+Count employees per department.
+Join employee and salary RDDs.
+10. cogroup()
+Concept
+
+cogroup() groups values from multiple Pair RDDs having the same key.
+
+rdd1 = sc.parallelize([
+    (1, "John"),
+    (2, "David")
+])
+
+rdd2 = sc.parallelize([
+    (1, "IT"),
+    (2, "HR")
+])
+
+result = rdd1.cogroup(rdd2)
+
+print(
+    result.mapValues(
+        lambda x: (list(x[0]), list(x[1]))
+    ).collect()
+)
+Hands-on
+
+Create:
+
+Customer RDD
+Order RDD
+Payment RDD
+
+Perform cogroup() using:
+
+customer_id
+
+Find:
+
+Customer details
+Orders
+Payments
+Interview difference
+join()	cogroup()
+Combines matching values	Groups values
+Two Pair RDDs	Can work with multiple Pair RDDs
+Produces paired records	Produces grouped iterables
+Common for relational-style operations	Useful when multiple datasets need grouping
+11. cache()
+Concept
+
+Stores an RDD in memory so that subsequent actions can reuse it.
+
+data = sc.parallelize(range(1, 1000000))
+
+data.cache()
+
+print(data.count())
+print(data.sum())
+Hands-on
+
+Create an RDD and perform:
+
+filter
+map
+count
+sum
+max
+
+Cache the RDD and execute multiple actions.
+
+Interview question
+
+When should we use cache?
+
+When the same RDD/DataFrame is used multiple times and recomputation would be expensive.
+
+12. persist()
+
+persist() allows you to specify the storage level.
+
+from pyspark import StorageLevel
+
+data.persist(StorageLevel.MEMORY_AND_DISK)
+
+print(data.count())
+Important Storage Levels
+MEMORY_ONLY
+MEMORY_AND_DISK
+DISK_ONLY
+MEMORY_ONLY_SER
+MEMORY_AND_DISK_SER
+Interview question
+
+Difference between cache and persist?
+
+Simple answer:
+
+cache()
+    ↓
+Shortcut for persist()
+    ↓
+Default storage level
+
+Example:
+
+data.cache()
+
+is essentially:
+
+data.persist(StorageLevel.MEMORY_ONLY)
+13. Broadcast Variables
+
+
+Used when a small dataset/value needs to be available on all worker nodes.
+
+Example:
+
+broadcast_data = sc.broadcast({
+    1: "IT",
+    2: "HR",
+    3: "Finance"
+})
+
+Use it:
+
+employees = sc.parallelize([
+    (101, "John", 1),
+    (102, "David", 2),
+    (103, "Smith", 3)
+])
+
+result = employees.map(
+    lambda x: (
+        x[0],
+        x[1],
+        broadcast_data.value[x[2]]
+    )
+)
+
+print(result.collect())
+Real-world scenario
+
+You have:
+
+Employee data = 500 GB
+Department lookup = 5 MB
+
+Instead of repeatedly transferring the small department data during joins, broadcast it.
+
+Hands-on
+
+Create:
+
+product_id → product_name
+
+Broadcast the product lookup and enrich transaction data.
+
+14. Accumulator Variables
+Concept
+
+Used for counters and aggregations from executors back to the driver.
+
+counter = sc.accumulator(0)
+
+data = sc.parallelize([1, 2, 3, 4, 5])
+
+def process(x):
+    global counter
+
+    if x % 2 == 0:
+        counter.add(1)
+
+data.foreach(process)
+
+print(counter.value)
+
+Output:
+
+2
+Hands-on
+
+Use accumulator to count:
+
+Invalid records.
+Null records.
+Negative numbers.
+Failed records.
+Records satisfying a condition.
+Interview point
+
+Accumulator is primarily useful for monitoring/debugging counters, not for implementing core business logic.
+
+15. Spark Execution
+
+Students should understand this flow:
+
+Application
+     ↓
+Spark Driver
+     ↓
+SparkSession / SparkContext
+     ↓
+DAG
+     ↓
+Jobs
+     ↓
+Stages
+     ↓
+Tasks
+     ↓
+Executors
+     ↓
+Partitions
+Important interview concepts
+
+Teach:
+
+Driver
+Executor
+Cluster Manager
+Job
+Stage
+Task
+Partition
+DAG
+Narrow transformation
+Wide transformation
+Shuffle
+Lazy evaluation
+16. Local Mode
+Concept
+
+Spark runs on the local machine.
+
+spark-submit --master local[*] my_program.py
+
+Examples:
+
+spark-submit --master local[2] my_program.py
+spark-submit --master local[*] my_program.py
+Hands-on
+
+Run the same PySpark program using:
+
+spark-submit --master local[2] program.py
+
+Then:
+
+spark-submit --master local[*] program.py
+
+Ask students to observe the difference.
+
+17. Cluster Mode
+Concept
+
+Application runs using a distributed cluster.
+
+Typical architecture:
+
+             Driver
+                |
+        Cluster Manager
+          /     |      \
+     Worker   Worker   Worker
+       |        |        |
+   Executor  Executor  Executor
+
+Students should know:
+
+Driver
+Worker
+Executor
+Cluster Manager
+Application
+Task
+Partition
+Cluster managers
+
+Common examples:
+
+Standalone
+YARN
+Kubernetes
+18. spark-submit
+ Interview Topic
+
+Used to submit Spark applications.
+
+Basic:
+
+spark-submit program.py
+
+Local:
+
+spark-submit --master local[*] program.py
+
+Specify deploy mode:
+
+spark-submit \
+  --master yarn \
+  --deploy-mode cluster \
+  program.py
+
+Specify executor resources:
+
+spark-submit \
+  --master yarn \
+  --deploy-mode cluster \
+  --executor-memory 4G \
+  --executor-cores 2 \
+  --num-executors 3 \
+  program.py
+Students should understand
+--master
+--deploy-mode
+--executor-memory
+--executor-cores
+--num-executors
+--driver-memory
+--conf
+Final Interview Hands-On Project
+
+After completing all individual topics, give students one integrated project.
+
+Employee Analytics Project
+
+Input:
+
+emp_id,name,dept_id,salary
+101,John,10,50000
+102,David,20,60000
+103,Smith,10,70000
+104,James,30,80000
+105,Robert,20,55000
+
+Department:
+
+dept_id,dept_name
+10,IT
+20,HR
+30,Finance
+Students must implement
+
+Task 1 — Read data
+
+Create RDDs.
+
+Task 2 — map()
+
+Convert CSV strings into tuples.
+
+Task 3 — filter()
+
+Find employees with salary > 60,000.
+
+Task 4 — mapValues()
+
+Increase salary by 10%.
+
+Task 5 — groupByKey()
+
+Group employees by department.
+
+Task 6 — reduceByKey()
+
+Calculate total salary per department.
+
+Task 7 — sortByKey()
+
+Sort departments based on department ID.
+
+Task 8 — join()
+
+Join employees with departments.
+
+Task 9 — cogroup()
+
+Combine employee and salary-related RDDs.
+
+Task 10 — cache()
+
+Cache employee RDD because it is reused multiple times.
+
+Task 11 — persist()
+
+Persist another frequently reused RDD using MEMORY_AND_DISK.
+
+Task 12 — Broadcast
+
+Broadcast department lookup.
+
+Task 13 — Accumulator
+
+Count invalid employee records.
+
+Task 14 — Spark Submit
+
+Run:
+
+spark-submit --master local[*] employee_analysis.py
+🔥 Most Important Interview Questions
+
+Make sure students can answer these without coding:
+
+What is RDD?
+What are the characteristics of RDD?
+What is lazy evaluation?
+Difference between transformation and action?
+Difference between map() and flatMap()?
+Difference between map() and mapValues()?
+Difference between groupByKey() and reduceByKey()?
+Why is reduceByKey() preferred over groupByKey()?
+What is shuffle?
+What are narrow and wide transformations?
+Is filter() narrow or wide?
+Is groupByKey() narrow or wide?
+Is reduceByKey() narrow or wide?
+What is sortByKey()?
+What is Pair RDD?
+What is join()?
+Difference between join() and cogroup()?
+What is caching?
+Difference between cache() and persist()?
+What are Storage Levels?
+What is broadcast variable?
+Why do we use broadcast variables?
+What is accumulator?
+What is the difference between broadcast and accumulator?
+What is Spark Driver?
+What is Executor?
+What is Cluster Manager?
+What is DAG?
+What is Job?
+What is Stage?
+What is Task?
+What is Partition?
+What happens when an action is called?
+What happens during shuffle?
+What is local mode?
+What is cluster mode?
+Difference between client and cluster deploy mode?
+What is spark-submit?
+What are --executor-memory and --executor-cores?
+Explain complete Spark application execution flow.
+
+
+Repartition vs Coalesce in Spark
+1. What is a Partition?
+
+A partition is a logical chunk of data processed by one Spark task.
+
+For example:
+
+RDD has 4 partitions
+
+Partition 1 → 100 records
+Partition 2 → 100 records
+Partition 3 → 100 records
+Partition 4 → 100 records
+
+Spark can process these partitions in parallel.
+
+2. repartition()
+
+repartition() is used to increase or decrease the number of partitions.
+
+Syntax
+rdd.repartition(number_of_partitions)
+Example
+data = sc.parallelize(range(1, 101), 4)
+
+print(data.getNumPartitions())
+
+new_data = data.repartition(8)
+
+print(new_data.getNumPartitions())
+
+Output:
+
+4
+8
+
+Here:
+
+Before:
+4 partitions
+
+After:
+8 partitions
+Important Point
+
+repartition() always causes a shuffle.
+
+4 partitions
+      ↓
+   SHUFFLE
+      ↓
+8 partitions
+
+Because Spark redistributes the data across partitions.
+
+3. coalesce()
+
+coalesce() is generally used to reduce the number of partitions.
+
+Syntax
+rdd.coalesce(number_of_partitions)
+Example
+data = sc.parallelize(range(1, 101), 8)
+
+print(data.getNumPartitions())
+
+new_data = data.coalesce(4)
+
+print(new_data.getNumPartitions())
+
+Output:
+
+8
+4
+
+So:
+
+Before:
+8 partitions
+
+After:
+4 partitions
+Important Point
+
+coalesce() normally does not perform a full shuffle when reducing partitions.
+
+8 partitions
+    ↓
+coalesce()
+    ↓
+4 partitions
+
+This makes it generally cheaper than repartition() for reducing partitions.
+
+4. Main Difference
+Feature	repartition()	coalesce()
+Purpose	Increase/decrease partitions	Mainly decrease partitions
+Shuffle	Yes	Normally no
+Performance	More expensive	Generally faster
+Data redistribution	Full redistribution	Limited/no redistribution
+Can increase partitions?	Yes	Generally not recommended
+Can decrease partitions?	Yes	Yes
+Use case	Need balanced redistribution	Reduce partitions efficiently
+5. Very Important Interview Question
+Q: I have 100 partitions and want 10 partitions. Which one should I use?
+
+Usually:
+
+rdd.coalesce(10)
+
+Because you are reducing partitions and don't need a full shuffle.
+
+Q: I have 10 partitions and want 100 partitions. Which one?
+
+Use:
+
+rdd.repartition(100)
+
+Because coalesce() is not designed for efficiently increasing partitions.
+
+6. Why Do We Need repartition()?
+
+Imagine:
+
+Partition 1 → 10 GB
+Partition 2 → 100 MB
+Partition 3 → 100 MB
+Partition 4 → 100 MB
+
+The data is badly distributed.
+
+One task has to process 10 GB, while other tasks process only 100 MB.
+
+This can cause data skew / uneven workload.
+
+Using:
+
+rdd.repartition(4)
+
+Spark redistributes the data.
+
+Before
+
+P1 → 10 GB
+P2 → 100 MB
+P3 → 100 MB
+P4 → 100 MB
+
+       ↓
+   repartition
+       ↓
+
+P1 → ~2.5 GB
+P2 → ~2.5 GB
+P3 → ~2.5 GB
+P4 → ~2.5 GB
+
+The exact distribution depends on the data.
+
+7. Why Do We Need coalesce()?
+
+Suppose you have:
+
+1000 partitions
+
+but your output file is relatively small.
+
+Writing 1000 partitions can result in many small output files.
+
+You can reduce the number of partitions:
+
+result = rdd.coalesce(10)
+
+Then write the data.
+
+1000 partitions
+       ↓
+coalesce(10)
+       ↓
+10 partitions
+       ↓
+10 output files approximately
+
+This is a common practical use case.
+
+8. Hands-on Exercise
+
+Give your students this exercise:
+
+Exercise 1 — Repartition
+data = sc.parallelize(range(1, 101), 4)
+
+print("Original:", data.getNumPartitions())
+
+result = data.repartition(8)
+
+print("After repartition:", result.getNumPartitions())
+
+Students should explain:
+
+Why did partitions increase?
+Did shuffle happen?
+Why?
+Exercise 2 — Coalesce
+data = sc.parallelize(range(1, 101), 8)
+
+print("Original:", data.getNumPartitions())
+
+result = data.coalesce(4)
+
+print("After coalesce:", result.getNumPartitions())
+
+Students should explain:
+
+Why are partitions reduced?
+Does a full shuffle happen?
+Why is it cheaper?
+9. Interview Trick Question
+Can coalesce() increase partitions?
+
+Technically, Spark's RDD coalesce() has an option to shuffle, so it can be used with shuffle=True:
+
+rdd.coalesce(10, shuffle=True)
+
+But for normal partition increases, the standard recommendation is:
+
+rdd.repartition(10)
+
+because repartition() is specifically intended for redistributing data into the requested number of partitions.

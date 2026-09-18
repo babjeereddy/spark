@@ -1,0 +1,185 @@
+1 Explain the complete Azure Databricks architecture step-by-step
+
+Data is coming from multiple sources like ERP systems, APIs, file systems, and streaming sources such as IoT devices.
+
+Ingestion is handled using Azure Data Factory for batch data and Event Hub for real-time streaming data.
+
+The data is stored in Azure Data Lake Storage Gen2, where we follow Medallion Architecture — Bronze layer for raw data, Silver for cleaned and transformed data, and Gold for business-level aggregated data.
+
+Azure Databricks is used for processing using Apache Spark, where we perform data cleansing, transformations, joins, and aggregations.
+
+We use Delta Lake on top of ADLS, which stores data in Parquet format and maintains transaction logs to ensure ACID properties, schema enforcement, and time travel.
+
+For governance and security, we use Unity Catalog to implement RBAC, Row-Level Security, and Column-Level Security.
+
+Finally, the processed data is consumed by Power BI or Tableau for reporting and analytics.
+
+Additionally, we ensure scalability and cost optimization using auto-scaling clusters, partitioning, and performance tuning techniques like OPTIMIZE and Z-ORDER.
+
+
+Question 2:
+
+Your Databricks job is running very slow on a large dataset (500 GB).
+
+
+Explain:
+
+How you will identify the issue
+How you will optimize performance
+
+Include:
+
+Spark UI
+Partitioning
+Joins
+Delta optimization
+
+
+First, I will analyze the job using Spark UI to check stages, tasks, shuffle read/write, and execution time. I will also review driver and executor logs for memory issues or failures.
+
+Next, I will identify bottlenecks such as data skew, small files, inefficient joins, or improper partitioning.
+
+If performance issues are due to too few partitions, I will increase partitions using repartition. If there are too many small partitions, I will use coalesce to reduce overhead.
+
+For join optimization, I will use broadcast join for small dimension tables to avoid shuffle.
+
+If data skew is present, I will use techniques like salting or enable Adaptive Query Execution (AQE) for automatic optimization.
+
+I will also optimize Delta tables using OPTIMIZE and Z-ORDER for better data skipping and query performance.
+
+Additionally, I may cache frequently used datasets and ensure proper file sizing to avoid small file issues.
+
+Finally, I will re-run the job and validate performance improvements.
+
+
+3 You are building a real-time fraud detection system in Azure Databricks.
+
+Data comes from Event Hub
+Must detect fraud in seconds
+Must be scalable and fault tolerant
+Must integrate with ML model
+
+
+
+
+Streaming data is generated from IoT devices and ingested into Azure Event Hub. From there, Databricks Structured Streaming reads the data in real-time.
+
+The raw streaming data is first stored in the Bronze layer in Azure Data Lake Storage Gen2 using Delta format. This layer contains unprocessed raw events.
+
+Next, the data is cleaned, validated, and transformed into the Silver layer, where we handle schema enforcement, deduplication, and data quality checks.
+
+Watermarking is used in Structured Streaming to handle late-arriving data and avoid duplicate processing. Checkpointing is also enabled for fault tolerance.
+
+The Gold layer contains curated, business-ready or ML-ready data.
+
+For fraud detection, the processed streaming data is passed to a trained machine learning model for real-time inference. The model outputs predictions such as fraud or non-fraud.
+
+Finally, the results can be stored back into Delta tables or visualized in Power BI dashboards for monitoring.
+
+The architecture is scalable using auto-scaling clusters and fault tolerant using Delta Lake and checkpointing.
+
+
+
+4 Question:
+
+A Databricks pipeline processes 10 TB daily batch data + real-time streaming data.
+
+But:
+
+Cost is too high
+Job is slow
+Data quality issues exist
+
+Explain:
+
+How will you redesign the architecture?
+How will you optimize cost + performance + data quality?
+
+
+
+
+Model Answer:
+
+First, I will redesign the pipeline using a Medallion Architecture approach with Bronze, Silver, and Gold layers.
+
+For ingestion, I will separate batch and streaming workloads:
+
+Batch data will be ingested using ADF into the Bronze layer.
+Streaming data will be ingested using Event Hub and processed using Structured Streaming.
+
+All raw data will be stored in ADLS Gen2 using Delta Lake format to ensure ACID transactions and scalability.
+
+For performance optimization:
+
+I will enable Adaptive Query Execution (AQE)
+Optimize joins using broadcast joins where applicable
+Use proper partitioning strategies based on data size
+Apply OPTIMIZE and Z-ORDER on Delta tables for faster query performance
+Use caching only when necessary
+
+For cost optimization:
+
+Use job clusters instead of all-purpose clusters
+Enable auto-scaling and auto-termination
+Use Photon engine for faster execution
+Optimize file sizes to avoid small file problems
+
+For data quality:
+
+Implement schema enforcement in Delta tables
+Use expectations (data validation rules) for data quality checks
+Handle duplicates and null values in the Silver layer
+Maintain audit logs and monitoring
+
+Finally, Gold layer will serve curated data for reporting and ML use cases, ensuring high performance and reliability.
+
+
+
+5 Design a Data Lakehouse architecture in Azure Databricks
+for a company that has:
+
+Multiple data sources (ERP, CRM, APIs, Streaming)
+Needs real-time + batch processing
+Requires governance & security
+Needs BI + ML
+
+Explain:
+
+Architecture diagram (step-by-step)
+Tools used
+Data flow
+
+
+Data is ingested from multiple sources such as ERP, CRM, file systems, and real-time streaming sources. Batch data is ingested using Azure Data Factory, while streaming data is ingested using Event Hub.
+
+All data is stored in Azure Data Lake Storage Gen2 in Delta Lake format to ensure ACID transactions and scalability.
+
+In Azure Databricks, I implement Medallion Architecture with Bronze, Silver, and Gold layers:
+
+Bronze layer stores raw data as-is from all sources
+Silver layer performs data cleaning such as deduplication, schema enforcement, null handling, and standardization
+Gold layer contains aggregated and business-ready data for analytics and ML
+
+For streaming workloads, I use Structured Streaming with checkpointing and watermarking to ensure fault tolerance and handle late-arriving data.
+
+For performance optimization:
+
+Use proper partitioning strategies
+Apply OPTIMIZE and Z-ORDER on Delta tables
+Use Photon engine for faster execution
+Optimize joins using broadcast joins
+Minimize shuffle operations
+
+For governance and security:
+
+Use Unity Catalog for centralized access control
+Implement RBAC for users and roles
+Apply row-level and column-level security
+
+For machine learning:
+
+Use MLflow for model tracking and management
+Train models on Gold layer data
+Deploy models for batch or real-time inference
+
+Finally, data is consumed using Power BI or Tableau, where dashboards and reports are built with row-level security applied.

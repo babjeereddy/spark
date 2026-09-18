@@ -1,0 +1,6 @@
+order_id,customer_id,product,category,amount
+1,C101,Laptop,Electronics,50000
+2,C102,Mouse,Electronics,1000
+3,C103,Chair,Furniture,5000
+4,C104,Table,Furniture,8000
+5,C105,Mobile,Electronics,25000

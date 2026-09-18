@@ -1,0 +1,6 @@
+order_id,customer_id,product,category,amount
+6,C106,TV,Electronics,40000
+7,C107,Sofa,Furniture,15000
+8,C108,Keyboard,Electronics,3000
+9,C109,Bed,Furniture,20000
+10,C110,Pen,Stationery,500

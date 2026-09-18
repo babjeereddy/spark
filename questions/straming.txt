@@ -1,0 +1,760 @@
+What is Structured Streaming?
+
+Structured Streaming is Spark's high-level streaming API that allows us to process continuously arriving data using the DataFrame/Dataset API.
+
+Instead of treating streaming data as completely different from batch data, Spark allows us to write DataFrame-style transformations.
+
+Conceptually:
+
+Streaming Source
+      ↓
+Read Stream
+      ↓
+DataFrame
+      ↓
+Transformations
+      ↓
+Window / Aggregation
+      ↓
+Write Stream
+      ↓
+Sink
+Real-world examples
+IoT Sensors
+    ↓
+Kafka
+    ↓
+Spark Structured Streaming
+    ↓
+Aggregation
+    ↓
+Database / Kafka / Files
+
+Other examples:
+
+Website clickstream
+Banking transactions
+Application logs
+IoT data
+E-commerce orders
+GPS data
+2. Batch vs Streaming
+Batch
+
+Data is collected first and processed later.
+
+Files
+ ↓
+100 GB Data
+ ↓
+Spark
+ ↓
+Result
+
+Example:
+
+df = spark.read.csv("orders.csv")
+Streaming
+
+Data continuously arrives and is continuously processed.
+
+Event 1 ─┐
+Event 2 ─┤
+Event 3 ─┤ → Spark → Result
+Event 4 ─┤
+Event 5 ─┘
+
+Example:
+
+df = spark.readStream.format("kafka")
+Interview question
+
+What is the major difference?
+
+Batch processes a bounded/static dataset, while streaming processes continuously arriving data.
+
+3. Bulk Load / Batch Load
+
+When you say bulk load, in Spark this generally refers to loading a large/bounded amount of data at once.
+
+Example:
+
+df = spark.read \
+    .option("header", True) \
+    .csv("orders.csv")
+
+Then:
+
+df.write \
+    .mode("overwrite") \
+    .parquet("output/")
+
+Flow:
+
+CSV / JSON / Parquet
+        ↓
+spark.read
+        ↓
+DataFrame
+        ↓
+Transform
+        ↓
+spark.write
+        ↓
+Storage
+Hands-on
+
+Give students a CSV file containing:
+
+order_id
+customer_id
+amount
+order_date
+
+Ask them to:
+
+Read the CSV.
+Infer/create schema.
+Filter orders.
+Group by customer.
+Calculate total amount.
+Write output to Parquet.
+
+Then ask:
+
+How would you modify this application if orders started arriving continuously?
+
+Expected answer:
+
+spark.read
+     ↓
+spark.readStream
+
+and:
+
+spark.write
+     ↓
+spark.writeStream
+4. Streaming Sources
+
+A source is where streaming data comes from.
+
+Common Structured Streaming sources include:
+
+1. Kafka
+
+Very important for interviews.
+
+df = spark.readStream \
+    .format("kafka") \
+    .option("kafka.bootstrap.servers", "localhost:9092") \
+    .option("subscribe", "orders") \
+    .load()
+
+Flow:
+
+Producer
+   ↓
+Kafka Topic
+   ↓
+Spark Structured Streaming
+2. Files
+
+Spark can monitor a directory for newly arriving files.
+
+df = spark.readStream \
+    .format("csv") \
+    .option("header", True) \
+    .schema(schema) \
+    .load("/data/orders/")
+
+Important:
+
+For file streaming, defining a schema explicitly is generally recommended.
+
+3. Rate Source
+
+Useful mainly for testing.
+
+df = spark.readStream \
+    .format("rate") \
+    .option("rowsPerSecond", 10) \
+    .load()
+
+It generates rows containing:
+
+timestamp
+value
+5. Streaming Sinks
+
+A sink is the destination where processed streaming data is written.
+
+Common sinks:
+
+File
+Kafka
+Console
+Memory
+foreach
+foreachBatch
+Console Sink
+
+Very useful for learning.
+
+query = df.writeStream \
+    .format("console") \
+    .outputMode("append") \
+    .start()
+
+Wait:
+
+query.awaitTermination()
+File Sink
+query = df.writeStream \
+    .format("parquet") \
+    .option("path", "/output/orders") \
+    .option("checkpointLocation", "/checkpoint/orders") \
+    .outputMode("append") \
+    .start()
+Kafka Sink
+
+Processed records can be written back to Kafka.
+
+Kafka
+ ↓
+Spark
+ ↓
+Transformation
+ ↓
+Kafka
+6. Output Modes
+
+This is a very important interview topic.
+
+Output mode determines which records Spark writes to the sink.
+
+There are three primary modes:
+
+Append
+Complete
+Update
+6.1 Append Mode
+
+Only new rows added to the result table are written.
+
+.outputMode("append")
+
+Concept:
+
+Batch 1 → A B
+Batch 2 → C
+Batch 3 → D E
+
+Output:
+A B C D E
+
+Good for situations where previously emitted results won't change.
+
+6.2 Complete Mode
+
+The entire result table is written every trigger.
+
+.outputMode("complete")
+
+Example aggregation:
+
+Department   Total
+IT           100000
+HR            80000
+Finance       90000
+
+Each trigger outputs the complete result.
+
+6.3 Update Mode
+
+Only rows whose values have changed since the previous trigger are output.
+
+.outputMode("update")
+
+Example:
+
+Initial:
+IT → 100
+
+New event:
+IT → 50
+
+Updated:
+IT → 150
+
+Only the updated result is emitted.
+
+7. Trigger
+
+A trigger determines when Spark checks for and processes new data.
+
+Example:
+
+query = df.writeStream \
+    .format("console") \
+    .trigger(processingTime="10 seconds") \
+    .start()
+
+Spark processes available data approximately every 10 seconds.
+
+Common trigger types
+Default / as fast as possible
+Processing time
+Available-now
+Once
+
+Example:
+
+.trigger(processingTime="30 seconds")
+8. Windowing
+
+⭐⭐⭐⭐⭐
+
+Windowing is used to divide streaming events into time-based groups.
+
+Suppose events arrive:
+
+10:01
+10:02
+10:03
+10:04
+10:05
+
+We can create windows such as:
+
+10:00 - 10:05
+10:05 - 10:10
+
+This allows us to perform aggregations over time periods.
+
+9. Tumbling Window
+
+A tumbling window has:
+
+Fixed duration
+No overlap
+
+Example:
+
+Window = 5 minutes
+10:00 ───── 10:05
+10:05 ───── 10:10
+10:10 ───── 10:15
+
+PySpark:
+
+from pyspark.sql.functions import *
+
+result = df.groupBy(
+    window("timestamp", "5 minutes")
+).count()
+Real-world example
+
+Count orders every 5 minutes.
+
+Orders
+  ↓
+5-minute window
+  ↓
+Count
+10. Sliding Window
+
+A sliding window can overlap.
+
+Example:
+
+Window = 10 minutes
+Slide = 5 minutes
+
+Windows:
+
+10:00 ───── 10:10
+       10:05 ───── 10:15
+              10:10 ───── 10:20
+
+PySpark:
+
+result = df.groupBy(
+    window(
+        "timestamp",
+        "10 minutes",
+        "5 minutes"
+    )
+).count()
+Real-world example
+
+Calculate the number of website visits in the last 10 minutes, updating every 5 minutes.
+
+11. Session Window
+
+A session window groups events based on periods of activity and inactivity.
+
+For example:
+
+User A
+
+10:00 event
+10:01 event
+10:03 event
+       ↓
+activity continues
+
+15:00 event
+       ↓
+new session
+
+PySpark:
+
+result = df.groupBy(
+    "user_id",
+    session_window(
+        "timestamp",
+        "10 minutes"
+    )
+).count()
+
+If the user remains inactive for more than 10 minutes, the current session ends.
+
+Real-world examples
+Website user sessions
+Shopping activity
+Mobile application usage
+Gaming sessions
+12. Watermarking
+
+⭐⭐⭐⭐⭐ Extremely important interview topic
+
+Watermarking handles late-arriving data.
+
+Suppose the event actually happened at:
+
+10:02
+
+but reaches Spark at:
+
+10:10
+
+This is called a late event.
+
+Why do we need watermarking?
+
+Without watermarking, Spark might have to keep state for a very long time waiting for late events.
+
+Watermarking tells Spark:
+
+"I will wait for late data up to this amount of time."
+
+Example:
+
+df = df.withWatermark(
+    "timestamp",
+    "10 minutes"
+)
+
+Meaning approximately:
+
+Allow late data
+       ↓
+up to 10 minutes behind
+       ↓
+then old state can be removed
+13. Watermark Example
+
+Suppose events have these timestamps:
+
+10:00
+10:02
+10:05
+10:08
+
+Current maximum event time:
+
+10:08
+
+Watermark:
+
+10 minutes
+
+Watermark boundary is approximately:
+
+10:08 - 10 minutes
+= 09:58
+
+Events older than the relevant watermark boundary can become eligible for state cleanup, subject to the query's stateful operation and semantics.
+
+Important
+
+Watermarking does not simply mean "drop every event older than 10 minutes."
+
+It is primarily a mechanism for controlling state and handling late data in stateful streaming operations.
+
+14. Window + Watermark
+
+This is a very common interview scenario.
+
+result = df \
+    .withWatermark(
+        "timestamp",
+        "10 minutes"
+    ) \
+    .groupBy(
+        window("timestamp", "5 minutes")
+    ) \
+    .count()
+
+Flow:
+
+Streaming Events
+       ↓
+Event Time
+       ↓
+Watermark
+       ↓
+5-minute Window
+       ↓
+Aggregation
+       ↓
+Sink
+Real-world example
+
+You are monitoring an e-commerce system.
+
+You need:
+
+"Count orders every 5 minutes and allow orders arriving up to 10 minutes late."
+
+Solution:
+
+.withWatermark("order_time", "10 minutes")
+.groupBy(window("order_time", "5 minutes"))
+.count()
+15. Windowing vs Watermarking
+
+Students often confuse these.
+
+Windowing	Watermarking
+Divides data into time-based groups	Handles late-arriving data/state
+Used for aggregation	Used for state management
+Example: 5-minute window	Example: 10-minute watermark
+Answers "Which time period?"	Helps determine "How long should state wait?"
+Easy memory trick
+WINDOW
+  ↓
+GROUP DATA BY TIME
+
+WATERMARK
+  ↓
+HANDLE LATE DATA + CLEAN STATE
+16. Windowing vs Trigger
+
+Another important interview question.
+
+Window
+
+Defines which events belong together.
+
+5-minute window
+Trigger
+
+Defines when Spark processes available data.
+
+Every 30 seconds
+
+Example:
+
+df.groupBy(
+    window("timestamp", "5 minutes")
+)
+
+and:
+
+.writeStream \
+.trigger(processingTime="30 seconds")
+
+They are completely different concepts.
+
+WINDOW
+→ Data grouping
+
+TRIGGER
+→ Processing frequency
+17. Checkpointing
+
+You should add this to your Structured Streaming syllabus.
+
+Checkpointing stores information about the progress/state of a streaming query so Spark can recover after failures.
+
+Example:
+
+query = df.writeStream \
+    .format("parquet") \
+    .option("path", "/output") \
+    .option(
+        "checkpointLocation",
+        "/checkpoint/orders"
+    ) \
+    .outputMode("append") \
+    .start()
+
+Concept:
+
+Streaming Application
+        ↓
+Checkpoint
+        ↓
+Progress / State
+        ↓
+Failure
+        ↓
+Recovery
+Interview question
+
+Is checkpointing the same as caching?
+
+No.
+
+Cache
+→ Performance
+→ Reuse data faster
+
+Checkpoint
+→ Fault tolerance / recovery
+→ Stores streaming progress/state
+🎯 Complete Hands-On Exercise
+
+Give students this scenario:
+
+E-commerce Order Streaming
+
+Input:
+
+order_id
+customer_id
+product_id
+amount
+order_time
+
+Events continuously arrive.
+
+Task 1
+
+Create a streaming source using the rate source for practice.
+
+Task 2
+
+Create:
+
+order_id
+customer_id
+amount
+timestamp
+Task 3
+
+Calculate order count using:
+
+5-minute tumbling window
+Task 4
+
+Add:
+
+10-minute watermark
+Task 5
+
+Write results to console.
+
+Task 6
+
+Use:
+
+Append mode
+Task 7
+
+Add a trigger:
+
+30 seconds
+Task 8
+
+Add checkpointing.
+
+Final architecture:
+
+             Streaming Source
+                    ↓
+                 DataFrame
+                    ↓
+              withWatermark
+                    ↓
+              5 Min Window
+                    ↓
+                 groupBy
+                    ↓
+                  count
+                    ↓
+               WriteStream
+                    ↓
+                  Console
+                    ↓
+              Checkpoint
+⭐ Interview Questions Students Must Know
+What is Structured Streaming?
+Difference between batch and streaming?
+What is a streaming source?
+What are common streaming sources?
+What is Kafka?
+What is a streaming sink?
+What are output modes?
+Explain Append mode.
+Explain Complete mode.
+Explain Update mode.
+What is a trigger?
+Difference between trigger and window?
+What is windowing?
+What is a tumbling window?
+What is a sliding window?
+What is a session window?
+Difference between tumbling and sliding window?
+What is watermarking?
+Why do we need watermarking?
+What is late-arriving data?
+How does watermarking help state management?
+What is checkpointing?
+Difference between checkpoint and cache?
+Can we use aggregation with Append mode?
+Explain Window + Watermark with a real-world example.
+What happens if data arrives later than the watermark threshold?
+What happens if the streaming application fails?
+What is readStream?
+What is writeStream?
+What is awaitTermination()?
+🔥 The core concepts to make students remember
+BATCH
+→ spark.read / spark.write
+
+STREAMING
+→ spark.readStream / spark.writeStream
+
+SOURCE
+→ Where data comes from
+
+SINK
+→ Where data goes
+
+MODE
+→ What result gets written
+
+TRIGGER
+→ When processing happens
+
+WINDOW
+→ How events are grouped by time
+
+WATERMARK
+→ How late data/state is handled
+
+CHECKPOINT
+→ How streaming progress/state is recovered

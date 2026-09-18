@@ -1,0 +1,8 @@
+[myconnection]
+account = "QVAUPTH-SE13176"
+user = "babjee"
+password = "Naveenreddy@2683"
+role = "ACCOUNTADMIN"
+warehouse = "COMPUTE_WH"
+database = "our_first_db"
+schema = "PUBLIC"

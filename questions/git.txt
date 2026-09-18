@@ -1,0 +1,44 @@
+Configure Git
+
+First time only
+
+git config --global user.name "Sai Kumar"
+
+git config --global user.email "abc@gmail.com"
+
+git config --list
+
+
+create a file
+
+git status
+
+Untracked files are files that exist in your project folder but are not yet being tracked by Git.
+
+
+git add test.py
+
+git add is a Git command used to move changes from the Working Directory to the Staging Area. It tells Git which changes you want to include in the next commit.
+
+git reset  Remove it from the staging area   
+git reset test.py
+
+
+git commit saves the changes that are in the staging area into Git history.
+
+git commit -m 'test.py was created'
+
+
+The git log command is used to view the commit history of a Git repository.
+
+git log
+
+
+Show One Line per Commit
+git log --oneline
+
+
+Undo the Last Commit but Keep Changes (Recommended)
+
+If you accidentally committed too early and want to edit the files or commit again:
+

@@ -1,0 +1,872 @@
+What is a DataFrame?
+
+A DataFrame is a distributed collection of data organized into named columns, similar to a table in a database.
+
+Example:
+
++----+------+------+
+| id | name | age  |
++----+------+------+
+| 101| John | 25   |
+| 102| David| 30   |
+| 103| Smith| 28   |
++----+------+------+
+Important characteristics
+Distributed
+Immutable
+Has schema
+Organized into rows and columns
+Supports SQL operations
+Optimized by Catalyst Optimizer
+Uses Tungsten execution engine
+Supports lazy evaluation
+2. What is Dataset?
+
+A Dataset provides the benefits of DataFrame processing with strong typing.
+
+Conceptually:
+
+RDD
+ ↓
+Dataset
+ ↓
+DataFrame
+
+In Scala/Java, Dataset is an important API.
+
+Important PySpark interview point
+
+PySpark does not provide a separate typed Dataset API like Scala/Java.
+
+In PySpark:
+
+DataFrame
+≈
+Dataset[Row]
+Interview answer
+
+A DataFrame is essentially a Dataset of Row objects, while a Dataset in Scala/Java can provide compile-time type safety.
+
+3. RDD vs DataFrame vs Dataset
+Feature	RDD	DataFrame	Dataset
+Structure	Objects	Rows/columns	Typed objects
+Schema	No	Yes	Yes
+Optimization	Limited	Catalyst + Tungsten	Catalyst + Tungsten
+Type safety	Yes	No compile-time type safety	Yes
+SQL support	Limited	Excellent	Excellent
+Python	Yes	Yes	No typed Dataset API
+Performance	Generally lower	Generally higher	High
+Interview question
+
+Which one should normally be preferred?
+
+For structured/semi-structured data:
+
+DataFrame
+
+is generally preferred over RDD because Spark can optimize DataFrame operations.
+
+4. Creating a DataFrame
+From list
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder \
+    .appName("DataFrameDemo") \
+    .master("local[*]") \
+    .getOrCreate()
+
+data = [
+    (101, "John", 25, 50000),
+    (102, "David", 30, 60000),
+    (103, "Smith", 28, 55000)
+]
+
+df = spark.createDataFrame(
+    data,
+    ["id", "name", "age", "salary"]
+)
+
+df.show()
+From CSV
+df = spark.read \
+    .option("header", True) \
+    .option("inferSchema", True) \
+    .csv("employees.csv")
+From JSON
+df = spark.read.json("employees.json")
+From Parquet
+df = spark.read.parquet("employees.parquet")
+Interview question
+
+Why is Parquet commonly preferred for analytical workloads?
+
+Because it is:
+
+Columnar
+Compressed
+Efficient for selective column reads
+Schema-aware
+5. select()
+
+Used to select columns.
+
+df.select("name", "salary").show()
+
+Multiple columns:
+
+df.select(
+    "id",
+    "name",
+    "salary"
+).show()
+With expression
+df.select(
+    "name",
+    (df.salary * 12).alias("annual_salary")
+).show()
+6. withColumn()
+
+Used to:
+
+Create a new column
+Modify an existing column
+Create column
+from pyspark.sql.functions import col
+
+df = df.withColumn(
+    "annual_salary",
+    col("salary") * 12
+)
+Modify existing column
+df = df.withColumn(
+    "salary",
+    col("salary") * 1.10
+)
+
+This creates a new DataFrame because DataFrames are immutable.
+
+7. withColumnRenamed()
+
+Used to rename a column.
+
+df = df.withColumnRenamed(
+    "salary",
+    "monthly_salary"
+)
+
+Before:
+
+salary
+
+After:
+
+monthly_salary
+8. drop()
+
+Remove columns.
+
+df = df.drop("age")
+
+Multiple columns:
+
+df = df.drop("age", "salary")
+9. filter()
+
+Used to filter rows.
+
+df.filter(
+    col("salary") > 50000
+).show()
+
+Multiple conditions:
+
+df.filter(
+    (col("salary") > 50000) &
+    (col("age") > 25)
+).show()
+where()
+
+where() is an alias for filter().
+
+df.where(col("salary") > 50000).show()
+10. sort() / orderBy()
+
+Ascending:
+
+df.sort("salary").show()
+
+Descending:
+
+from pyspark.sql.functions import desc
+
+df.sort(
+    desc("salary")
+).show()
+
+Using orderBy():
+
+df.orderBy(
+    col("salary").desc()
+).show()
+Interview question
+
+Difference between sort() and orderBy()?
+
+For DataFrames, they are effectively equivalent APIs for sorting.
+
+11. String Functions
+
+Very important for interviews.
+
+Import:
+
+from pyspark.sql.functions import *
+upper()
+df.select(
+    upper("name").alias("name")
+).show()
+lower()
+df.select(
+    lower("name")
+).show()
+trim()
+df.select(
+    trim("name")
+).show()
+length()
+df.select(
+    length("name")
+).show()
+substring()
+df.select(
+    substring("name", 1, 3)
+).show()
+concat()
+df.select(
+    concat("first_name", "last_name")
+).show()
+concat_ws()
+df.select(
+    concat_ws(
+        " ",
+        "first_name",
+        "last_name"
+    )
+).show()
+regexp_replace()
+df.select(
+    regexp_replace(
+        "name",
+        " ",
+        "_"
+    )
+).show()
+Hands-on
+
+Give students a customer dataset and ask them to:
+
+Convert names to uppercase.
+Remove leading/trailing spaces.
+Find name length.
+Extract first 3 characters.
+Replace spaces with _.
+Combine first and last names.
+12. Date Functions
+
+Very important.
+
+Example:
+
+from pyspark.sql.functions import *
+
+df.select(
+    current_date()
+).show()
+Common functions
+current_date()
+current_timestamp()
+year()
+month()
+day()
+dayofmonth()
+dayofweek()
+dayofyear()
+date_format()
+datediff()
+add_months()
+date_add()
+date_sub()
+
+Example:
+
+df.select(
+    year("order_date").alias("year"),
+    month("order_date").alias("month")
+).show()
+Date difference
+df.select(
+    datediff(
+        current_date(),
+        col("order_date")
+    ).alias("days")
+).show()
+13. groupBy()
+
+Used to group records.
+
+df.groupBy("department").count().show()
+
+Example:
+
+df.groupBy("department") \
+  .sum("salary") \
+  .show()
+14. Aggregations
+
+Common functions:
+
+count()
+sum()
+avg()
+min()
+max()
+
+Example:
+
+df.groupBy("department").agg(
+    count("*").alias("employee_count"),
+    sum("salary").alias("total_salary"),
+    avg("salary").alias("avg_salary"),
+    max("salary").alias("max_salary"),
+    min("salary").alias("min_salary")
+).show()
+Hands-on
+
+Give employees data and ask:
+
+Total employees per department
+Average salary
+Maximum salary
+Minimum salary
+Total salary
+Average salary by location
+15. Joins
+
+⭐⭐⭐⭐⭐ Very important.
+
+Suppose:
+
+Employee
+emp_id | name | dept_id
+Department
+dept_id | dept_name
+
+Create:
+
+result = employee_df.join(
+    department_df,
+    employee_df.dept_id == department_df.dept_id,
+    "inner"
+)
+Types of joins
+inner
+left
+right
+full
+left_semi
+left_anti
+cross
+Left join
+employee_df.join(
+    department_df,
+    "dept_id",
+    "left"
+)
+Left semi
+
+Returns rows from the left DataFrame that have a match.
+
+employee_df.join(
+    department_df,
+    "dept_id",
+    "left_semi"
+)
+Left anti
+
+Returns rows from the left DataFrame that do not have a match.
+
+employee_df.join(
+    department_df,
+    "dept_id",
+    "left_anti"
+)
+16. Join Strategies
+
+⭐⭐⭐⭐⭐
+
+This is one of the most important areas for experienced Spark interviews.
+
+1. Broadcast Hash Join
+
+When one DataFrame is small:
+
+from pyspark.sql.functions import broadcast
+
+result = large_df.join(
+    broadcast(small_df),
+    "dept_id"
+)
+
+Concept:
+
+Large DataFrame
+      |
+      |
+Executors
+
+Small DataFrame
+      ↓
+Broadcast
+      ↓
+All Executors
+2. Sort Merge Join
+
+Used commonly when both datasets are large and join keys can be shuffled/sorted.
+
+Concept:
+
+Large DF
+   ↓
+Shuffle
+   ↓
+Sort
+   ↓
+Merge
+
+Large DF
+   ↓
+Shuffle
+   ↓
+Sort
+   ↓
+Merge
+3. Shuffle Hash Join
+
+Data is shuffled based on join keys and a hash table is built for the smaller side.
+
+4. Broadcast Nested Loop Join
+
+Used for certain non-equi/cross-style join situations and is generally more expensive.
+
+17. Set Operations
+
+Important DataFrame operations:
+
+union()
+unionByName()
+intersect()
+except()
+union()
+df1.union(df2)
+unionByName()
+
+Useful when column order differs but names match.
+
+df1.unionByName(df2)
+intersect()
+
+Find common rows.
+
+df1.intersect(df2)
+except()
+
+Rows in first DataFrame but not second.
+
+df1.exceptAll(df2)
+Hands-on
+
+Create:
+
+customers_2025
+customers_2026
+
+Ask students to find:
+
+All customers
+Common customers
+New customers
+Customers present only in 2025
+18. dropna()
+
+Used to remove rows containing NULL values.
+
+df.dropna().show()
+Drop rows if a particular column is NULL
+df.dropna(
+    subset=["salary"]
+).show()
+how
+df.dropna(
+    how="all"
+)
+
+Remove row only when all columns are NULL.
+
+df.dropna(
+    how="any"
+)
+
+Remove row when any column is NULL.
+
+19. fillna()
+
+Used to replace NULL values.
+
+df.fillna({
+    "salary": 0,
+    "department": "Unknown"
+})
+
+Example:
+
+df = df.fillna(
+    {"salary": 0}
+)
+Interview difference
+dropna()
+   ↓
+Remove NULL records
+
+fillna()
+   ↓
+Replace NULL values
+20. describe()
+
+Provides basic statistics.
+
+df.describe().show()
+
+Output includes:
+
+count
+mean
+stddev
+min
+max
+
+Example:
+
+df.select("salary").describe().show()
+Interview question
+
+describe() is useful for quick exploratory analysis, but it isn't a complete data-quality/profiling solution.
+
+21. Spark SQL
+
+⭐⭐⭐⭐⭐
+
+Spark SQL allows you to use SQL queries on DataFrames.
+
+First create a temporary view:
+
+df.createOrReplaceTempView("employees")
+
+Then:
+
+result = spark.sql("""
+    SELECT *
+    FROM employees
+    WHERE salary > 50000
+""")
+
+result.show()
+SQL aggregation
+result = spark.sql("""
+    SELECT
+        department,
+        COUNT(*) AS employee_count,
+        SUM(salary) AS total_salary,
+        AVG(salary) AS avg_salary
+    FROM employees
+    GROUP BY department
+""")
+
+result.show()
+22. Performance Tuning
+
+⭐⭐⭐⭐⭐
+
+This should be the final module because students need to understand DataFrames, joins, partitions, and transformations first.
+
+Teach these topics:
+
+1. Use DataFrames instead of RDD when possible
+RDD
+ ↓
+More manual optimization
+
+DataFrame
+ ↓
+Catalyst Optimizer
+ ↓
+Better optimization opportunities
+2. Avoid unnecessary columns
+
+Instead of:
+
+df.select("*")
+
+use:
+
+df.select(
+    "emp_id",
+    "name",
+    "salary"
+)
+
+This is column pruning.
+
+3. Filter early
+
+Instead of processing unnecessary records:
+
+df.filter(
+    col("salary") > 50000
+)
+
+before expensive operations such as joins where appropriate.
+
+4. Use Broadcast Join
+
+If one DataFrame is small:
+
+large_df.join(
+    broadcast(small_df),
+    "id"
+)
+5. Avoid unnecessary groupByKey()
+
+For RDDs:
+
+groupByKey()
+
+can move a lot of data across the network.
+
+Prefer:
+
+reduceByKey()
+aggregateByKey()
+combineByKey()
+
+when applicable.
+
+6. Avoid unnecessary shuffles
+
+Expensive operations include:
+
+groupBy
+join
+distinct
+orderBy
+repartition
+
+Students should learn to identify shuffle operations.
+
+7. cache() / persist()
+
+If the same DataFrame is reused:
+
+df.cache()
+
+df.count()
+df.groupBy("department").count()
+8. Partition tuning
+
+Teach:
+
+df.repartition(10)
+
+and:
+
+df.coalesce(4)
+
+Remember:
+
+repartition()
+    → shuffle
+
+coalesce()
+    → generally reduces partitions without full shuffle
+9. Adaptive Query Execution — AQE
+
+Very important for modern Spark interviews.
+
+Spark can dynamically optimize query execution based on runtime statistics.
+
+Examples include:
+
+Dynamic coalescing of shuffle partitions
+Join strategy changes
+Handling certain types of skew
+10. Explain the execution plan
+
+Use:
+
+df.explain()
+
+or:
+
+df.explain(True)
+
+Students should learn to identify:
+
+Scan
+Filter
+Project
+Exchange
+Sort
+BroadcastHashJoin
+SortMergeJoin
+
+Especially:
+
+Exchange
+
+often indicates a shuffle boundary.
+
+🎯 Final DataFrame Hands-On Project
+
+Give students one project after completing all topics.
+
+Employee Analytics
+Employee Data
+emp_id,name,dept_id,salary,join_date
+101,John,10,50000,2022-01-10
+102,David,20,60000,2021-05-15
+103,Smith,10,70000,2023-03-20
+104,James,30,80000,2020-07-11
+105,Robert,20,55000,2022-09-25
+Department Data
+dept_id,dept_name
+10,IT
+20,HR
+30,Finance
+Give students these tasks
+
+Basic
+
+Create DataFrames.
+Display schema.
+Select employee name and salary.
+Rename salary to monthly_salary.
+Drop unnecessary columns.
+Filter salary > 60,000.
+Sort salary descending.
+
+Column operations
+
+Create annual salary.
+Increase salary by 10%.
+Create salary category.
+
+String functions
+
+Convert names to uppercase.
+Find name length.
+Extract first three characters.
+
+Date functions
+
+Extract joining year.
+Extract joining month.
+Calculate days since joining.
+
+Aggregations
+
+Count employees by department.
+Calculate total salary by department.
+Calculate average salary by department.
+Find maximum salary by department.
+
+Joins
+
+Inner join employee and department.
+Left join.
+Find employees without a valid department using left_anti.
+Demonstrate broadcast join.
+
+Set operations
+
+Create two customer DataFrames.
+Perform union.
+Perform unionByName.
+Find common records.
+Find records present only in first DataFrame.
+
+NULL handling
+
+Create NULL values.
+Use dropna().
+Use fillna().
+
+SQL
+
+Create temporary view.
+Write SQL to find employees earning > 60,000.
+Find department-wise salary.
+Find highest-paid employee.
+Find average salary by department.
+
+Performance
+
+Check number of partitions.
+Use repartition().
+Use coalesce().
+Cache a DataFrame.
+Compare execution plans using explain().
+Identify Exchange in the physical plan.
+Demonstrate Broadcast Hash Join.
+⭐ Interview Priority
+
+If students have limited preparation time, focus heavily on these:
+
+1. DataFrame vs RDD
+2. DataFrame vs Dataset
+3. Creating DataFrame
+4. select()
+5. withColumn()
+6. filter()
+7. groupBy + aggregation
+8. Joins
+9. Broadcast Join
+10. Sort Merge Join
+11. Shuffle
+12. repartition vs coalesce
+13. cache vs persist
+14. Spark SQL
+15. Catalyst Optimizer
+16. AQE
+17. explain()
+18. Performance tuning
+
+The most important interview connection for your students is:
+
+DataFrame
+   ↓
+Transformation
+   ↓
+Catalyst Optimizer
+   ↓
+Logical Plan
+   ↓
+Physical Plan
+   ↓
+Join Strategy / Shuffle
+   ↓
+Stages
+   ↓
+Tasks
+   ↓
+Executors
+
+If they understand this flow rather than just memorizing functions, they will be much stronger in Spark practical + scenario-based interviews.

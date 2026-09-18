@@ -1,0 +1,782 @@
+1 Explain about your self
+
+Good morning. My name is Babjee Reddy. I have around 15 years of experience in technical training, primarily focusing on data integration, databases, and data visualization technologies.
+
+I have delivered training programs for large corporate organizations such as Cognizant, Deloitte, LTIMindtree, and Capgemini.
+
+My technical expertise includes data integration tools such as Informatica, IICS, Talend, SSIS, and DataStage. On the data visualization side, I have experience with QlikView, Qlik Sense, Tableau, and Power BI.
+
+I also have hands-on experience with major relational databases such as Oracle, SQL Server, Teradata, and MySQL, and I am a certified DBA.
+
+Regarding Qlik, I have delivered multiple Qlik Sense training programs, including programs for organizations such as Cognizant and Capgemini. My Qlik Sense knowledge includes data loading and scripting, data modeling, associations, set analysis, expressions, visualizations, performance optimization, and troubleshooting common data-modeling issues.
+
+Overall, my background combines strong database and data integration knowledge with data visualization, which helps me explain Qlik Sense from both the backend data-processing and frontend visualization perspectives.
+
+2 What is Qlik Sense, and how is it different from traditional BI tools such as Tableau or Power BI?
+
+Qlik Sense is a self-service business intelligence and data visualization platform used to load, transform, model, analyze, and visualize data.
+
+One of the major strengths of Qlik Sense is its associative engine. Instead of following only predefined hierarchies or drill-down paths, users can freely explore relationships between different fields and see associated and non-associated data dynamically.
+
+Qlik Sense also provides a powerful scripting language for data extraction, transformation, and loading. It supports advanced analytical capabilities such as Set Analysis, which is useful for comparative and complex calculations.
+
+Compared with Tableau and Power BI, Qlik Sense is particularly strong in its associative data model and flexible data exploration. Tableau is traditionally very strong in visual analytics, while Power BI has strong integration with the Microsoft ecosystem. Qlik provides a combination of data integration, associative modeling, and self-service analytics.
+
+Qlik also provides AI capabilities such as Qlik Answers, where users can interact with governed data and ask questions using natural language.
+
+3 What is the Qlik Sense Associative Model? Explain it with a simple example, and tell me how it is different from a traditional relational model.
+
+The Associative Model is one of the major strengths of Qlik Sense.
+
+Qlik uses an associative engine that allows users to explore relationships between different fields dynamically rather than being restricted to predefined drill-down hierarchies.
+
+For example, suppose we have:
+
+Customer → Sales ← Product
+
+and
+
+Customer → City
+
+If I select the customer "Babjee", Qlik dynamically identifies the associated data and can show the sales made by Babjee, the products purchased by him, and the city associated with that customer.
+
+Qlik also visually distinguishes associated, selected, and non-associated values, which makes data exploration very intuitive.
+
+In a traditional relational BI model, relationships are generally based on predefined tables, joins, and relationships. Qlik's associative model allows users to explore the data from different directions without necessarily following a predefined navigation path.
+
+4 What is the difference between QlikView and Qlik Sense?
+
+The main difference between QlikView and Qlik Sense is their approach to analytics and user experience.
+
+QlikView is primarily designed for guided analytics. Developers generally build and design the applications, and users consume the predefined dashboards and analysis.
+
+Qlik Sense is designed more for self-service analytics. Business users can interact with dashboards, explore data, create visualizations, and perform their own analysis with less dependency on developers.
+
+QlikView is more developer-oriented, while Qlik Sense provides a more modern, user-friendly interface and supports self-service data exploration.
+
+Qlik Sense is also the modern Qlik analytics platform, with strong cloud capabilities and newer AI and natural-language analytics features.
+
+In simple terms, I would summarize it as:
+
+QlikView → Developer-driven, guided analytics
+
+Qlik Sense → Self-service, interactive analytics
+
+
+5 What are the different types of LOAD statements in Qlik Sense? Explain LOAD, INLINE, RESIDENT, FROM, and AUTOGENERATE with examples.
+
+In Qlik Sense, the LOAD statement is used to load data into the Qlik data model, and we can also perform transformations while loading the data.
+
+There are several commonly used approaches:
+
+1. LOAD with FROM
+
+FROM is used to specify an external data source such as a CSV, Excel, QVD, or other supported source.
+
+For example:
+
+LOAD
+CustomerID,
+CustomerName,
+Amount
+FROM [lib://Data/customer.csv]
+(txt, utf8, embedded labels, delimiter is ',', msq);
+
+2. INLINE LOAD
+
+INLINE is used when we want to provide the data directly inside the Qlik script without using an external file or database.
+
+For example:
+
+LOAD * INLINE [
+CustomerID, CustomerName
+101, Babjee
+102, Ravi
+];
+
+3. RESIDENT LOAD
+
+RESIDENT is used to load data from a table that has already been loaded into the Qlik data model.
+
+For example:
+
+Sales:
+LOAD
+CustomerID,
+Amount,
+Quantity
+FROM [lib://Data/sales.csv];
+
+Sales_Transformed:
+LOAD
+CustomerID,
+Amount,
+Quantity,
+Amount * Quantity AS TotalAmount
+RESIDENT Sales;
+
+4. AUTOGENERATE
+
+AUTOGENERATE generates records based on an expression without requiring an external data source.
+
+For example:
+
+LOAD
+RowNo() AS ID
+AUTOGENERATE 10;
+
+This generates 10 records.
+
+It can also be used for generating dates, numbers, or other calculated values.
+
+So, in simple terms:
+
+FROM → loads from an external source
+
+INLINE → data is written directly in the script
+
+RESIDENT → loads from an already loaded Qlik table
+
+AUTOGENERATE → generates records from expressions
+
+LOAD → performs the actual loading and can also perform transformations.
+
+
+6 synthetic key
+A synthetic key is an automatically generated key created by Qlik Sense when two or more tables have two or more common fields.
+
+For example, if Sales and Customer both contain CustomerID and ProductID, Qlik may create a synthetic key because there are multiple common fields between the tables.
+
+Synthetic keys are not always errors, but they can indicate an undesirable or complex data model and may affect application performance.
+
+To resolve a synthetic key, first I identify whether the common fields are actually required for the relationship.
+
+I can resolve it by:
+
+1. Renaming a field using an alias if the fields should not have the same name.
+2. Dropping unnecessary duplicate fields from the load script.
+3. Creating a composite key when multiple fields genuinely represent the relationship.
+
+For example:
+
+LOAD
+CustomerID & '|' & ProductID AS CustomerProductKey,
+Amount
+FROM ...;
+
+Then I can use CustomerProductKey as the common key between the tables.
+
+I would not simply remove fields to eliminate the synthetic key. First I understand the business relationship and then choose the appropriate data-modeling solution.
+
+7 What is the difference between JOIN, CONCATENATE, and KEEP in Qlik Sense?
+
+JOIN combines two tables horizontally based on common fields. The result is a single table with columns from both tables.
+
+For example:
+
+Sales:
+CustomerID, Amount
+
+Customer:
+CustomerID, CustomerName
+
+If I JOIN Customer with Sales using CustomerID, the resulting table can contain:
+
+CustomerID, Amount, CustomerName
+
+CONCATENATE combines tables vertically by adding records from one table below another.
+
+For example, if I have Sales2025 and Sales2026 with similar fields, I can concatenate them into one Sales table.
+
+KEEP is different from JOIN. KEEP keeps the tables as separate logical tables, but reduces the records based on the common fields between the tables.
+
+So the simple difference is:
+
+JOIN → combines tables horizontally and creates one resulting table.
+
+CONCATENATE → combines tables vertically by adding rows.
+
+KEEP → keeps tables separate but reduces the data based on their association.
+
+
+8 Interviewer — Question 8 🔥
+
+Suppose I have:
+
+Sales
+
+CustomerID
+ProductID
+Amount
+
+Customer
+
+CustomerID
+CustomerName
+City
+
+The business says:
+
+"I don't want to physically join these tables. I want to keep them separate but only retain customers who have sales."
+
+Employees:
+LOAD
+    EmpID,
+    EmpName,
+    DeptID
+FROM [lib://Data/employees.csv];
+
+Left Keep (Employees)
+
+Departments:
+LOAD
+    DeptID,
+    DeptName
+FROM [lib://Data/departments.csv];
+
+9 What is Set Analysis in Qlik Sense? Why do we use it? Explain the difference between Set Analysis and normal selections/filters with an example.
+Set Analysis is an advanced feature in Qlik Sense that allows us to define a specific set of records for an aggregation.
+
+We mainly use Set Analysis when we want to perform calculations based on specific conditions, and when we want the calculation to respect or ignore certain user selections.
+
+For example:
+
+Sum({<Year={2025}>} Sales)
+
+This calculates Sales for the year 2025.
+
+A Set Analysis expression generally contains a set identifier, set operators, and set modifiers.
+
+The important set identifiers are:
+
+$ → current selection
+
+$1 → previous selection state
+
+1 → all records, ignoring the current selection
+
+For example:
+
+Sum({1} Sales)
+
+calculates Sales across the entire data set, regardless of the current selections.
+
+Set Analysis is different from a normal filter because a filter changes the user's current selection, whereas Set Analysis controls the data set used specifically by an expression.
+
+Set operators such as + can be used to create unions between sets.
+
+10 What is a QVD? Why do we use QVDs in Qlik Sense? What are the main advantages of using QVDs?
+
+QVD stands for QlikView Data file. It is Qlik's optimized data storage format used to store data extracted from different sources.
+
+The main advantages of QVDs are:
+
+1. Fast data loading — QVDs can be loaded much faster than many external sources because they use Qlik's optimized storage format.
+
+2. Data compression — QVDs store data in a compressed format, which can reduce storage requirements.
+
+3. Incremental loading — QVDs are commonly used in incremental-load architectures, where only new or changed records are extracted from the source.
+
+4. Reusability — The same QVD can be used by multiple Qlik applications, reducing repeated extraction from source systems.
+
+5. Transformed data — We can extract and transform data before storing it in a QVD, so downstream applications can consume prepared data.
+
+QVDs are therefore commonly used as an intermediate or staging layer between source systems and Qlik Sense applications.
+
+11 Now let's test incremental loading, which is a very common scenario question.
+
+Suppose your source database contains 10 million sales records.
+
+Every day, only 10,000 new records are added.
+
+The interviewer asks:
+
+“How would you implement incremental loading in Qlik Sense using QVD?”
+
+Incremental loading is used when we have a large source table but only a small number of new or changed records are generated every day.
+
+For example, if the source has 10 million records and only 10,000 new records are added daily, I don't want to extract all 10 million records every day.
+
+The general approach is:
+
+1. Check whether the QVD already exists.
+2. Load the existing data from the QVD.
+3. Identify only the new or changed records from the source using a field such as OrderID, CreatedDate, ModifiedDate, or UpdateTimestamp.
+4. Load those incremental records from the source.
+5. Combine the existing QVD data with the new or changed records.
+6. Store the updated data back into the QVD.
+
+This reduces source-system load and improves reload performance because we process only the required incremental data instead of performing a full load every time.
+
+12 Your source table does not have a CreatedDate or UpdatedDate column. How will you implement incremental loading?”
+If the source does not have a CreatedDate or UpdatedDate column, I can use a unique ID to identify newly inserted records.
+
+I would load the existing QVD and compare the source IDs with the IDs already present in the QVD. Then I can load only the new IDs and concatenate them with the existing QVD data.
+
+However, if the requirement is to capture updated records as well, comparing only the unique ID is not sufficient. In that case, I would need another mechanism, such as a source-side change tracking mechanism, CDC, audit table, modification information, or a suitable business rule.
+
+So, with only a unique ID, I can reliably handle new records, but I cannot reliably detect changes to existing records.
+
+13 What is a circular reference (loop) in Qlik Sense? Why does it occur, and how would you resolve it?
+
+A circular reference, or loop, occurs in Qlik Sense when there are multiple association paths between tables, creating a loop in the data model.
+
+For example, suppose we have:
+
+Customer → Orders ← Product
+
+and Customer is also directly associated with Product.
+
+Now there can be more than one path between Customer and Product, which can create a circular reference.
+
+To resolve it, I first identify which associations are actually required from a business perspective.
+
+Possible solutions are:
+
+1. Rename fields using aliases when fields should not be associated.
+2. Drop unnecessary common fields from the load script.
+3. Redesign the data model to remove the unwanted association.
+4. Use a Link Table when multiple relationships are genuinely required.
+
+I would not simply remove a field just to eliminate the loop. I would first understand the business relationship and then choose the appropriate modeling solution.
+
+14 What is a Link Table in Qlik Sense? When would you use a Link Table? Explain with a practical example.
+A Link Table is a bridge table used in Qlik Sense to connect multiple tables through common keys while avoiding unwanted associations, synthetic keys, or circular references.
+
+For example, suppose we have two fact tables:
+
+Sales:
+
+* CustomerID
+* ProductID
+* SalesAmount
+
+Returns:
+
+* CustomerID
+* ProductID
+* ReturnAmount
+
+Both fact tables need to be associated with Customer and Product dimensions.
+
+Instead of directly connecting everything and potentially creating an undesirable data model, I can create a Link Table containing the required common keys, such as CustomerID and ProductID, and use it as a bridge between the fact tables and dimensions.
+
+A Link Table is particularly useful when multiple fact tables share dimensions or when we have complex many-to-many relationships.
+
+So, I would use a Link Table as a data-modeling technique to control associations and avoid problems such as circular references or synthetic keys.
+
+
+15 Now let's test ApplyMap(), one of the most frequently asked Qlik scripting questions.
+ApplyMap() is a Qlik Sense scripting function used to look up a value from a mapping table based on a key.
+
+For example, if the Employee table contains DeptID and I want to get DeptName from a Department mapping table, I can use ApplyMap().
+
+First, I create the mapping table:
+
+DeptMap:
+MAPPING LOAD
+DeptID,
+DeptName
+FROM [lib://Data/department.csv];
+
+Then, while loading Employee, I use:
+
+Employees:
+LOAD
+EmpID,
+DeptID,
+ApplyMap('DeptMap', DeptID, 'Unknown') AS DeptName
+FROM [lib://Data/employees.csv];
+
+Here, Qlik takes the DeptID from each employee, looks it up in DeptMap, and returns the corresponding DeptName.
+
+ApplyMap() is often preferred over a JOIN for simple lookups because it adds only the required value to the target table and avoids creating an additional joined table.
+
+16 What is the difference between ApplyMap() and JOIN in Qlik Sense? When would you choose ApplyMap() over a JOIN?
+
+JOIN combines columns from two or more tables and produces a single resulting table.
+
+ApplyMap(), on the other hand, does not physically combine the mapping table with the current table. It performs a lookup using a key and returns the corresponding value.
+
+For example, if Employee has DeptID and I need DeptName, I can create a mapping table with DeptID and DeptName and use ApplyMap() to retrieve DeptName.
+
+I would generally prefer ApplyMap() when I need a simple lookup value from a reference table because it is more targeted and avoids physically joining the tables.
+
+JOIN is more appropriate when I actually need multiple fields from another table or need to combine the tables as part of the data model.
+
+So, in simple terms:
+
+JOIN → physically combines tables.
+
+ApplyMap() → performs a key-based lookup and returns a value.
+
+
+17 Let's move to Qlik performance tuning, which is very important for experienced candidates.
+
+Suppose a Qlik Sense application takes 20 minutes to reload and the dashboard is also slow.
+
+What steps would you take to improve the performance?
+
+If a Qlik Sense application has a long reload time and slow dashboard performance, I would first identify whether the bottleneck is in the data load, data model, or front-end visualizations.
+
+For reload performance:
+
+1. Use QVDs as an optimized staging layer instead of repeatedly extracting large volumes from source systems.
+2. Implement incremental loading when appropriate instead of performing full loads.
+3. Load only the required fields and records and remove unnecessary columns.
+4. Perform transformations efficiently in the load script.
+5. Avoid unnecessary JOINs and use ApplyMap() for simple lookups where appropriate.
+6. Resolve unnecessary synthetic keys and circular references.
+7. Optimize the data model and avoid unnecessarily high-cardinality fields.
+
+For dashboard performance:
+
+1. Reduce the number of unnecessary visualizations on a sheet.
+2. Avoid overly complex chart expressions and unnecessary nested aggregations.
+3. Avoid calculations that process very large datasets when the result can be prepared during the load.
+4. Use appropriate aggregations and efficient Set Analysis.
+5. Review objects that are slow to calculate and optimize them individually.
+
+I would also use Qlik's available monitoring and profiling capabilities to identify the actual bottleneck rather than making changes blindly.
+
+The overall goal is to reduce data volume, simplify the data model, optimize the load process, and minimize expensive front-end calculations.
+
+
+18 You have a Qlik Sense application with 50 million records. Users complain that a chart showing Sum(Sales) takes 10–15 seconds to respond after every selection.
+
+How would you troubleshoot this problem?
+
+First, I would identify whether the performance issue is caused by the data model, the expression, or the visualization itself.
+
+Since the application has 50 million records, I would check whether the chart is scanning a very large amount of data for every selection.
+
+If the business requirement does not need transaction-level detail for that particular chart, I would reduce the data volume by aggregating it during the load.
+
+For example, instead of loading every transaction, I could aggregate Sales by the dimensions required for the dashboard, such as Date, Product, Region, or Customer.
+
+I would also check the chart expression and simplify any complex calculations or nested aggregations.
+
+Then I would review the data model for synthetic keys, circular references, unnecessary fields, and high-cardinality fields.
+
+So my approach would be:
+
+1. Identify the bottleneck.
+2. Check the chart expression.
+3. Check the data model.
+4. Reduce unnecessary data volume.
+5. Aggregate data during the load when detailed records are not required.
+6. Test the chart again and compare the performance.
+
+I would not aggregate blindly because users may still need transaction-level analysis elsewhere in the application.
+
+19 What is the difference between Sum() and Aggr() in Qlik Sense?
+
+Give me a simple example where Aggr() is required but Sum() alone would not solve the problem.
+
+`Sum()` is an aggregation function used to calculate the total of a numerical field based on the current selection.
+
+`Aggr()` is used when we need to perform an aggregation at a specific dimensional level and then apply another aggregation on the result. It creates a virtual table or array based on the dimensions we provide.
+
+For example, if I want to calculate the average sales per customer:
+
+`Avg(Aggr(Sum(Sales), Customer))`
+
+Here, `Aggr()` first calculates total sales for each customer, and then the outer `Avg()` calculates the average of those customer-level totals.
+
+So, simply:
+
+* `Sum()` → directly aggregates values.
+* `Aggr()` → creates an aggregated result at a specified dimension level, which can then be used by another aggregation.
+
+20 You have a Sales table with Customer, Product, SalesAmount, and Year.
+
+I want to display:
+
+The sales amount for each customer, but only for customers whose total sales are greater than 100,000.
+
+Aggr(
+    If(Sum(SalesAmount) > 100000, Sum(SalesAmount)),
+    Customer
+)
+
+21 What is the difference between $, $1, and 1 in Qlik Sense Set Analysis?
+In Qlik Sense Set Analysis:
+
+* `$` represents the **current selection state**.
+  Example: `Sum({$} Sales)` calculates sales based on the user's current selections.
+
+* `1` represents **all records**, ignoring the current selections.
+  Example: `Sum({1} Sales)` calculates sales from the complete dataset.
+
+* `$1` represents the **previous selection state**.
+  Example: `Sum({$1} Sales)` calculates sales based on the previous selection state.
+
+So, simply:
+
+`$` → Current selection
+`1` → Ignore current selection
+`$1` → Previous selection
+
+22 What is the difference between WHERE and IF in a Qlik Sense LOAD statement?
+
+`WHERE` is used to filter records during the load process. Records that do not satisfy the condition are not loaded into the Qlik data model.
+
+For example:
+
+```qlik
+LOAD
+    CustomerID,
+    CustomerName
+FROM [lib://Data/customers.csv]
+WHERE NOT IsNull(CustomerID);
+```
+
+Here, records with a null `CustomerID` are excluded from the data model.
+
+`IF()` is used to evaluate a condition and return a value based on that condition. It is commonly used to create calculated or derived fields.
+
+For example:
+
+```qlik
+LOAD
+    CustomerID,
+    NumberOfChildren,
+    IF(NumberOfChildren > 0, 'Yes', 'No') AS IsParent
+FROM [lib://Data/customers.csv];
+```
+
+Here, `IF()` returns `Yes` when the customer has children; otherwise, it returns `No`.
+
+So, simply:
+
+`WHERE` → filters records during loading.
+
+`IF()` → evaluates a condition and returns a value.
+
+23 What is the difference between RESIDENT LOAD and FROM LOAD in Qlik Sense?
+
+`FROM` is used to load data from an external data source such as a CSV file, Excel file, QVD, or database.
+
+`RESIDENT LOAD` is used to load data from a table that has already been loaded into Qlik's memory.
+
+For example:
+
+```qlik id="5v7k2p"
+Sales:
+LOAD
+    CustomerID,
+    Quantity,
+    Price
+FROM [lib://Data/Sales.csv];
+
+Sales_Final:
+LOAD
+    CustomerID,
+    Quantity,
+    Price,
+    Quantity * Price AS SalesAmount
+RESIDENT Sales;
+```
+
+Here, the first LOAD reads data from the external CSV file, while the Resident Load reads the already loaded `Sales` table and performs an additional transformation.
+
+I would prefer Resident Load when I need to perform further transformations or aggregations on data that is already loaded into the Qlik data model.
+
+
+24 What is NoConcatenate in Qlik Sense?
+
+Why do we use it, and can you give me a simple example where Qlik would otherwise automatically concatenate two tables?
+
+`NoConcatenate` is a Qlik Sense script prefix used to prevent Qlik from automatically concatenating two tables.
+
+Qlik automatically concatenates tables when they have matching field structures. If I want those tables to remain separate, I use `NoConcatenate`.
+
+For example:
+
+```qlik id="80426"
+Sales:
+LOAD
+    CustomerID,
+    Amount
+FROM [lib://Data/Sales.csv];
+
+NoConcatenate
+Orders:
+LOAD
+    CustomerID,
+    Amount
+FROM [lib://Data/Orders.csv];
+```
+
+Without `NoConcatenate`, Qlik may automatically concatenate the two tables because they have the same fields.
+
+So, simply:
+
+`Concatenate` → intentionally combines tables vertically.
+
+`NoConcatenate` → prevents automatic concatenation and keeps tables separate.
+
+
+25 You have this data model:
+
+Sales
+  |
+Customer
+  |
+Orders
+
+But Sales and Orders both contain CustomerID and ProductID, and Qlik is creating a Synthetic Key.
+
+How would you troubleshoot and resolve this Synthetic Key?
+
+
+A Synthetic Key is created by Qlik when two or more tables have multiple common fields.
+
+To resolve it, I would first understand whether those common fields are required for the business relationship.
+
+If a common field should not create an association, I can rename it.
+
+If the field is unnecessary, I can drop it from one of the tables.
+
+If the relationship genuinely depends on multiple fields, I can create a composite key using those fields.
+
+For example:
+
+```qlik id="93527"
+CustomerID & '|' & ProductID AS CustomerProductKey
+```
+
+I would then use the composite key as the association between the tables.
+
+So, my approach is:
+
+**Rename unnecessary associations → Drop unnecessary fields → Create a composite key when the relationship is genuinely composite.**
+
+26 What is a Circular Reference / Loop in Qlik Sense?
+
+Give me a simple example of how a loop can occur and two ways to resolve it.
+
+A Circular Reference or Loop occurs in Qlik Sense when there are multiple association paths between tables, creating a loop in the associative data model.
+
+For example:
+
+```text
+Customer → Orders → Product
+    ↑                  |
+    └──────────────────┘
+```
+
+If Customer is associated with Orders, Orders with Product, and Product is also directly associated with Customer, Qlik can create multiple paths between the tables.
+
+To resolve it, I would first identify whether all associations are required.
+
+If an association is unnecessary, I can rename or remove the field.
+
+If multiple relationships are genuinely required, I can redesign the data model or use a Link Table to manage the associations.
+
+So the main approaches are:
+
+1. Rename fields that should not be associated.
+2. Drop unnecessary association fields.
+3. Use a Link Table when the multiple relationships are genuinely required.
+
+
+27 Let's move to Qlik Sense data modeling.
+
+Dimensional modeling generally consists of Fact and Dimension tables.
+
+A **Dimension table** contains descriptive attributes that are used to analyze, filter, and group data. For example, a Customer dimension can contain CustomerID, CustomerName, City, and Region.
+
+A **Fact table** contains transactional or measurable data. It normally contains foreign keys referencing dimensions along with numerical measures such as Quantity, SalesAmount, and Profit.
+
+For example, in a Sales model:
+
+```text
+DimCustomer
+     |
+     |
+ FactSales ---- DimProduct
+     |
+     |
+  DimDate
+```
+
+The FactSales table may contain CustomerID, ProductID, DateID, Quantity, and SalesAmount, while the dimension tables contain descriptive information about customers, products, and dates.
+
+Typically, a fact table contains a much larger number of records than dimension tables.
+
+So, simply:
+
+**Dimension → Descriptive information**
+
+**Fact → Measures + keys to dimensions**
+
+28 Suppose you have Sales and Returns fact tables, and both need to connect to Customer and Product dimensions.
+
+How would you design this model in Qlik Sense to avoid unwanted associations or synthetic keys?
+
+If I have two fact tables, such as Sales and Returns, and both need to connect to Customer and Product dimensions, I can use a Link Table to manage the associations.
+
+For example:
+
+```text
+DimCustomer
+     |
+ Link Table
+   /     \
+Sales   Returns
+   \     /
+  DimProduct
+```
+
+The Link Table contains the common keys such as CustomerID and ProductID.
+
+This helps avoid unwanted direct associations between the Sales and Returns fact tables and can prevent synthetic keys or circular references caused by multiple common fields.
+
+I would use a Link Table when the relationships between multiple fact tables and dimensions are genuinely required and the data model needs a controlled association structure.
+
+
+29 What is the difference between ApplyMap() and Mapping Load in Qlik Sense?
+
+And write a simple example to convert:
+
+`MAPPING LOAD` is used to create a special mapping table containing key-value pairs.
+
+`ApplyMap()` is used to look up a value from that mapping table and return the corresponding value.
+
+For example, if I want to convert `DeptID` into `DeptName`:
+
+```qlik
+DeptMap:
+MAPPING LOAD
+    DeptID,
+    DeptName
+FROM [lib://Data/Department.csv];
+
+Employees:
+LOAD
+    EmpID,
+    EmpName,
+    DeptID,
+    ApplyMap('DeptMap', DeptID, 'Unknown') AS DeptName
+FROM [lib://Data/Employee.csv];
+```
+
+Here, `MAPPING LOAD` creates the mapping table, and `ApplyMap()` uses `DeptID` to retrieve the corresponding `DeptName`.
+
+So simply:
+
+**MAPPING LOAD → Creates the lookup mapping**
+
+**ApplyMap() → Uses the mapping to retrieve the value**
+
+
+30 You have a Qlik Sense application with 10 million records.
+
+The business says the dashboard is slow.
+
+What steps would you take to improve Qlik Sense application performance?
+
+
+
+

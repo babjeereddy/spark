@@ -1,0 +1,7016 @@
+Python Basics
+1. What is Python?
+
+Answer:
+Python is a high-level, interpreted, object-oriented programming language known for its simple syntax and extensive standard library.
+
+2. What are the features of Python?
+
+Answer
+
+Easy to learn
+Interpreted
+Platform independent
+Object-oriented
+Dynamically typed
+Large standard library
+Open source
+3. Difference between Compiler and Interpreter?
+Compiler	Interpreter
+Converts entire code	Executes line by line
+Faster execution	Slower execution
+Errors after compilation	Errors immediately
+
+Python uses an Interpreter.
+
+4. Why is Python called dynamically typed?
+
+Because variable types are decided at runtime.
+
+x = 10
+x = "Hello"
+
+No datatype declaration is required.
+
+5. What are Python keywords?
+
+Reserved words having special meaning.
+
+Examples
+
+if
+else
+for
+while
+class
+return
+try
+except
+Variables & Data Types
+6. What are Python data types?
+int
+float
+complex
+bool
+str
+list
+tuple
+set
+dictionary
+7. Difference between List and Tuple?
+List	Tuple
+Mutable	Immutable
+[]	()
+Slower	Faster
+8. Difference between Set and List?
+List	Set
+Ordered	Unordered
+Allows duplicates	No duplicates
+Indexed	No indexing
+9. Difference between Dictionary and List?
+
+Dictionary stores
+
+Key : Value
+
+Example
+
+student = {
+    "name":"John",
+    "age":22
+}
+10. What is None?
+
+Represents absence of value.
+
+x = None
+Operators
+11. Types of operators?
+Arithmetic
+Assignment
+Comparison
+Logical
+Membership
+Identity
+Bitwise
+12. Difference between == and is?
+==
+
+Compares values.
+
+is
+
+Compares memory location.
+
+Example
+
+a=[1]
+b=[1]
+
+a==b
+True
+
+a is b
+False
+Strings
+13. Are strings mutable?
+
+No.
+
+Strings are immutable.
+
+14. Reverse a string.
+s="Python"
+
+print(s[::-1])
+
+Output
+
+nohtyP
+15. Count vowels.
+text="Persistent"
+
+count=0
+
+for ch in text.lower():
+    if ch in "aeiou":
+        count+=1
+
+print(count)
+Lists
+16. Add element to list.
+numbers=[1,2]
+
+numbers.append(3)
+17. Difference between append() and extend()?
+
+append()
+
+Adds one object.
+
+a.append([3,4])
+
+extend()
+
+Adds multiple elements.
+
+a.extend([3,4])
+18. Remove duplicates from list.
+numbers=[1,2,2,3]
+
+unique=list(set(numbers))
+Functions
+19. What is a function?
+
+Reusable block of code.
+
+20. Difference between return and print?
+
+print()
+
+Displays output.
+
+return
+
+Returns value to caller.
+
+21. What are default arguments?
+def greet(name="Guest"):
+    print(name)
+22. What is lambda function?
+
+Anonymous function.
+
+square=lambda x:x*x
+OOP
+23. What is Object-Oriented Programming?
+
+Programming using classes and objects.
+
+24. Four OOP concepts?
+Encapsulation
+Inheritance
+Polymorphism
+Abstraction
+25. What is a class?
+
+Blueprint for creating objects.
+
+26. What is an object?
+
+Instance of a class.
+
+class Student:
+    pass
+
+s=Student()
+27. What is inheritance?
+
+One class inherits another.
+
+class Animal:
+    pass
+
+class Dog(Animal):
+    pass
+28. What is polymorphism?
+
+Same method behaves differently.
+
+29. What is encapsulation?
+
+Wrapping data and methods into one unit.
+
+30. What is abstraction?
+
+Hiding implementation details.
+
+Exception Handling
+31. Why exception handling?
+
+Prevents program from crashing.
+
+32. Syntax?
+try:
+    pass
+except:
+    pass
+finally:
+    pass
+33. Difference between Error and Exception?
+
+Errors
+
+Program cannot recover.
+
+Exceptions
+
+Can be handled.
+
+File Handling
+34. Modes of opening file?
+r
+w
+a
+x
+rb
+wb
+35. Read file.
+with open("data.txt","r") as f:
+    print(f.read())
+Modules
+36. What is a module?
+
+Python file containing functions.
+
+37. Difference between module and package?
+
+Module
+
+Single .py file
+
+Package
+
+Collection of modules
+
+Collections
+38. Difference between pop() and remove()?
+
+remove()
+
+Removes value.
+
+pop()
+
+Removes index.
+
+39. Sort list.
+numbers.sort()
+Coding Questions
+40. Check palindrome.
+text="madam"
+
+print(text==text[::-1])
+41. Find largest number.
+numbers=[5,10,3]
+
+print(max(numbers))
+42. Swap two variables.
+a,b=10,20
+
+a,b=b,a
+43. Find factorial.
+n=5
+fact=1
+
+for i in range(1,n+1):
+    fact*=i
+
+print(fact)
+44. Fibonacci series.
+a,b=0,1
+
+for i in range(10):
+    print(a,end=" ")
+    a,b=b,a+b
+45. Count frequency.
+text="banana"
+
+print(text.count("a"))
+Python Internals
+46. What is PEP8?
+
+Python coding style guidelines.
+
+47. What is indentation?
+
+Python uses indentation instead of braces.
+
+48. What is __name__ == "__main__"?
+
+Checks whether the file is executed directly or imported as a module.
+
+if __name__ == "__main__":
+    print("Executed directly")
+49. What are Python libraries?
+
+Reusable collections of modules.
+
+Examples:
+
+math
+os
+random
+datetime
+json
+50. Why do companies like Persistent use Python?
+
+Python is widely used for:
+
+Backend development
+Data Engineering
+Automation
+Data Analysis
+AI and Machine Learning
+API development
+ETL pipelines
+Cloud applications
+Interview Tips for Persistent Systems
+Be ready to write code on a whiteboard or shared editor.
+Practice tracing code output without executing it.
+Understand OOP concepts with real examples.
+Know basic exception handling and file handling.
+Learn common built-in functions (len(), range(), sorted(), max(), min(), zip(), enumerate()).
+Practice simple coding problems such as palindrome, prime number, anagram, Fibonacci, factorial, list manipulation
+
+
+Find the Length of a String
+Question
+text = "Persistent Systems"
+
+Find the length of the string.
+
+Answer
+text = "Persistent Systems"
+
+print(len(text))
+
+Output
+
+18
+2. Print First and Last Character
+Question
+text = "Python"
+Answer
+text = "Python"
+
+print("First Character:", text[0])
+print("Last Character:", text[-1])
+
+Output
+
+First Character: P
+Last Character: n
+3. Convert to Uppercase
+Answer
+text = "persistent systems"
+
+print(text.upper())
+
+Output
+
+PERSISTENT SYSTEMS
+4. Convert to Lowercase
+Answer
+text = "PERSISTENT SYSTEMS"
+
+print(text.lower())
+
+Output
+
+persistent systems
+5. Reverse a String
+Answer
+text = "Python"
+
+print(text[::-1])
+
+Output
+
+nohtyP
+6. Reverse Without Slicing
+Answer
+text = "Python"
+reverse = ""
+
+for ch in text:
+    reverse = ch + reverse
+
+print(reverse)
+
+Output
+
+nohtyP
+7. Check Palindrome
+Answer
+text = input("Enter a string: ")
+
+if text == text[::-1]:
+    print("Palindrome")
+else:
+    print("Not Palindrome")
+
+Sample Output
+
+Enter a string: madam
+Palindrome
+8. Count Vowels
+Answer
+text = "Persistent"
+
+count = 0
+
+for ch in text.lower():
+    if ch in "aeiou":
+        count += 1
+
+print("Vowels =", count)
+
+Output
+
+Vowels = 3
+9. Count Consonants
+Answer
+text = "Persistent"
+
+count = 0
+
+for ch in text.lower():
+    if ch.isalpha() and ch not in "aeiou":
+        count += 1
+
+print("Consonants =", count)
+
+Output
+
+Consonants = 7
+10. Count Spaces
+Answer
+text = "Persistent Systems"
+
+print(text.count(" "))
+
+Output
+
+1
+11. Count Occurrence of a Character
+Answer
+text = "programming"
+
+print(text.count("g"))
+
+Output
+
+2
+12. Replace Spaces
+Answer
+text = "Persistent Systems Interview"
+
+print(text.replace(" ", "_"))
+
+Output
+
+Persistent_Systems_Interview
+13. Remove Spaces
+Answer
+text = "Python Programming"
+
+print(text.replace(" ", ""))
+
+Output
+
+PythonProgramming
+14. Split String
+Answer
+text = "Apple,Banana,Mango"
+
+fruits = text.split(",")
+
+print(fruits)
+
+Output
+
+['Apple', 'Banana', 'Mango']
+15. Join List
+Answer
+languages = ["Python", "Java", "SQL"]
+
+print("-".join(languages))
+
+Output
+
+Python-Java-SQL
+16. Check Startswith
+Answer
+text = "Python"
+
+print(text.startswith("Py"))
+
+Output
+
+True
+17. Check Endswith
+Answer
+text = "Python"
+
+print(text.endswith("on"))
+
+Output
+
+True
+18. Check isAlpha()
+Answer
+text = "Python"
+
+print(text.isalpha())
+
+Output
+
+True
+19. Check isDigit()
+Answer
+text = "12345"
+
+print(text.isdigit())
+
+Output
+
+True
+20. Check isAlnum()
+Answer
+text = "Python123"
+
+print(text.isalnum())
+
+Output
+
+True
+21. Remove Duplicate Characters
+Answer
+text = "programming"
+
+result = ""
+
+for ch in text:
+    if ch not in result:
+        result += ch
+
+print(result)
+
+Output
+
+progamin
+22. Find Duplicate Characters
+Answer
+text = "programming"
+
+duplicates = ""
+
+for ch in text:
+    if text.count(ch) > 1 and ch not in duplicates:
+        duplicates += ch
+
+print(duplicates)
+
+Output
+
+rgm
+23. Find Longest Word
+Answer
+text = "Python programming interview questions"
+
+words = text.split()
+
+longest = max(words, key=len)
+
+print(longest)
+
+Output
+
+programming
+24. Find Smallest Word
+Answer
+text = "Python programming interview questions"
+
+words = text.split()
+
+smallest = min(words, key=len)
+
+print(smallest)
+
+Output
+
+Python
+25. Count Words
+Answer
+text = "Python is easy to learn"
+
+print(len(text.split()))
+
+Output
+
+5
+26. Print ASCII Values
+Answer
+text = "ABC"
+
+for ch in text:
+    print(ch, "=", ord(ch))
+
+Output
+
+A = 65
+B = 66
+C = 67
+27. String Compression
+Answer
+text = "aaabbcccc"
+
+result = ""
+count = 1
+
+for i in range(len(text) - 1):
+    if text[i] == text[i + 1]:
+        count += 1
+    else:
+        result += text[i] + str(count)
+        count = 1
+
+result += text[-1] + str(count)
+
+print(result)
+
+Output
+
+a3b2c4
+28. Check Anagram
+Answer
+s1 = "listen"
+s2 = "silent"
+
+if sorted(s1) == sorted(s2):
+    print("Anagram")
+else:
+    print("Not Anagram")
+
+Output
+
+Anagram
+29. First Non-Repeated Character
+Answer
+text = "programming"
+
+for ch in text:
+    if text.count(ch) == 1:
+        print(ch)
+        break
+
+Output
+
+p
+30. Count Uppercase, Lowercase, Digits and Special Characters
+Answer
+text = "Python@123"
+
+upper = lower = digit = special = 0
+
+for ch in text:
+    if ch.isupper():
+        upper += 1
+    elif ch.islower():
+        lower += 1
+    elif ch.isdigit():
+        digit += 1
+    else:
+        special += 1
+
+print("Uppercase =", upper)
+print("Lowercase =", lower)
+print("Digits =", digit)
+print("Special =", special)
+
+Output
+
+Uppercase = 1
+Lowercase = 5
+Digits = 3
+Special = 1
+
+
+1. Create a List
+numbers = [10, 20, 30, 40]
+
+print(numbers)
+
+Output
+
+[10, 20, 30, 40]
+2. Access List Elements
+numbers = [10, 20, 30, 40]
+
+print(numbers[0])
+print(numbers[2])
+
+Output
+
+10
+30
+3. Negative Indexing
+numbers = [10, 20, 30, 40]
+
+print(numbers[-1])
+print(numbers[-2])
+
+Output
+
+40
+30
+4. List Slicing
+numbers = [10, 20, 30, 40, 50]
+
+print(numbers[1:4])
+
+Output
+
+[20, 30, 40]
+5. Append Element
+numbers = [10, 20]
+
+numbers.append(30)
+
+print(numbers)
+
+Output
+
+[10, 20, 30]
+6. Insert Element
+numbers = [10, 20, 40]
+
+numbers.insert(2, 30)
+
+print(numbers)
+
+Output
+
+[10, 20, 30, 40]
+7. Extend List
+list1 = [1, 2]
+list2 = [3, 4]
+
+list1.extend(list2)
+
+print(list1)
+
+Output
+
+[1, 2, 3, 4]
+8. Remove Element
+numbers = [10, 20, 30]
+
+numbers.remove(20)
+
+print(numbers)
+
+Output
+
+[10, 30]
+9. Pop Element
+numbers = [10, 20, 30]
+
+numbers.pop()
+
+print(numbers)
+
+Output
+
+[10, 20]
+10. Pop Using Index
+numbers = [10, 20, 30]
+
+numbers.pop(1)
+
+print(numbers)
+
+Output
+
+[10, 30]
+11. Delete Element
+numbers = [10, 20, 30]
+
+del numbers[1]
+
+print(numbers)
+
+Output
+
+[10, 30]
+12. Clear List
+numbers = [10, 20, 30]
+
+numbers.clear()
+
+print(numbers)
+
+Output
+
+[]
+13. Length of List
+numbers = [10, 20, 30, 40]
+
+print(len(numbers))
+
+Output
+
+4
+14. Sort List
+numbers = [30, 10, 50, 20]
+
+numbers.sort()
+
+print(numbers)
+
+Output
+
+[10, 20, 30, 50]
+15. Reverse Sort
+numbers = [30, 10, 50, 20]
+
+numbers.sort(reverse=True)
+
+print(numbers)
+
+Output
+
+[50, 30, 20, 10]
+16. Reverse List
+numbers = [1, 2, 3, 4]
+
+numbers.reverse()
+
+print(numbers)
+
+Output
+
+[4, 3, 2, 1]
+17. Count Occurrence
+numbers = [10, 20, 20, 30]
+
+print(numbers.count(20))
+
+Output
+
+2
+18. Find Index
+numbers = [10, 20, 30]
+
+print(numbers.index(20))
+
+Output
+
+1
+19. Maximum Number
+numbers = [10, 50, 30]
+
+print(max(numbers))
+
+Output
+
+50
+20. Minimum Number
+numbers = [10, 50, 30]
+
+print(min(numbers))
+
+Output
+
+10
+21. Sum of Elements
+numbers = [10, 20, 30]
+
+print(sum(numbers))
+
+Output
+
+60
+22. Find Largest Number (Without max())
+numbers = [10, 50, 30]
+
+largest = numbers[0]
+
+for num in numbers:
+    if num > largest:
+        largest = num
+
+print(largest)
+
+Output
+
+50
+23. Find Smallest Number (Without min())
+numbers = [10, 50, 30]
+
+smallest = numbers[0]
+
+for num in numbers:
+    if num < smallest:
+        smallest = num
+
+print(smallest)
+
+Output
+
+10
+24. Remove Duplicates
+numbers = [1, 2, 2, 3, 4, 4]
+
+unique = list(set(numbers))
+
+print(unique)
+
+Output
+
+[1, 2, 3, 4]
+25. Find Even Numbers
+numbers = [1, 2, 3, 4, 5, 6]
+
+for num in numbers:
+    if num % 2 == 0:
+        print(num)
+
+Output
+
+2
+4
+6
+26. Find Odd Numbers
+numbers = [1, 2, 3, 4, 5]
+
+for num in numbers:
+    if num % 2 != 0:
+        print(num)
+
+Output
+
+1
+3
+5
+27. Square Every Number
+numbers = [1, 2, 3, 4]
+
+result = []
+
+for num in numbers:
+    result.append(num ** 2)
+
+print(result)
+
+Output
+
+[1, 4, 9, 16]
+28. Copy a List
+numbers = [10, 20, 30]
+
+copy_list = numbers.copy()
+
+print(copy_list)
+
+Output
+
+[10, 20, 30]
+29. Merge Two Lists
+list1 = [1, 2]
+list2 = [3, 4]
+
+result = list1 + list2
+
+print(result)
+
+Output
+
+[1, 2, 3, 4]
+30. List Comprehension
+numbers = [1, 2, 3, 4, 5]
+
+squares = [num ** 2 for num in numbers]
+
+print(squares)
+
+Output
+
+[1, 4, 9, 16, 25]
+Frequently Asked List Interview Questions (Persistent Systems)
+What is the difference between append() and extend()?
+What is the difference between remove(), pop(), and del?
+How do you remove duplicates while preserving the original order?
+What is the difference between a shallow copy and a deep copy?
+What is list comprehension, and why is it useful?
+How do you find the second largest element in a list?
+How do you reverse a list without using reverse()?
+How do you merge two sorted lists?
+What is the time complexity of append(), insert(), remove(), and pop()?
+How do you sort a list of dictionaries based on a key?
+
+Python List Comprehension (Persistent Systems Interview)
+
+List comprehension is a concise way to create a new list from an existing iterable (such as a list, tuple, string, or range).
+
+Syntax
+new_list = [expression for item in iterable]
+Example
+numbers = [1, 2, 3, 4, 5]
+
+square = [num ** 2 for num in numbers]
+
+print(square)
+
+Output
+
+[1, 4, 9, 16, 25]
+1. Create a List of Numbers
+Without List Comprehension
+numbers = []
+
+for i in range(1, 6):
+    numbers.append(i)
+
+print(numbers)
+With List Comprehension
+numbers = [i for i in range(1, 6)]
+
+print(numbers)
+
+Output
+
+[1, 2, 3, 4, 5]
+2. Square of Numbers
+numbers = [1, 2, 3, 4, 5]
+
+square = [num * num for num in numbers]
+
+print(square)
+
+Output
+
+[1, 4, 9, 16, 25]
+3. Cube of Numbers
+numbers = [1, 2, 3, 4]
+
+cube = [num ** 3 for num in numbers]
+
+print(cube)
+
+Output
+
+[1, 8, 27, 64]
+4. Even Numbers
+numbers = [1, 2, 3, 4, 5, 6]
+
+even = [num for num in numbers if num % 2 == 0]
+
+print(even)
+
+Output
+
+[2, 4, 6]
+5. Odd Numbers
+numbers = [1, 2, 3, 4, 5]
+
+odd = [num for num in numbers if num % 2 != 0]
+
+print(odd)
+
+Output
+
+[1, 3, 5]
+6. Convert to Uppercase
+names = ["john", "ram", "sai"]
+
+upper = [name.upper() for name in names]
+
+print(upper)
+
+Output
+
+['JOHN', 'RAM', 'SAI']
+7. Find Length of Each Word
+words = ["Python", "Java", "SQL"]
+
+length = [len(word) for word in words]
+
+print(length)
+
+Output
+
+[6, 4, 3]
+8. First Character of Each Word
+names = ["Python", "Java", "SQL"]
+
+result = [name[0] for name in names]
+
+print(result)
+
+Output
+
+['P', 'J', 'S']
+9. Remove Spaces
+text = [" Python ", " Java ", " SQL "]
+
+result = [word.strip() for word in text]
+
+print(result)
+
+Output
+
+['Python', 'Java', 'SQL']
+10. Create a List of Characters
+text = "Python"
+
+characters = [ch for ch in text]
+
+print(characters)
+
+Output
+
+['P', 'y', 't', 'h', 'o', 'n']
+11. Filter Strings by Length
+languages = ["Python", "C", "Java", "Go"]
+
+result = [lang for lang in languages if len(lang) > 3]
+
+print(result)
+
+Output
+
+['Python', 'Java']
+12. Replace Negative Numbers with Zero
+numbers = [10, -5, 20, -3, 8]
+
+result = [0 if num < 0 else num for num in numbers]
+
+print(result)
+
+Output
+
+[10, 0, 20, 0, 8]
+13. Find Vowels
+text = "Persistent"
+
+vowels = [ch for ch in text.lower() if ch in "aeiou"]
+
+print(vowels)
+
+Output
+
+['e', 'i', 'e']
+14. Multiplication Table of 5
+table = [5 * i for i in range(1, 11)]
+
+print(table)
+
+Output
+
+[5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+15. Nested List Comprehension
+
+Flatten a 2D list.
+
+matrix = [
+    [1, 2],
+    [3, 4],
+    [5, 6]
+]
+
+result = [num for row in matrix for num in row]
+
+print(result)
+
+Output
+
+[1, 2, 3, 4, 5, 6]
+16. Conditional List Comprehension
+numbers = [1, 2, 3, 4, 5]
+
+result = ["Even" if num % 2 == 0 else "Odd" for num in numbers]
+
+print(result)
+
+Output
+
+['Odd', 'Even', 'Odd', 'Even', 'Odd']
+17. Create Tuples
+numbers = [1, 2, 3]
+
+result = [(num, num ** 2) for num in numbers]
+
+print(result)
+
+Output
+
+[(1, 1), (2, 4), (3, 9)]
+18. Remove Empty Strings
+names = ["Python", "", "Java", "", "SQL"]
+
+result = [name for name in names if name]
+
+print(result)
+
+Output
+
+['Python', 'Java', 'SQL']
+19. Convert String Numbers to Integers
+numbers = ["10", "20", "30"]
+
+result = [int(num) for num in numbers]
+
+print(result)
+
+Output
+
+[10, 20, 30]
+20. Find Common Elements
+list1 = [1, 2, 3, 4]
+list2 = [3, 4, 5, 6]
+
+common = [num for num in list1 if num in list2]
+
+print(common)
+
+Output
+
+[3, 4]
+Interview Questions on List Comprehension
+1. What is list comprehension?
+
+A concise way to create a new list from an iterable using a single expression.
+
+2. What are the benefits?
+Less code
+Easy to read
+Often faster than a traditional for loop
+Pythonic style
+3. Can you use if in list comprehension?
+
+Yes.
+
+numbers = [1, 2, 3, 4, 5]
+
+even = [num for num in numbers if num % 2 == 0]
+4. Can you use if-else?
+
+Yes.
+
+numbers = [1, 2, 3]
+
+result = ["Even" if n % 2 == 0 else "Odd" for n in numbers]
+5. Can you use nested loops?
+
+Yes.
+
+pairs = [(i, j) for i in range(2) for j in range(2)]
+
+print(pairs)
+
+Output
+
+[(0, 0), (0, 1), (1, 0), (1, 1)]
+Persistent Systems Interview Tip
+
+Interviewers frequently ask candidates to:
+
+Convert a for loop into a list comprehension.
+Explain the syntax (expression, for, if).
+Write list comprehensions with filtering and conditional logic.
+Compare list comprehensions with map() and filter().
+Discuss when not to use list comprehensions (e.g., when the logic becomes too complex and readability suffers).
+
+
+Top 50 OOP (Object-Oriented Programming) Interview Questions for Persistent Systems (Python Freshers)
+
+These questions are commonly asked in Persistent Systems, TCS, Infosys, Cognizant, Accenture, Capgemini, IBM, Wipro, and Deloitte Python interviews.
+
+Basic OOP Questions
+1. What is Object-Oriented Programming (OOP)?
+
+Answer:
+Object-Oriented Programming (OOP) is a programming paradigm that organizes code using classes and objects. It helps make code reusable, modular, and easier to maintain.
+
+2. What are the four pillars of OOP?
+Encapsulation
+Inheritance
+Polymorphism
+Abstraction
+3. What is a class?
+
+A class is a blueprint or template for creating objects.
+
+class Student:
+    pass
+4. What is an object?
+
+An object is an instance of a class.
+
+class Student:
+    pass
+
+s1 = Student()
+5. Difference between Class and Object
+Class	Object
+Blueprint	Instance of a class
+Logical entity	Physical entity
+Doesn't occupy memory until instantiated	Occupies memory
+Constructors
+6. What is a constructor?
+
+A constructor initializes an object automatically when it is created.
+
+class Student:
+    def __init__(self):
+        print("Constructor Called")
+
+s = Student()
+7. What is __init__()?
+
+__init__() is Python's constructor method that initializes object attributes.
+
+8. Can a class have multiple constructors?
+
+Python does not support multiple constructors directly. You can simulate them using:
+
+Default arguments
+Variable-length arguments (*args, **kwargs)
+Class methods
+
+Example:
+
+class Student:
+    def __init__(self, name="Unknown"):
+        self.name = name
+self Keyword
+9. What is self?
+
+self refers to the current object of the class.
+
+class Student:
+    def display(self):
+        print("Hello")
+10. Is self a keyword?
+
+No. It is a naming convention. You can technically use another name, but self is the standard.
+
+Instance Variables
+11. What is an instance variable?
+
+A variable unique to each object.
+
+class Student:
+    def __init__(self, name):
+        self.name = name
+12. What is a class variable?
+
+A variable shared by all objects.
+
+class Student:
+    college = "ABC College"
+13. Difference between Instance Variable and Class Variable
+Instance Variable	Class Variable
+Belongs to an object	Belongs to the class
+Different value per object	Shared across all objects
+Methods
+14. Types of methods in Python
+Instance Method
+Class Method
+Static Method
+15. What is an instance method?
+
+Works with object-specific data.
+
+class Student:
+    def display(self):
+        print("Student")
+16. What is a class method?
+
+Uses the @classmethod decorator and receives cls.
+
+class Student:
+    college = "ABC"
+
+    @classmethod
+    def show(cls):
+        print(cls.college)
+17. What is a static method?
+
+Uses the @staticmethod decorator and doesn't access self or cls.
+
+class Math:
+    @staticmethod
+    def add(a, b):
+        return a + b
+Encapsulation
+18. What is encapsulation?
+
+Encapsulation means combining data and methods into a single unit (class) and controlling access to the data.
+
+19. How does Python support encapsulation?
+
+Using naming conventions:
+
+class Employee:
+    def __init__(self):
+        self.public = 10
+        self._protected = 20
+        self.__private = 30
+20. Difference between Public, Protected, and Private
+Type	Syntax
+Public	name
+Protected	_name
+Private	__name
+Inheritance
+21. What is inheritance?
+
+Inheritance allows one class to acquire the properties and methods of another class.
+
+class Animal:
+    def sound(self):
+        print("Animal Sound")
+
+class Dog(Animal):
+    pass
+
+Dog().sound()
+22. Advantages of inheritance
+Code reuse
+Easier maintenance
+Extensibility
+23. Types of inheritance
+Single
+Multiple
+Multilevel
+Hierarchical
+Hybrid
+24. Explain Single Inheritance
+
+One child inherits from one parent.
+
+25. Explain Multiple Inheritance
+
+One child inherits from multiple parents.
+
+class A:
+    pass
+
+class B:
+    pass
+
+class C(A, B):
+    pass
+26. What is Multilevel Inheritance?
+A → B → C
+27. What is Hierarchical Inheritance?
+
+One parent with multiple children.
+
+28. What is Hybrid Inheritance?
+
+A combination of two or more inheritance types.
+
+Polymorphism
+29. What is polymorphism?
+
+The same interface can behave differently depending on the object or input.
+
+30. Types of polymorphism
+Method Overriding
+Operator Overloading
+31. What is method overriding?
+
+A child class provides its own implementation of a method defined in the parent class.
+
+class Animal:
+    def sound(self):
+        print("Animal Sound")
+
+class Dog(Animal):
+    def sound(self):
+        print("Bark")
+32. Does Python support method overloading?
+
+Not in the traditional sense. Similar behavior can be achieved using default parameters or *args.
+
+Abstraction
+33. What is abstraction?
+
+Abstraction hides implementation details and exposes only essential functionality.
+
+34. How is abstraction implemented in Python?
+
+Using the abc module.
+
+from abc import ABC, abstractmethod
+
+class Shape(ABC):
+
+    @abstractmethod
+    def area(self):
+        pass
+35. Can you create an object of an abstract class?
+
+No.
+
+super()
+36. What is super()?
+
+super() is used to call methods or constructors from the parent class.
+
+class Parent:
+    def __init__(self):
+        print("Parent")
+
+class Child(Parent):
+    def __init__(self):
+        super().__init__()
+        print("Child")
+Magic Methods
+37. What are magic (dunder) methods?
+
+Methods with double underscores, such as:
+
+__init__
+__str__
+__len__
+__repr__
+38. What is __str__()?
+
+It defines the human-readable string representation of an object.
+
+39. Difference between __str__() and __repr__()
+__str__()	__repr__()
+User-friendly output	Developer/debug representation
+Used by print()	Used by repr() and debugging
+Real-Time Questions
+40. Why do we use OOP?
+Reusability
+Maintainability
+Modularity
+Scalability
+41. Give a real-time example of a class.
+
+A Car class.
+
+Attributes:
+
+brand
+model
+color
+speed
+
+Methods:
+
+start()
+stop()
+accelerate()
+42. Give a real-time example of inheritance.
+Vehicle
+   |
+-----------------
+|               |
+Car           Bike
+
+Both inherit common features from Vehicle.
+
+43. Give a real-time example of abstraction.
+
+An ATM machine:
+
+Users interact with buttons and screens.
+Internal banking operations are hidden.
+44. Give a real-time example of encapsulation.
+
+A bank account:
+
+Balance is protected.
+Access is provided through methods like deposit() and withdraw().
+45. Give a real-time example of polymorphism.
+
+A make_sound() method:
+
+Dog → "Bark"
+Cat → "Meow"
+Cow → "Moo"
+
+The same method name behaves differently.
+
+Scenario-Based Questions
+46. Why should data members be private?
+
+To prevent unauthorized modification and protect data integrity.
+
+47. Can one object call another object's method?
+
+Yes.
+
+class A:
+    def display(self):
+        print("Hello")
+
+class B:
+    def call(self):
+        obj = A()
+        obj.display()
+
+B().call()
+48. What happens if a child class does not define its own constructor?
+
+The parent class constructor is called automatically (if compatible with the arguments).
+
+49. Why is inheritance preferred over copying code?
+
+Because it:
+
+Reduces duplication
+Improves maintainability
+Promotes code reuse
+50. Difference between Composition and Inheritance
+Inheritance	Composition
+"Is-a" relationship	"Has-a" relationship
+Example: Dog is an Animal	Car has an Engine
+Stronger coupling	Looser coupling
+Frequently Asked Persistent Systems OOP Coding Questions
+Create a Student class with attributes and methods.
+Write a program demonstrating all four OOP principles.
+Implement single inheritance with Employee and Manager.
+Override a method in a child class.
+Create an abstract class Shape and implement Circle and Rectangle.
+Use super() to invoke a parent constructor.
+Create a BankAccount class demonstrating encapsulation.
+Write a class using instance, class, and static methods.
+Implement multiple inheritance with a practical example.
+Override __str__() to display object details.
+
+These questions cover the core OOP concepts that are most commonly assessed in Persistent Systems Python interviews for freshers. Mastering both the theory and coding examples will prepare you well for technical interview rounds.
+
+
+Python Counter with Examples (Persistent Systems Interview)
+
+Counter is a class from Python's collections module. It is used to count the frequency of elements in an iterable such as a string, list, or tuple.
+
+from collections import Counter
+1. Count Characters in a String
+from collections import Counter
+
+text = "programming"
+
+result = Counter(text)
+
+print(result)
+
+Output
+
+Counter({'g': 2, 'r': 2, 'm': 2, 'p': 1, 'o': 1, 'a': 1, 'i': 1, 'n': 1})
+2. Count Words
+from collections import Counter
+
+sentence = "python is easy python is powerful"
+
+words = sentence.split()
+
+result = Counter(words)
+
+print(result)
+
+Output
+
+Counter({'python': 2, 'is': 2, 'easy': 1, 'powerful': 1})
+3. Count Numbers in a List
+from collections import Counter
+
+numbers = [10, 20, 10, 30, 20, 10]
+
+result = Counter(numbers)
+
+print(result)
+
+Output
+
+Counter({10: 3, 20: 2, 30: 1})
+4. Find the Most Common Element
+from collections import Counter
+
+numbers = [1, 2, 2, 3, 3, 3, 4]
+
+result = Counter(numbers)
+
+print(result.most_common(1))
+
+Output
+
+[(3, 3)]
+
+
+Python Exception Handling Interview Questions (Persistent Systems – Freshers)
+
+Exception handling is one of the most frequently asked Python topics in Persistent Systems interviews. Below are 30 interview questions with answers and examples.
+
+1. What is an Exception?
+Answer
+
+An exception is an event that interrupts the normal flow of a program during execution.
+
+Example:
+
+a = 10
+b = 0
+
+print(a / b)
+
+Output
+
+ZeroDivisionError: division by zero
+2. What is Exception Handling?
+Answer
+
+Exception handling is the process of handling runtime errors so that the program does not terminate unexpectedly.
+
+Example
+
+try:
+    a = 10
+    b = 0
+    print(a / b)
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+Output
+
+Cannot divide by zero
+3. Why Do We Need Exception Handling?
+Prevents program crashes
+Handles unexpected errors
+Improves user experience
+Makes programs more reliable
+4. Difference Between Error and Exception
+Error	Exception
+Usually cannot be handled	Can be handled using try-except
+Stops program execution	Allows program to continue
+Example: SyntaxError	Example: ValueError, ZeroDivisionError
+5. Syntax of Exception Handling
+try:
+    # Risky code
+except:
+    # Handle exception
+else:
+    # Executes if no exception occurs
+finally:
+    # Always executes
+6. What is the Purpose of the try Block?
+
+The try block contains code that may raise an exception.
+
+try:
+    print(10 / 2)
+7. What is the Purpose of the except Block?
+
+The except block catches and handles exceptions.
+
+try:
+    print(10 / 0)
+except ZeroDivisionError:
+    print("Division by zero is not allowed")
+8. What is the else Block?
+
+The else block executes only if no exception occurs.
+
+try:
+    print(10 / 2)
+except ZeroDivisionError:
+    print("Error")
+else:
+    print("Executed Successfully")
+
+Output
+
+5.0
+Executed Successfully
+9. What is the finally Block?
+
+The finally block always executes, whether an exception occurs or not.
+
+try:
+    print(10 / 2)
+finally:
+    print("Closing resources")
+
+Output
+
+5.0
+Closing resources
+10. Difference Between else and finally
+else	finally
+Runs only if no exception occurs	Runs in all cases
+Optional	Optional
+Used for success logic	Used for cleanup
+11. What Happens if an Exception is Not Handled?
+
+The program stops execution and displays a traceback.
+
+12. Can One try Have Multiple except Blocks?
+
+Yes.
+
+try:
+    x = int(input("Enter number: "))
+    print(10 / x)
+
+except ValueError:
+    print("Invalid input")
+
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+13. Can We Catch Multiple Exceptions Together?
+
+Yes.
+
+try:
+    x = int(input())
+    print(10 / x)
+
+except (ValueError, ZeroDivisionError):
+    print("Exception occurred")
+14. What is a Generic Exception?
+try:
+    print(10 / 0)
+except Exception as e:
+    print(e)
+
+Exception catches most built-in exceptions.
+
+15. What Does Exception as e Mean?
+
+It stores the exception object in the variable e.
+
+try:
+    print(10 / 0)
+except Exception as e:
+    print("Error:", e)
+16. What is raise?
+
+raise is used to explicitly generate an exception.
+
+age = -5
+
+if age < 0:
+    raise ValueError("Age cannot be negative")
+17. What is a User-Defined Exception?
+
+A custom exception created by inheriting from Exception.
+
+class InvalidAgeError(Exception):
+    pass
+
+age = -1
+
+if age < 0:
+    raise InvalidAgeError("Invalid Age")
+18. Common Built-in Exceptions
+ZeroDivisionError
+ValueError
+TypeError
+IndexError
+KeyError
+NameError
+AttributeError
+FileNotFoundError
+ImportError
+19. Example of ValueError
+num = int("abc")
+
+Output
+
+ValueError
+20. Example of IndexError
+numbers = [1, 2, 3]
+
+print(numbers[5])
+
+Output
+
+IndexError
+21. Example of KeyError
+student = {"name": "John"}
+
+print(student["age"])
+
+Output
+
+KeyError
+22. Example of TypeError
+print(10 + "20")
+
+Output
+
+TypeError
+23. Example of NameError
+print(x)
+
+Output
+
+NameError
+24. Example of FileNotFoundError
+with open("test.txt") as file:
+    print(file.read())
+
+If the file does not exist:
+
+FileNotFoundError
+25. Can finally Execute After a return Statement?
+
+Yes.
+
+def demo():
+    try:
+        return 100
+    finally:
+        print("Finally Executed")
+
+print(demo())
+
+Output
+
+Finally Executed
+100
+26. Why is finally Used in File Handling?
+
+To ensure that files, database connections, or network connections are properly closed even if an exception occurs.
+
+27. Real-Time Example: ATM Withdrawal
+balance = 5000
+withdraw = 6000
+
+try:
+    if withdraw > balance:
+        raise Exception("Insufficient Balance")
+    balance -= withdraw
+    print(balance)
+
+except Exception as e:
+    print(e)
+
+Output
+
+Insufficient Balance
+28. Real-Time Example: Login Validation
+username = ""
+
+try:
+    if username == "":
+        raise ValueError("Username cannot be empty")
+
+except ValueError as e:
+    print(e)
+
+Python Generators Interview Questions (Persistent Systems – Freshers)
+
+Generators are a frequently asked Python interview topic because they test your understanding of memory efficiency, iteration, and lazy evaluation.
+
+1. What is a Generator?
+Answer
+
+A generator is a function that returns an iterator and produces values one at a time using the yield keyword instead of return.
+
+Example
+def numbers():
+    yield 1
+    yield 2
+    yield 3
+
+g = numbers()
+
+print(next(g))
+print(next(g))
+print(next(g))
+
+Output
+
+1
+2
+3
+2. Difference Between return and yield
+return	yield
+Ends the function	Pauses the function
+Returns one value	Returns multiple values one at a time
+Function execution stops	Function state is preserved
+Uses more memory for large data	Memory efficient
+3. Simple Generator Example
+def my_generator():
+    yield "Python"
+    yield "Java"
+    yield "SQL"
+
+g = my_generator()
+
+for item in g:
+    print(item)
+
+Output
+
+Python
+Java
+SQL
+4. Generator vs List
+List
+numbers = [1, 2, 3, 4, 5]
+
+print(numbers)
+Generator
+def numbers():
+    for i in range(1, 6):
+        yield i
+
+print(numbers())
+
+Output
+
+<generator object numbers at 0x...>
+5. Using next()
+def demo():
+    yield 10
+    yield 20
+    yield 30
+
+g = demo()
+
+print(next(g))
+print(next(g))
+print(next(g))
+
+Output
+
+10
+20
+30
+6. What Happens After All Values Are Exhausted?
+def demo():
+    yield 1
+
+g = demo()
+
+print(next(g))
+print(next(g))
+
+Output
+
+1
+StopIteration
+7. Generator for Even Numbers
+def even_numbers(n):
+    for i in range(2, n + 1, 2):
+        yield i
+
+for num in even_numbers(10):
+    print(num)
+
+Output
+
+2
+4
+6
+8
+10
+8. Generator for Squares
+def square(n):
+    for i in range(1, n + 1):
+        yield i ** 2
+
+for value in square(5):
+    print(value)
+
+Output
+
+1
+4
+9
+16
+25
+9. Fibonacci Generator
+def fibonacci(n):
+    a, b = 0, 1
+
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
+
+for num in fibonacci(10):
+    print(num)
+
+Output
+
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+10. Generator Expression
+
+Similar to list comprehension, but uses parentheses.
+
+numbers = (x ** 2 for x in range(5))
+
+for num in numbers:
+    print(num)
+
+Output
+
+0
+1
+4
+9
+16
+11. List Comprehension vs Generator Expression
+List Comprehension
+numbers = [x ** 2 for x in range(5)]
+
+print(numbers)
+
+Output
+
+[0, 1, 4, 9, 16]
+Generator Expression
+numbers = (x ** 2 for x in range(5))
+
+print(numbers)
+
+Output
+
+<generator object ...>
+12. Memory Comparison
+List
+
+Stores all values in memory.
+
+numbers = [x for x in range(1000000)]
+Generator
+
+Produces values one by one.
+
+numbers = (x for x in range(1000000))
+
+Generators are preferred for large datasets because they use much less memory.
+
+13. Infinite Generator
+def infinite():
+    num = 1
+
+    while True:
+        yield num
+        num += 1
+
+g = infinite()
+
+for _ in range(5):
+    print(next(g))
+
+Output
+
+1
+2
+3
+4
+5
+14. Read Large File Using Generator
+def read_file(file_name):
+    with open(file_name) as file:
+        for line in file:
+            yield line.strip()
+
+for line in read_file("sample.txt"):
+    print(line)
+15. Custom Range Generator
+def my_range(start, end):
+    while start <= end:
+        yield start
+        start += 1
+
+for num in my_range(1, 5):
+    print(num)
+
+Output
+
+1
+2
+3
+4
+5
+Real-Time Example 1: Log File Processing
+def read_logs():
+    with open("logs.txt") as file:
+        for line in file:
+            yield line
+
+for log in read_logs():
+    print(log)
+
+Why use a generator?
+
+Reads one line at a time.
+Avoids loading the entire file into memory.
+Real-Time Example 2: Streaming Sensor Data
+def sensor_data():
+    value = 100
+
+    while True:
+        yield value
+        value += 1
+
+data = sensor_data()
+
+print(next(data))
+print(next(data))
+Frequently Asked Interview Questions
+1. Why use generators?
+Memory efficient
+Faster for large datasets
+Lazy evaluation (generate values only when needed)
+2. What keyword is used in generators?
+
+Answer: yield
+
+3. What is lazy evaluation?
+
+Values are created only when requested, not all at once.
+
+4. Can a generator be iterated multiple times?
+
+No. Once a generator is exhausted, it cannot be reused. You must create a new generator object.
+
+def demo():
+    yield 1
+    yield 2
+
+g = demo()
+
+for i in g:
+    print(i)
+
+for i in g:
+    print(i)   # Nothing is printed
+5. Difference Between Iterator and Generator
+Iterator	Generator
+Uses __iter__() and __next__()	Uses yield
+More code to implement	Easier to write
+Manual implementation	Automatically creates an iterator
+6. Can a generator return a value?
+
+Yes, but a return statement ends the generator.
+
+def demo():
+    yield 1
+    return
+
+g = demo()
+
+print(next(g))
+
+Output
+
+1
+7. How do generators save memory?
+
+They do not store all values at once. They generate one value at a time and keep only the current state in memory.
+
+Persistent Systems Coding Questions
+Q1. Print Even Numbers Using a Generator
+def even(n):
+    for i in range(2, n + 1, 2):
+        yield i
+
+for value in even(20):
+    print(value)
+Q2. Print Prime Numbers Using a Generator
+def primes(limit):
+    for num in range(2, limit + 1):
+        is_prime = True
+        for i in range(2, int(num ** 0.5) + 1):
+            if num % i == 0:
+                is_prime = False
+                break
+        if is_prime:
+            yield num
+
+for p in primes(20):
+    print(p)
+Q3. Yield Characters of a String
+def characters(text):
+    for ch in text:
+        yield ch
+
+for c in characters("Python"):
+    print(c)
+Interview Tips for Persistent Systems
+
+Interviewers often ask these follow-up questions:
+
+What is the difference between a list and a generator?
+Lists store all values in memory; generators produce values on demand.
+What exception is raised when a generator has no more values?
+StopIteration
+What is the difference between yield and return?
+yield pauses and resumes execution; return ends the function.
+When would you use a generator?
+Processing large files, streaming data, ETL pipelines, APIs with pagination, and large datasets.
+Why are generators useful in Data Engineering?
+They process data incrementally, reducing memory usage when working with large CSV files, log files, or streaming data.
+
+Mastering these concepts is especially useful for Persistent Systems, where Python interviews often include questions on writing efficient, scalable code.
+
+
+Python File Handling Interview Questions (Persistent Systems – Freshers)
+
+File handling is a frequently asked topic in Persistent Systems Python interviews. You should know how to read, write, append, and handle files safely.
+
+1. What is File Handling?
+Answer
+
+File handling is the process of creating, reading, writing, appending, and deleting files using Python.
+
+2. Why Do We Need File Handling?
+Store data permanently
+Read existing data
+Write reports/logs
+Process CSV/Text files
+Handle configuration files
+3. How to Open a File?
+Syntax
+file = open("sample.txt", "r")
+4. File Modes
+Mode	Description
+r	Read (default)
+w	Write (creates file if not exists, overwrites if exists)
+a	Append
+x	Create new file
+rb	Read binary
+wb	Write binary
+r+	Read and Write
+a+	Append and Read
+5. Read Entire File
+
+Suppose sample.txt contains:
+
+Hello
+Welcome to Python
+file = open("sample.txt", "r")
+
+print(file.read())
+
+file.close()
+
+Output
+
+Hello
+Welcome to Python
+6. Read One Line
+file = open("sample.txt", "r")
+
+print(file.readline())
+
+file.close()
+
+Output
+
+Hello
+7. Read All Lines
+file = open("sample.txt", "r")
+
+print(file.readlines())
+
+file.close()
+
+Output
+
+['Hello\n', 'Welcome to Python\n']
+8. Read File Using Loop
+file = open("sample.txt", "r")
+
+for line in file:
+    print(line.strip())
+
+file.close()
+9. Write to a File
+file = open("sample.txt", "w")
+
+file.write("Python File Handling")
+
+file.close()
+
+Note: w mode overwrites existing content.
+
+10. Append to a File
+file = open("sample.txt", "a")
+
+file.write("\nPersistent Systems")
+
+file.close()
+11. Create a New File
+file = open("newfile.txt", "x")
+
+file.close()
+
+If the file already exists, Python raises a FileExistsError.
+
+12. Close a File
+file = open("sample.txt")
+
+file.close()
+
+Always close files after use to free system resources.
+
+13. Using with open() (Recommended)
+with open("sample.txt", "r") as file:
+    print(file.read())
+Why use with?
+Automatically closes the file
+Safer
+Cleaner code
+14. Check File Exists
+import os
+
+if os.path.exists("sample.txt"):
+    print("File Exists")
+else:
+    print("File Not Found")
+15. Delete a File
+import os
+
+os.remove("sample.txt")
+16. Rename a File
+import os
+
+os.rename("old.txt", "new.txt")
+17. Write Multiple Lines
+lines = [
+    "Python\n",
+    "Java\n",
+    "SQL\n"
+]
+
+with open("languages.txt", "w") as file:
+    file.writelines(lines)
+18. Copy File Content
+with open("source.txt", "r") as src:
+    data = src.read()
+
+with open("destination.txt", "w") as dest:
+    dest.write(data)
+19. Count Number of Lines
+count = 0
+
+with open("sample.txt") as file:
+    for line in file:
+        count += 1
+
+print(count)
+20. Count Words
+with open("sample.txt") as file:
+    text = file.read()
+
+print(len(text.split()))
+21. Count Characters
+with open("sample.txt") as file:
+    text = file.read()
+
+print(len(text))
+22. Count Vowels in File
+vowels = "aeiouAEIOU"
+count = 0
+
+with open("sample.txt") as file:
+    text = file.read()
+
+for ch in text:
+    if ch in vowels:
+        count += 1
+
+print(count)
+23. Find Longest Word
+with open("sample.txt") as file:
+    words = file.read().split()
+
+print(max(words, key=len))
+24. Read CSV File
+
+Suppose employees.csv contains:
+
+ID,Name,Salary
+1,Ram,50000
+2,Sai,60000
+import csv
+
+with open("employees.csv") as file:
+    reader = csv.reader(file)
+
+    for row in reader:
+        print(row)
+
+Output
+
+['ID', 'Name', 'Salary']
+['1', 'Ram', '50000']
+['2', 'Sai', '60000']
+25. Write CSV File
+import csv
+
+data = [
+    ["ID", "Name", "Salary"],
+    [1, "Ram", 50000],
+    [2, "Sai", 60000]
+]
+
+with open("employees.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
+Interview Questions
+26. Difference Between read(), readline(), and readlines()
+Method	Description
+read()	Reads entire file
+readline()	Reads one line
+readlines()	Reads all lines into a list
+27. Difference Between w and a
+w	a
+Overwrites existing content	Adds content at the end
+Creates file if not present	Creates file if not present
+28. Why is with open() Preferred?
+Automatically closes the file
+Prevents resource leaks
+Easier to read and maintain
+29. How Do You Handle Missing Files?
+try:
+    with open("sample.txt") as file:
+        print(file.read())
+except FileNotFoundError:
+    print("File not found")
+30. Read Large Files Efficiently
+with open("largefile.txt") as file:
+    for line in file:
+        print(line.strip())
+
+Reading line by line is more memory-efficient than read() for very large files.
+
+Real-Time Example
+Employee Report
+with open("employees.txt", "w") as file:
+    file.write("101,Ram,50000\n")
+    file.write("102,Sai,60000\n")
+
+with open("employees.txt", "r") as file:
+    for record in file:
+        print(record.strip())
+Persistent Systems Coding Questions
+Q1. Count the Number of Lines in a File
+count = 0
+
+with open("sample.txt") as file:
+    for line in file:
+        count += 1
+
+print(count)
+Q2. Count Frequency of Words
+from collections import Counter
+
+with open("sample.txt") as file:
+    words = file.read().split()
+
+counter = Counter(words)
+
+print(counter)
+Q3. Copy One File to Another
+with open("source.txt") as src:
+    data = src.read()
+
+with open("target.txt", "w") as dest:
+    dest.write(data)
+Q4. Count Uppercase and Lowercase Characters
+upper = lower = 0
+
+with open("sample.txt") as file:
+    data = file.read()
+
+for ch in data:
+    if ch.isupper():
+        upper += 1
+    elif ch.islower():
+        lower += 1
+
+print("Uppercase:", upper)
+print("Lowercase:", lower)
+Q5. Search for a Word
+word = "Python"
+
+with open("sample.txt") as file:
+    text = file.read()
+
+if word in text:
+    print("Word Found")
+else:
+    print("Word Not Found")
+Frequently Asked Persistent Systems Follow-up Questions
+1. What happens if you open a file in w mode?
+If the file exists, its contents are erased.
+If it does not exist, a new file is created.
+2. What happens if you open a file in r mode and the file doesn't exist?
+Python raises a FileNotFoundError.
+3. Which is better: open() or with open()?
+with open() is preferred because it automatically closes the file.
+4. How do you process a 5 GB log file?
+Read it line by line (or use a generator) instead of loading the entire file into memory.
+5. How is file handling used in Data Engineering?
+Reading CSV, JSON, and log files.
+Writing ETL output files.
+Processing batch data.
+Creating audit and application log files.
+
+
+Python filter() Function (Persistent Systems Interview)
+
+The filter() function is used to filter elements from an iterable (such as a list, tuple, or string) based on a condition.
+
+It returns a filter object (iterator) containing only the elements for which the condition is True.
+
+Syntax
+filter(function, iterable)
+function → Function that returns True or False
+iterable → List, tuple, string, etc.
+Example 1: Filter Even Numbers
+numbers = [10, 15, 20, 25, 30]
+
+result = filter(lambda x: x % 2 == 0, numbers)
+
+print(list(result))
+
+Output
+
+[10, 20, 30]
+Example 2: Filter Odd Numbers
+numbers = [10, 15, 20, 25, 30]
+
+result = filter(lambda x: x % 2 != 0, numbers)
+
+print(list(result))
+
+Output
+
+[15, 25]
+Example 3: Filter Positive Numbers
+numbers = [-5, 10, -2, 15, 20]
+
+positive = filter(lambda x: x > 0, numbers)
+
+print(list(positive))
+
+Output
+
+[10, 15, 20]
+Example 4: Filter Names Starting with 'A'
+names = ["Alice", "Bob", "Andrew", "John"]
+
+result = filter(lambda name: name.startswith("A"), names)
+
+print(list(result))
+
+Output
+
+['Alice', 'Andrew']
+Example 5: Filter Strings Longer Than 5 Characters
+languages = ["Python", "Java", "SQL", "JavaScript"]
+
+result = filter(lambda x: len(x) > 5, languages)
+
+print(list(result))
+
+Output
+
+['Python', 'JavaScript']
+Example 6: Using a Normal Function
+def is_even(num):
+    return num % 2 == 0
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+result = filter(is_even, numbers)
+
+print(list(result))
+
+Output
+
+[2, 4, 6]
+Example 7: Remove Empty Strings
+names = ["Python", "", "Java", "", "SQL"]
+
+result = filter(None, names)
+
+print(list(result))
+
+Output
+
+['Python', 'Java', 'SQL']
+
+filter(None, iterable) removes all falsy values such as "", 0, False, None, and empty collections.
+
+Example 8: Filter Vowels
+text = "Persistent"
+
+result = filter(lambda ch: ch.lower() in "aeiou", text)
+
+print(list(result))
+
+Output
+
+['e', 'i', 'e']
+Example 9: Filter Numbers Greater Than 50
+numbers = [10, 55, 60, 25, 80]
+
+result = filter(lambda x: x > 50, numbers)
+
+print(list(result))
+
+Output
+
+[55, 60, 80]
+Example 10: Filter Dictionary Values
+students = {
+    "Ram": 85,
+    "Sai": 45,
+    "John": 90
+}
+
+result = dict(filter(lambda item: item[1] >= 50, students.items()))
+
+print(result)
+
+Output
+
+{'Ram': 85, 'John': 90}
+Real-Time Example 1: Eligible Employees
+employees = [
+    {"name": "Ram", "salary": 50000},
+    {"name": "Sai", "salary": 30000},
+    {"name": "John", "salary": 70000}
+]
+
+eligible = list(filter(lambda emp: emp["salary"] >= 50000, employees))
+
+print(eligible)
+
+Output
+
+[
+ {'name': 'Ram', 'salary': 50000},
+ {'name': 'John', 'salary': 70000}
+]
+Real-Time Example 2: Valid Email Addresses
+emails = [
+    "abc@gmail.com",
+    "xyz",
+    "test@yahoo.com"
+]
+
+valid = list(filter(lambda email: "@" in email, emails))
+
+print(valid)
+
+Output
+
+['abc@gmail.com', 'test@yahoo.com']
+filter() vs List Comprehension
+Using filter()
+numbers = [1, 2, 3, 4, 5, 6]
+
+result = list(filter(lambda x: x % 2 == 0, numbers))
+
+print(result)
+Using List Comprehension
+numbers = [1, 2, 3, 4, 5, 6]
+
+result = [x for x in numbers if x % 2 == 0]
+
+print(result)
+
+Output
+
+[2, 4, 6]
+Difference Between map() and filter()
+map()	filter()
+Transforms each element	Selects elements based on a condition
+Returns all elements after transformation	Returns only matching elements
+Uses a transformation function	Uses a function that returns True or False
+Example
+numbers = [1, 2, 3, 4]
+
+# map()
+print(list(map(lambda x: x * 2, numbers)))
+
+# filter()
+print(list(filter(lambda x: x % 2 == 0, numbers)))
+
+Output
+
+[2, 4, 6, 8]
+[2, 4]
+Frequently Asked Interview Questions
+1. What does filter() return?
+
+A filter object (iterator). Use list() to display all filtered values.
+
+2. Can filter() work with tuples?
+
+Yes.
+
+numbers = (1, 2, 3, 4, 5)
+
+print(list(filter(lambda x: x > 2, numbers)))
+
+Output
+
+[3, 4, 5]
+3. Can filter() work with strings?
+
+Yes.
+
+text = "Python123"
+
+letters = filter(str.isalpha, text)
+
+print("".join(letters))
+
+Output
+
+Python
+4. What is the time complexity of filter()?
+
+O(n), where n is the number of elements in the iterable.
+
+Persistent Systems Coding Questions
+Q1. Filter Prime Numbers
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+print(list(filter(is_prime, numbers)))
+
+Output
+
+[2, 3, 5, 7]
+Q2. Filter Palindrome Words
+words = ["madam", "python", "level", "java"]
+
+result = list(filter(lambda x: x == x[::-1], words))
+
+print(result)
+
+Output
+
+['madam', 'level']
+Interview Tips
+
+Interviewers often ask:
+
+What is the difference between map() and filter()?
+What does filter() return?
+Can you write the same logic using list comprehension?
+When would you choose filter() over list comprehension?
+
+
+NumPy Interview Questions with Examples (Persistent Systems – Freshers)
+
+NumPy (Numerical Python) is the most popular Python library for numerical computing. It provides a fast, memory-efficient N-dimensional array (ndarray) and mathematical functions.
+
+1. What is NumPy?
+Answer
+
+NumPy is an open-source Python library used for:
+
+Numerical computing
+Scientific computing
+Matrix operations
+Linear algebra
+Statistical analysis
+2. Why Use NumPy?
+Faster than Python lists
+Uses less memory
+Supports multidimensional arrays
+Provides mathematical and statistical functions
+Foundation for libraries like Pandas, SciPy, and Scikit-learn
+3. Install NumPy
+pip install numpy
+
+Import:
+
+import numpy as np
+4. Create a NumPy Array
+import numpy as np
+
+arr = np.array([10, 20, 30, 40])
+
+print(arr)
+
+Output
+
+[10 20 30 40]
+5. Difference Between List and NumPy Array
+Python List	NumPy Array
+Slower	Faster
+More memory	Less memory
+Limited mathematical operations	Supports vectorized operations
+Stores mixed data types	Usually stores the same data type
+6. Check Array Type
+import numpy as np
+
+arr = np.array([1, 2, 3])
+
+print(type(arr))
+
+Output
+
+<class 'numpy.ndarray'>
+7. Check Shape
+import numpy as np
+
+arr = np.array([[1, 2], [3, 4]])
+
+print(arr.shape)
+
+Output
+
+(2, 2)
+8. Check Dimensions
+import numpy as np
+
+arr = np.array([[1, 2], [3, 4]])
+
+print(arr.ndim)
+
+Output
+
+2
+9. Check Size
+import numpy as np
+
+arr = np.array([[1, 2], [3, 4]])
+
+print(arr.size)
+
+Output
+
+4
+10. Check Data Type
+import numpy as np
+
+arr = np.array([1, 2, 3])
+
+print(arr.dtype)
+
+Output
+
+int64
+11. Create Array of Zeros
+import numpy as np
+
+print(np.zeros((2, 3)))
+
+Output
+
+[[0. 0. 0.]
+ [0. 0. 0.]]
+12. Create Array of Ones
+import numpy as np
+
+print(np.ones((2, 2)))
+
+Output
+
+[[1. 1.]
+ [1. 1.]]
+13. Create Identity Matrix
+import numpy as np
+
+print(np.eye(3))
+
+Output
+
+[[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+14. Create Range
+import numpy as np
+
+print(np.arange(1, 11, 2))
+
+Output
+
+[1 3 5 7 9]
+15. Create Evenly Spaced Values
+import numpy as np
+
+print(np.linspace(0, 10, 5))
+
+Output
+
+[ 0.   2.5  5.   7.5 10. ]
+16. Reshape Array
+import numpy as np
+
+arr = np.arange(1, 7)
+
+print(arr.reshape(2, 3))
+
+Output
+
+[[1 2 3]
+ [4 5 6]]
+17. Flatten Array
+import numpy as np
+
+arr = np.array([[1, 2], [3, 4]])
+
+print(arr.flatten())
+
+Output
+
+[1 2 3 4]
+18. Array Indexing
+import numpy as np
+
+arr = np.array([10, 20, 30])
+
+print(arr[1])
+
+Output
+
+20
+19. Array Slicing
+import numpy as np
+
+arr = np.array([10, 20, 30, 40, 50])
+
+print(arr[1:4])
+
+Output
+
+[20 30 40]
+20. Mathematical Operations
+import numpy as np
+
+arr = np.array([1, 2, 3])
+
+print(arr + 10)
+
+Output
+
+[11 12 13]
+21. Addition of Two Arrays
+import numpy as np
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+
+print(a + b)
+
+Output
+
+[5 7 9]
+22. Multiplication
+import numpy as np
+
+arr = np.array([1, 2, 3])
+
+print(arr * 2)
+
+Output
+
+[2 4 6]
+23. Mean
+import numpy as np
+
+arr = np.array([10, 20, 30])
+
+print(np.mean(arr))
+
+Output
+
+20.0
+24. Sum
+import numpy as np
+
+arr = np.array([10, 20, 30])
+
+print(np.sum(arr))
+
+Output
+
+60
+25. Maximum and Minimum
+import numpy as np
+
+arr = np.array([5, 10, 15])
+
+print(np.max(arr))
+print(np.min(arr))
+
+Output
+
+15
+5
+26. Random Numbers
+import numpy as np
+
+print(np.random.randint(1, 10, 5))
+
+Sample Output
+
+[3 7 1 9 4]
+27. Boolean Indexing
+import numpy as np
+
+arr = np.array([10, 20, 30, 40])
+
+print(arr[arr > 20])
+
+Output
+
+[30 40]
+28. Sort Array
+import numpy as np
+
+arr = np.array([5, 2, 9, 1])
+
+print(np.sort(arr))
+
+Output
+
+[1 2 5 9]
+29. Vertical Stack
+import numpy as np
+
+a = np.array([1, 2])
+b = np.array([3, 4])
+
+print(np.vstack((a, b)))
+
+Output
+
+[[1 2]
+ [3 4]]
+30. Horizontal Stack
+import numpy as np
+
+a = np.array([1, 2])
+b = np.array([3, 4])
+
+print(np.hstack((a, b)))
+
+Output
+
+[1 2 3 4]
+Frequently Asked NumPy Interview Questions
+1. What is ndarray?
+
+A multidimensional array object provided by NumPy.
+
+2. Why is NumPy faster than Python lists?
+Arrays are stored in contiguous memory.
+Operations are implemented in optimized C code.
+Supports vectorized operations without explicit Python loops.
+3. Difference Between reshape() and flatten()
+reshape()	flatten()
+Changes the array shape	Converts to a 1D array
+Number of elements must remain the same	Always returns a new 1D array
+4. Difference Between arange() and linspace()
+arange()	linspace()
+Uses a step value	Uses the number of values
+np.arange(0,10,2)	np.linspace(0,10,5)
+5. Difference Between List and NumPy Array
+Lists are general-purpose Python collections.
+NumPy arrays are optimized for numerical computation.
+Persistent Systems Coding Questions
+Q1. Find Even Numbers
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6])
+
+print(arr[arr % 2 == 0])
+Q2. Find the Maximum Element
+import numpy as np
+
+arr = np.array([5, 10, 15, 20])
+
+print(np.max(arr))
+Q3. Reverse an Array
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+
+print(arr[::-1])
+Q4. Find Unique Values
+import numpy as np
+
+arr = np.array([1, 2, 2, 3, 3, 4])
+
+print(np.unique(arr))
+
+Output
+
+[1 2 3 4]
+Q5. Calculate Row-wise Sum
+import numpy as np
+
+arr = np.array([[1, 2], [3, 4]])
+
+print(np.sum(arr, axis=1))
+
+Output
+
+[3 7]
+Persistent Systems Interview Tips
+
+Interviewers commonly ask:
+
+What is NumPy, and why is it faster than Python lists?
+What is vectorization?
+What is the difference between reshape() and resize()?
+Explain axis=0 and axis=1 in NumPy operations.
+How do you filter values in a NumPy array?
+How do you generate random numbers using NumPy?
+
+For Python freshers, focus on:
+
+Array creation (array, zeros, ones, arange, linspace)
+Indexing and slicing
+Mathematical operations
+Array shape and dimensions
+Aggregation functions (sum, mean, max, min)
+Boolean indexing
+Reshaping arrays
+
+Pandas Interview Questions with Examples (Persistent Systems – Freshers)
+
+Pandas is one of the most important Python libraries for Data Analysis, ETL, Data Engineering, and Machine Learning. It is frequently asked in Persistent Systems Python interviews.
+
+1. What is Pandas?
+Answer
+
+Pandas is an open-source Python library used for:
+
+Data Analysis
+Data Cleaning
+Data Manipulation
+Reading/Writing CSV, Excel, JSON
+ETL Operations
+2. Why Use Pandas?
+Easy to work with tabular data
+Fast and efficient
+Handles missing values
+Supports filtering and grouping
+Integrates with NumPy
+3. Install Pandas
+pip install pandas
+
+Import:
+
+import pandas as pd
+4. What are the Main Data Structures in Pandas?
+Series (1-Dimensional)
+DataFrame (2-Dimensional)
+5. Create a Series
+import pandas as pd
+
+s = pd.Series([10, 20, 30, 40])
+
+print(s)
+
+Output
+
+0    10
+1    20
+2    30
+3    40
+dtype: int64
+6. Create a DataFrame
+import pandas as pd
+
+data = {
+    "Name": ["Ram", "Sai", "John"],
+    "Age": [22, 25, 24]
+}
+
+df = pd.DataFrame(data)
+
+print(df)
+
+Output
+
+   Name  Age
+0   Ram   22
+1   Sai   25
+2  John   24
+7. Read CSV File
+import pandas as pd
+
+df = pd.read_csv("employees.csv")
+
+print(df)
+8. Write CSV File
+df.to_csv("output.csv", index=False)
+9. Display First 5 Rows
+print(df.head())
+10. Display Last 5 Rows
+print(df.tail())
+11. Display Data Types
+print(df.dtypes)
+12. Check DataFrame Information
+print(df.info())
+13. Display Statistical Summary
+print(df.describe())
+14. Select One Column
+print(df["Name"])
+15. Select Multiple Columns
+print(df[["Name", "Age"]])
+16. Select Rows Using loc
+print(df.loc[1])
+
+Output
+
+Name    Sai
+Age      25
+17. Select Rows Using iloc
+print(df.iloc[0])
+18. Filter Rows
+print(df[df["Age"] > 23])
+
+Output
+
+   Name  Age
+1   Sai   25
+2  John   24
+19. Add New Column
+df["Salary"] = [50000, 60000, 70000]
+
+print(df)
+20. Delete Column
+df.drop("Salary", axis=1, inplace=True)
+21. Rename Column
+df.rename(columns={"Age": "EmployeeAge"}, inplace=True)
+22. Sort Values
+print(df.sort_values(by="Age"))
+23. Find Missing Values
+print(df.isnull())
+24. Count Missing Values
+print(df.isnull().sum())
+25. Fill Missing Values
+df.fillna(0, inplace=True)
+26. Remove Missing Values
+df.dropna(inplace=True)
+27. Remove Duplicate Rows
+df.drop_duplicates(inplace=True)
+28. Group By
+data = {
+    "Department": ["IT", "HR", "IT", "HR"],
+    "Salary": [50000, 40000, 60000, 45000]
+}
+
+df = pd.DataFrame(data)
+
+print(df.groupby("Department")["Salary"].mean())
+
+Output
+
+Department
+HR    42500
+IT    55000
+29. Value Counts
+print(df["Department"].value_counts())
+30. Merge Two DataFrames
+emp = pd.DataFrame({
+    "ID": [1, 2],
+    "Name": ["Ram", "Sai"]
+})
+
+salary = pd.DataFrame({
+    "ID": [1, 2],
+    "Salary": [50000, 60000]
+})
+
+result = pd.merge(emp, salary, on="ID")
+
+print(result)
+31. Concatenate DataFrames
+df = pd.concat([emp, salary], axis=1)
+
+print(df)
+32. Apply Function
+df = pd.DataFrame({
+    "Age": [20, 30, 40]
+})
+
+df["Age"] = df["Age"].apply(lambda x: x + 1)
+
+print(df)
+33. Unique Values
+print(df["Age"].unique())
+34. Number of Unique Values
+print(df["Age"].nunique())
+35. Change Data Type
+df["Age"] = df["Age"].astype(float)
+Frequently Asked Pandas Interview Questions
+1. Difference Between Series and DataFrame
+Series	DataFrame
+1D	2D
+Single column	Multiple columns
+2. Difference Between loc and iloc
+loc	iloc
+Label-based	Position-based
+Includes end label in slices	Uses standard Python slicing
+
+Example:
+
+df.loc[0]
+df.iloc[0]
+3. Difference Between drop() and drop_duplicates()
+drop()	drop_duplicates()
+Removes rows/columns	Removes duplicate rows
+4. Difference Between merge() and concat()
+merge()	concat()
+SQL-style join on keys	Combines along rows or columns
+5. Difference Between isnull() and fillna()
+isnull()	fillna()
+Finds missing values	Replaces missing values
+Real-Time Example: Employee Data Analysis
+import pandas as pd
+
+df = pd.read_csv("employees.csv")
+
+# Employees with salary greater than 50,000
+result = df[df["Salary"] > 50000]
+
+print(result)
+Persistent Systems Coding Questions
+Q1. Find Employees Older Than 30
+df[df["Age"] > 30]
+Q2. Find Average Salary by Department
+df.groupby("Department")["Salary"].mean()
+Q3. Remove Duplicate Employees
+df.drop_duplicates()
+Q4. Replace Missing Salary with 0
+df["Salary"] = df["Salary"].fillna(0)
+Q5. Sort Employees by Salary (Descending)
+df.sort_values(by="Salary", ascending=False)
+Frequently Asked Persistent Systems Follow-up Questions
+1. Why is Pandas faster than normal Python for data analysis?
+It uses optimized C/NumPy implementations for many operations.
+It provides vectorized operations instead of explicit Python loops.
+2. What is the difference between apply(), map(), and applymap()?
+Method	Works On
+map()	Series only
+apply()	Series or DataFrame (row/column-wise)
+applymap()	Every element of a DataFrame
+3. How do you remove duplicate rows?
+df.drop_duplicates()
+4. How do you handle missing values?
+dropna()
+fillna()
+Replace with mean, median, mode, or a fixed value
+5. How do you filter multiple conditions?
+result = df[(df["Age"] > 25) & (df["Salary"] > 50000)]
+
+print(result)
+Persistent Systems Interview Preparation Topics
+
+For Python freshers, make sure you are comfortable with:
+
+Creating Series and DataFrame
+Reading and writing CSV files
+Selecting rows and columns (loc, iloc)
+Filtering data
+Sorting
+Handling missing values
+Grouping and aggregation (groupby)
+Merging and concatenating DataFrames
+Removing duplicates
+Using apply() and lambda functions
+
+Project A requires Pandas 2.0
+Project B requires Pandas 2.2
+
+If you install packages globally, one project may stop working because of version conflicts.
+
+A virtual environment solves this problem by keeping each project's dependencies separate.
+
+Without Virtual Environment
+System Python
+│
+├── pandas 2.2
+├── numpy 2.1
+├── requests 2.31
+
+All projects share the same packages, which can lead to conflicts.
+
+With Virtual Environment
+Project A
+│
+├── venv
+│   ├── pandas 2.0
+│   ├── numpy 1.26
+│
+
+Project B
+│
+├── venv
+│   ├── pandas 2.2
+│   ├── numpy 2.1
+
+Each project has its own dependencies.
+
+Advantages
+✅ Isolates project dependencies
+✅ Prevents package version conflicts
+✅ Easy to recreate project environments
+✅ Safe to test new libraries
+✅ Standard practice in Python development
+How to Create a Virtual Environment
+Step 1: Create a Project Folder
+mkdir MyProject
+cd MyProject
+Step 2: Create a Virtual Environment
+python -m venv venv
+
+or
+
+python3 -m venv venv
+
+This creates a folder named venv.
+
+
+PyTest Interview Questions with Examples (Persistent Systems – Freshers)
+
+PyTest is the most popular Python testing framework used to write and execute test cases. It is widely used in ETL pipelines, Data Engineering, APIs, and Python applications.
+
+1. What is PyTest?
+Answer
+
+PyTest is a Python testing framework used to:
+
+Write test cases
+Execute test cases
+Generate test reports
+Automate testing
+
+Install:
+
+pip install pytest
+2. Why Use PyTest?
+Easy to write test cases
+Powerful assertions
+Supports fixtures
+Parameterized testing
+Generates detailed reports
+Automatically discovers test files
+3. Simple PyTest Example
+calculator.py
+def add(a, b):
+    return a + b
+test_calculator.py
+from calculator import add
+
+def test_add():
+    assert add(10, 20) == 30
+
+Run:
+
+pytest
+
+Output
+
+==================== test session starts ====================
+
+test_calculator.py .
+
+1 passed
+4. Naming Convention
+
+PyTest automatically discovers:
+
+Files starting with test_
+Functions starting with test_
+
+Example
+
+test_math.py
+
+def test_add():
+    pass
+5. What is assert?
+
+assert checks whether a condition is True.
+
+def test_sum():
+    assert 10 + 20 == 30
+
+If the condition is false, the test fails.
+
+6. Multiple Test Cases
+def test_add():
+    assert 2 + 3 == 5
+
+def test_subtract():
+    assert 10 - 5 == 5
+
+def test_multiply():
+    assert 5 * 5 == 25
+7. Failed Test Example
+def test_demo():
+    assert 10 == 20
+
+Output
+
+FAILED
+AssertionError
+8. Running a Specific Test File
+pytest test_calculator.py
+9. Running a Specific Test Function
+pytest test_calculator.py::test_add
+10. PyTest Fixtures
+
+Fixtures provide setup data or resources before a test runs.
+
+import pytest
+
+@pytest.fixture
+def numbers():
+    return 10, 20
+
+def test_add(numbers):
+    a, b = numbers
+    assert a + b == 30
+11. Fixture with Setup and Cleanup
+import pytest
+
+@pytest.fixture
+def database():
+    print("Connecting Database")
+
+    yield
+
+    print("Closing Database")
+
+def test_demo(database):
+    print("Testing...")
+
+Output
+
+Connecting Database
+Testing...
+Closing Database
+12. Parameterized Testing
+
+Instead of writing multiple tests, use @pytest.mark.parametrize.
+
+import pytest
+
+@pytest.mark.parametrize("a,b,result", [
+    (2, 3, 5),
+    (5, 5, 10),
+    (10, 20, 30)
+])
+
+def test_add(a, b, result):
+    assert a + b == result
+13. Skip a Test
+import pytest
+
+@pytest.mark.skip
+def test_skip():
+    assert True
+14. Expected Failure
+import pytest
+
+@pytest.mark.xfail
+def test_fail():
+    assert 10 == 20
+15. Exception Testing
+import pytest
+
+def divide(a, b):
+    return a / b
+
+def test_exception():
+    with pytest.raises(ZeroDivisionError):
+        divide(10, 0)
+16. Group Tests in a Class
+class TestMath:
+
+    def test_add(self):
+        assert 2 + 3 == 5
+
+    def test_subtract(self):
+        assert 10 - 5 == 5
+17. Using conftest.py
+
+Shared fixtures are stored in conftest.py.
+
+Example:
+
+import pytest
+
+@pytest.fixture
+def employee():
+    return {"name": "Ram"}
+
+Use in tests:
+
+def test_name(employee):
+    assert employee["name"] == "Ram"
+18. Temporary Directory Fixture
+def test_temp(tmp_path):
+    file = tmp_path / "sample.txt"
+
+    file.write_text("Hello")
+
+    assert file.read_text() == "Hello"
+19. Generate HTML Report
+
+Install:
+
+pip install pytest-html
+
+Run:
+
+pytest --html=report.html
+20. Measure Code Coverage
+
+Install:
+
+pip install pytest-cov
+
+Run:
+
+pytest --cov=.
+Real-Time ETL Example
+
+Suppose your ETL function removes duplicate rows.
+
+import pandas as pd
+
+def remove_duplicates(df):
+    return df.drop_duplicates()
+
+Test:
+
+import pandas as pd
+from etl import remove_duplicates
+
+def test_duplicates():
+
+    df = pd.DataFrame({
+        "ID": [1, 1, 2]
+    })
+
+    result = remove_duplicates(df)
+
+    assert len(result) == 2
+Frequently Asked Interview Questions
+1. What is PyTest?
+
+A Python testing framework used for automated testing.
+
+2. Difference Between PyTest and unittest
+unittest	PyTest
+Built into Python	External package
+More boilerplate	Simpler syntax
+Uses self.assertEqual()	Uses assert
+Less flexible	More powerful
+3. What is a Fixture?
+
+Reusable setup code executed before a test.
+
+4. What is Parameterization?
+
+Running the same test with different input values.
+
+5. What is conftest.py?
+
+A file used to store shared fixtures across multiple test files.
+
+6. What is Code Coverage?
+
+It measures how much of your source code is executed during testing.
+
+7. What is the Purpose of pytest.raises()?
+
+It verifies that a specific exception is raised.
+
+8. Difference Between skip and xfail
+skip	xfail
+Test is not executed	Test executes but failure is expected
+9. How Does PyTest Discover Tests?
+
+PyTest automatically discovers:
+
+Files named test_*.py or *_test.py
+Functions named test_*
+Methods inside classes named Test*
+10. What is the Command to Run All Tests?
+pytest
+Persistent Systems Coding Questions
+Q1. Test Even Number Function
+def is_even(n):
+    return n % 2 == 0
+
+def test_even():
+    assert is_even(10)
+Q2. Test String Reverse
+def reverse(s):
+    return s[::-1]
+
+def test_reverse():
+    assert reverse("python") == "nohtyp"
+Q3. Test Division Exception
+import pytest
+
+def divide(a, b):
+    return a / b
+
+def test_divide():
+    with pytest.raises(ZeroDivisionError):
+        divide(10, 0)
+Q4. Test Pandas DataFrame
+import pandas as pd
+
+def test_dataframe():
+
+    df = pd.DataFrame({
+        "Name": ["Ram", "Sai"]
+    })
+
+    assert len(df) == 2
+Q5. Parameterized Addition Test
+import pytest
+
+@pytest.mark.parametrize("a,b,result", [
+    (1, 2, 3),
+    (10, 20, 30),
+    (5, 5, 10)
+])
+
+def test_add(a, b, result):
+    assert a + b == result
+PyTest for ETL/Data Engineering
+
+PyTest is commonly used to test:
+
+CSV file validation
+Data quality checks
+Schema validation
+Duplicate record checks
+Null value validation
+Data transformation logic
+API response validation
+Database queries
+
+Example:
+
+def validate_null(df):
+    return df.isnull().sum().sum() == 0
+
+def test_validate_null():
+    import pandas as pd
+
+    df = pd.DataFrame({
+        "ID": [1, 2],
+        "Name": ["Ram", "Sai"]
+    })
+
+    assert validate_null(df)
+Persistent Systems Interview Tips
+
+Interviewers often ask:
+
+What is PyTest?
+Why is PyTest preferred over unittest?
+What is a fixture?
+What is conftest.py?
+How do you test exceptions?
+What is parameterized testing?
+How do you generate HTML reports?
+How do you measure test coverage?
+How would you test an ETL pipeline?
+How do you validate a Pandas DataFrame using PyTest?
+
+For Data Engineering roles, it's also valuable to know libraries like Great Expectations, Pandera, or pytest +
+
+
+
+Persistent Systems Python Hands-on – Part 1 (Questions 1–20 with Answers)
+1. Swap Two Numbers Without Using a Third Variable
+a = 10
+b = 20
+
+a, b = b, a
+
+print("a =", a)
+print("b =", b)
+
+Output
+
+a = 20
+b = 10
+2. Find the Largest of Three Numbers
+a = 10
+b = 30
+c = 20
+
+if a >= b and a >= c:
+    print("Largest:", a)
+elif b >= a and b >= c:
+    print("Largest:", b)
+else:
+    print("Largest:", c)
+
+Output
+
+Largest: 30
+3. Check Whether a Number is Even or Odd
+num = 15
+
+if num % 2 == 0:
+    print("Even")
+else:
+    print("Odd")
+
+Output
+
+Odd
+4. Check Whether a Number is Positive, Negative, or Zero
+num = -5
+
+if num > 0:
+    print("Positive")
+elif num < 0:
+    print("Negative")
+else:
+    print("Zero")
+
+Output
+
+Negative
+5. Find the Factorial of a Number
+num = 5
+fact = 1
+
+for i in range(1, num + 1):
+    fact *= i
+
+print("Factorial:", fact)
+
+Output
+
+Factorial: 120
+6. Check Whether a Number is Prime
+num = 17
+
+if num < 2:
+    print("Not Prime")
+else:
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            print("Not Prime")
+            break
+    else:
+        print("Prime")
+
+Output
+
+Prime
+7. Print All Prime Numbers Between 1 and 100
+for num in range(2, 101):
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            break
+    else:
+        print(num, end=" ")
+
+Output
+
+2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97
+8. Generate the Fibonacci Series
+n = 10
+
+a, b = 0, 1
+
+for _ in range(n):
+    print(a, end=" ")
+    a, b = b, a + b
+
+Output
+
+0 1 1 2 3 5 8 13 21 34
+9. Check Whether a Number is an Armstrong Number
+num = 153
+temp = num
+power = len(str(num))
+total = 0
+
+while temp > 0:
+    digit = temp % 10
+    total += digit ** power
+    temp //= 10
+
+if total == num:
+    print("Armstrong")
+else:
+    print("Not Armstrong")
+
+Output
+
+Armstrong
+10. Check Whether a Number is a Palindrome
+num = 121
+temp = num
+rev = 0
+
+while temp > 0:
+    digit = temp % 10
+    rev = rev * 10 + digit
+    temp //= 10
+
+if rev == num:
+    print("Palindrome")
+else:
+    print("Not Palindrome")
+
+Output
+
+Palindrome
+11. Reverse a Number
+num = 12345
+rev = 0
+
+while num > 0:
+    digit = num % 10
+    rev = rev * 10 + digit
+    num //= 10
+
+print(rev)
+
+Output
+
+54321
+12. Find the Sum of Digits
+num = 12345
+total = 0
+
+while num > 0:
+    total += num % 10
+    num //= 10
+
+print("Sum =", total)
+
+Output
+
+Sum = 15
+13. Count the Number of Digits
+num = 987654
+count = 0
+
+while num > 0:
+    count += 1
+    num //= 10
+
+print("Digits =", count)
+
+Output
+
+Digits = 6
+14. Find the GCD of Two Numbers
+a = 48
+b = 18
+
+while b != 0:
+    a, b = b, a % b
+
+print("GCD =", a)
+
+Output
+
+GCD = 6
+15. Find the LCM of Two Numbers
+a = 12
+b = 18
+
+x, y = a, b
+
+while y:
+    x, y = y, x % y
+
+gcd = x
+lcm = (a * b) // gcd
+
+print("LCM =", lcm)
+
+Output
+
+LCM = 36
+16. Print the Multiplication Table
+num = 7
+
+for i in range(1, 11):
+    print(f"{num} x {i} = {num * i}")
+
+Output
+
+7 x 1 = 7
+7 x 2 = 14
+...
+7 x 10 = 70
+17. Print All Divisors of a Number
+num = 24
+
+for i in range(1, num + 1):
+    if num % i == 0:
+        print(i, end=" ")
+
+Output
+
+1 2 3 4 6 8 12 24
+18. Calculate the Power of a Number Without Using **
+base = 2
+exp = 5
+result = 1
+
+for _ in range(exp):
+    result *= base
+
+print(result)
+
+Output
+
+32
+19. Check Whether a Year is a Leap Year
+year = 2024
+
+if (year % 400 == 0) or (year % 4 == 0 and year % 100 != 0):
+    print("Leap Year")
+else:
+    print("Not Leap Year")
+
+Output
+
+Leap Year
+20. Generate Random Numbers
+import random
+
+print(random.randint(1, 100))
+
+Sample Output
+
+57
+
+21. Reverse a String
+text = "Python"
+
+reverse = text[::-1]
+
+print(reverse)
+
+Output
+
+nohtyP
+22. Check Whether a String is a Palindrome
+text = "madam"
+
+if text == text[::-1]:
+    print("Palindrome")
+else:
+    print("Not Palindrome")
+
+Output
+
+Palindrome
+23. Count Vowels and Consonants
+text = "Persistent"
+
+vowels = "aeiouAEIOU"
+
+vowel_count = 0
+consonant_count = 0
+
+for ch in text:
+    if ch.isalpha():
+        if ch in vowels:
+            vowel_count += 1
+        else:
+            consonant_count += 1
+
+print("Vowels:", vowel_count)
+print("Consonants:", consonant_count)
+
+Output
+
+Vowels: 3
+Consonants: 7
+24. Count Uppercase and Lowercase Letters
+text = "PyThOn"
+
+upper = 0
+lower = 0
+
+for ch in text:
+    if ch.isupper():
+        upper += 1
+    elif ch.islower():
+        lower += 1
+
+print("Uppercase:", upper)
+print("Lowercase:", lower)
+
+Output
+
+Uppercase: 3
+Lowercase: 3
+25. Remove Duplicate Characters
+text = "programming"
+
+result = ""
+
+for ch in text:
+    if ch not in result:
+        result += ch
+
+print(result)
+
+Output
+
+progamin
+26. Find Duplicate Characters
+text = "programming"
+
+duplicates = set()
+
+for ch in text:
+    if text.count(ch) > 1:
+        duplicates.add(ch)
+
+print(duplicates)
+
+Output
+
+{'r', 'g', 'm'}
+27. Count Frequency of Each Character
+text = "banana"
+
+freq = {}
+
+for ch in text:
+    freq[ch] = freq.get(ch, 0) + 1
+
+print(freq)
+
+Output
+
+{'b': 1, 'a': 3, 'n': 2}
+28. Find the First Non-Repeated Character
+text = "swiss"
+
+for ch in text:
+    if text.count(ch) == 1:
+        print(ch)
+        break
+
+Output
+
+w
+29. Find the First Repeated Character
+text = "programming"
+
+seen = set()
+
+for ch in text:
+    if ch in seen:
+        print(ch)
+        break
+    seen.add(ch)
+
+Output
+
+r
+30. Count Words in a Sentence
+sentence = "Python is easy to learn"
+
+words = sentence.split()
+
+print(len(words))
+
+Output
+
+5
+31. Reverse Words in a Sentence
+sentence = "Python is easy"
+
+words = sentence.split()
+
+reverse = words[::-1]
+
+print(" ".join(reverse))
+
+Output
+
+easy is Python
+32. Check Whether Two Strings are Anagrams
+str1 = "listen"
+str2 = "silent"
+
+if sorted(str1) == sorted(str2):
+    print("Anagram")
+else:
+    print("Not Anagram")
+
+Output
+
+Anagram
+33. Remove Spaces from a String
+text = "Python Programming"
+
+print(text.replace(" ", ""))
+
+Output
+
+PythonProgramming
+34. Replace Spaces with Hyphens
+text = "Python Programming Language"
+
+print(text.replace(" ", "-"))
+
+Output
+
+Python-Programming-Language
+35. Convert Lowercase to Uppercase (Without upper())
+text = "python"
+
+result = ""
+
+for ch in text:
+    result += chr(ord(ch) - 32)
+
+print(result)
+
+Output
+
+PYTHON
+36. Convert Uppercase to Lowercase (Without lower())
+text = "PYTHON"
+
+result = ""
+
+for ch in text:
+    result += chr(ord(ch) + 32)
+
+print(result)
+
+Output
+
+python
+37. Count Special Characters
+text = "Python@123#"
+
+count = 0
+
+for ch in text:
+    if not ch.isalnum():
+        count += 1
+
+print(count)
+
+Output
+
+2
+38. Count Digits in a String
+text = "Python12345"
+
+count = 0
+
+for ch in text:
+    if ch.isdigit():
+        count += 1
+
+print(count)
+
+Output
+
+5
+39. Find the Longest Word
+sentence = "Python programming language"
+
+words = sentence.split()
+
+longest = max(words, key=len)
+
+print(longest)
+
+Output
+
+programming
+40. Check Whether One String is a Substring of Another
+text = "Python Programming"
+
+sub = "Program"
+
+if sub in text:
+    print("Substring Found")
+else:
+    print("Not Found")
+
+Output
+
+Substring Found
+Bonus Interview Questions
+Q41. Count the Frequency of Words
+sentence = "python java python sql java python"
+
+words = sentence.split()
+
+frequency = {}
+
+for word in words:
+    frequency[word] = frequency.get(word, 0) + 1
+
+print(frequency)
+
+Output
+
+{'python': 3, 'java': 2, 'sql': 1}
+Q42. Check Whether a String Contains Only Digits
+text = "123456"
+
+print(text.isdigit())
+
+Output
+
+True
+Q43. Remove All Vowels
+text = "Persistent Systems"
+
+vowels = "aeiouAEIOU"
+
+result = ""
+
+for ch in text:
+    if ch not in vowels:
+        result += ch
+
+print(result)
+
+Output
+
+Prsstnt Systms
+Q44. Capitalize the First Letter of Each Word
+text = "python programming language"
+
+print(text.title())
+
+Output
+
+Python Programming Language
+Q45. Find the Number of Occurrences of a Substring
+text = "banana"
+
+print(text.count("an"))
+
+Output
+
+2
+Frequently Asked Persistent Systems String Interview Questions
+Question	Answer
+How do you reverse a string?	text[::-1]
+How do you check for a palindrome?	Compare the string with its reverse
+How do you count vowels?	Loop through characters and check against "aeiouAEIOU"
+How do you remove duplicates?	Use a loop with a result string or a set
+How do you find duplicate characters?	Use count() or a dictionary
+How do you check for an anagram?	Compare sorted(str1) and sorted(str2)
+How do you reverse words in a sentence?	sentence.split()[::-1] followed by " ".join()
+Difference between find() and index()?	find() returns -1 if not found; index() raises a ValueError
+Difference between replace() and translate()?	replace() substitutes substrings; translate() performs character-by-character mapping
+Time complexity of reversing a string using slicing?	O(n)
+Persistent Systems Python Hands-on – Part 3: Lists (Questions 41–55 with Answers)
+
+List-based questions are very common in Python interviews for Persistent Systems, TCS, Infosys, Cognizant, Accenture, and other service-based companies.
+
+41. Find the Largest Element in a List
+numbers = [10, 45, 23, 89, 12]
+
+largest = numbers[0]
+
+for num in numbers:
+    if num > largest:
+        largest = num
+
+print("Largest:", largest)
+
+Output
+
+Largest: 89
+42. Find the Smallest Element in a List
+numbers = [10, 45, 23, 89, 12]
+
+smallest = numbers[0]
+
+for num in numbers:
+    if num < smallest:
+        smallest = num
+
+print("Smallest:", smallest)
+
+Output
+
+Smallest: 10
+43. Find the Second Largest Number
+numbers = [10, 45, 23, 89, 12]
+
+largest = second = float("-inf")
+
+for num in numbers:
+    if num > largest:
+        second = largest
+        largest = num
+    elif num > second and num != largest:
+        second = num
+
+print("Second Largest:", second)
+
+Output
+
+Second Largest: 45
+44. Remove Duplicates from a List
+numbers = [1, 2, 2, 3, 4, 4, 5]
+
+result = []
+
+for num in numbers:
+    if num not in result:
+        result.append(num)
+
+print(result)
+
+Output
+
+[1, 2, 3, 4, 5]
+45. Find Duplicate Elements
+numbers = [1, 2, 3, 2, 4, 5, 1]
+
+duplicates = []
+
+for num in numbers:
+    if numbers.count(num) > 1 and num not in duplicates:
+        duplicates.append(num)
+
+print(duplicates)
+
+Output
+
+[1, 2]
+46. Merge Two Lists
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+
+merged = list1 + list2
+
+print(merged)
+
+Output
+
+[1, 2, 3, 4, 5, 6]
+47. Sort a List Without Using sort()
+numbers = [5, 2, 8, 1, 4]
+
+for i in range(len(numbers)):
+    for j in range(i + 1, len(numbers)):
+        if numbers[i] > numbers[j]:
+            numbers[i], numbers[j] = numbers[j], numbers[i]
+
+print(numbers)
+
+Output
+
+[1, 2, 4, 5, 8]
+48. Reverse a List
+numbers = [10, 20, 30, 40]
+
+print(numbers[::-1])
+
+Output
+
+[40, 30, 20, 10]
+49. Rotate a List Left
+numbers = [1, 2, 3, 4, 5]
+
+k = 2
+
+result = numbers[k:] + numbers[:k]
+
+print(result)
+
+Output
+
+[3, 4, 5, 1, 2]
+50. Rotate a List Right
+numbers = [1, 2, 3, 4, 5]
+
+k = 2
+
+result = numbers[-k:] + numbers[:-k]
+
+print(result)
+
+Output
+
+[4, 5, 1, 2, 3]
+51. Find Common Elements in Two Lists
+list1 = [1, 2, 3, 4]
+list2 = [3, 4, 5, 6]
+
+common = []
+
+for num in list1:
+    if num in list2:
+        common.append(num)
+
+print(common)
+
+Output
+
+[3, 4]
+52. Find Missing Numbers
+numbers = [1, 2, 4, 5, 7]
+
+missing = []
+
+for i in range(1, max(numbers) + 1):
+    if i not in numbers:
+        missing.append(i)
+
+print(missing)
+
+Output
+
+[3, 6]
+53. Split a List into Chunks
+numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+size = 3
+
+for i in range(0, len(numbers), size):
+    print(numbers[i:i + size])
+
+Output
+
+[1, 2, 3]
+[4, 5, 6]
+[7, 8]
+54. Flatten a Nested List
+nested = [[1, 2], [3, 4], [5, 6]]
+
+flat = []
+
+for sublist in nested:
+    for item in sublist:
+        flat.append(item)
+
+print(flat)
+
+Output
+
+[1, 2, 3, 4, 5, 6]
+55. Count Occurrences of Each Element
+numbers = [1, 2, 2, 3, 3, 3, 4]
+
+count = {}
+
+for num in numbers:
+    count[num] = count.get(num, 0) + 1
+
+print(count)
+
+Output
+
+{1: 1, 2: 2, 3: 3, 4: 1}
+Bonus Questions
+56. Find the Sum of All Elements
+numbers = [10, 20, 30, 40]
+
+print(sum(numbers))
+
+Output
+
+100
+57. Find the Average
+numbers = [10, 20, 30, 40]
+
+average = sum(numbers) / len(numbers)
+
+print(average)
+
+Output
+
+25.0
+58. Find the Maximum Using max()
+numbers = [10, 50, 30]
+
+print(max(numbers))
+
+Output
+
+50
+59. Find the Minimum Using min()
+numbers = [10, 50, 30]
+
+print(min(numbers))
+
+Output
+
+10
+60. Remove an Element
+numbers = [10, 20, 30, 40]
+
+numbers.remove(20)
+
+print(numbers)
+
+Output
+
+[10, 30, 40]
+
+56. Convert a Tuple to a List
+numbers = (10, 20, 30, 40)
+
+result = list(numbers)
+
+print(result)
+print(type(result))
+
+Output
+
+[10, 20, 30, 40]
+<class 'list'>
+57. Convert a List to a Tuple
+numbers = [10, 20, 30, 40]
+
+result = tuple(numbers)
+
+print(result)
+print(type(result))
+
+Output
+
+(10, 20, 30, 40)
+<class 'tuple'>
+58. Find the Maximum Value in a Tuple
+numbers = (15, 30, 8, 45, 22)
+
+print(max(numbers))
+
+Output
+
+45
+59. Find the Minimum Value in a Tuple
+numbers = (15, 30, 8, 45, 22)
+
+print(min(numbers))
+
+Output
+
+8
+60. Find the Sum of Tuple Elements
+numbers = (10, 20, 30, 40)
+
+print(sum(numbers))
+
+Output
+
+100
+61. Count the Occurrences of an Element
+numbers = (1, 2, 2, 3, 2, 4)
+
+print(numbers.count(2))
+
+Output
+
+3
+62. Find the Index of an Element
+numbers = (10, 20, 30, 40)
+
+print(numbers.index(30))
+
+Output
+
+2
+63. Merge Two Tuples
+tuple1 = (1, 2, 3)
+tuple2 = (4, 5, 6)
+
+result = tuple1 + tuple2
+
+print(result)
+
+Output
+
+(1, 2, 3, 4, 5, 6)
+64. Remove Duplicate Values from a Tuple
+numbers = (1, 2, 2, 3, 4, 4, 5)
+
+result = tuple(set(numbers))
+
+print(result)
+
+Output
+
+(1, 2, 3, 4, 5)
+
+Note: set() removes duplicates but does not preserve the original order.
+
+65. Reverse a Tuple
+numbers = (10, 20, 30, 40)
+
+print(numbers[::-1])
+
+Output
+
+(40, 30, 20, 10)
+66. Check Whether an Element Exists
+numbers = (10, 20, 30, 40)
+
+if 30 in numbers:
+    print("Found")
+else:
+    print("Not Found")
+
+Output
+
+Found
+67. Find the Length of a Tuple
+numbers = (10, 20, 30, 40)
+
+print(len(numbers))
+
+Output
+
+4
+68. Iterate Through a Tuple
+numbers = (100, 200, 300)
+
+for num in numbers:
+    print(num)
+
+Output
+
+100
+200
+300
+69. Tuple Unpacking
+student = ("Ram", 22, "Python")
+
+name, age, course = student
+
+print(name)
+print(age)
+print(course)
+
+Output
+
+Ram
+22
+Python
+70. Swap Variables Using Tuple Unpacking
+a = 10
+b = 20
+
+a, b = b, a
+
+print(a)
+print(b)
+
+Output
+
+20
+10
+Bonus Tuple Questions
+71. Nested Tuple
+students = (
+    ("Ram", 90),
+    ("Sai", 85),
+    ("John", 88)
+)
+
+for name, marks in students:
+    print(name, marks)
+
+Output
+
+Ram 90
+Sai 85
+John 88
+72. Create a Single-Element Tuple
+x = (10,)
+
+print(type(x))
+
+Output
+
+<class 'tuple'>
+
+Without the comma (x = (10)), Python treats it as an int.
+
+73. Concatenate Multiple Tuples
+t1 = (1, 2)
+t2 = (3, 4)
+t3 = (5, 6)
+
+result = t1 + t2 + t3
+
+print(result)
+
+Output
+
+(1, 2, 3, 4, 5, 6)
+74. Find the Largest String in a Tuple
+words = ("Python", "Java", "Programming", "SQL")
+
+print(max(words, key=len))
+
+Output
+
+Programming
+75. Sort a Tuple
+numbers = (5, 1, 8, 2)
+
+result = tuple(sorted(numbers))
+
+print(result)
+
+Output
+
+(1, 2, 5, 8)
+Frequently Asked Tuple Interview Questions
+1. What is a tuple?
+
+A tuple is an ordered, immutable collection of elements.
+
+Example:
+
+t = (1, 2, 3)
+2. Difference Between List and Tuple
+List	Tuple
+Mutable	Immutable
+Uses []	Uses ()
+Slower	Faster
+More memory	Less memory
+Methods like append(), remove()	Only count() and index()
+3. Why Are Tuples Faster Than Lists?
+Tuples are immutable.
+Python can optimize their storage and access.
+They require less memory.
+4. Can a Tuple Be Modified?
+
+No. Tuples are immutable.
+
+t = (1, 2, 3)
+
+# This raises an error:
+# t[0] = 100
+5. Can a Tuple Contain Different Data Types?
+
+Yes.
+
+t = (1, "Python", 3.14, True)
+6. What Methods Are Available for Tuples?
+count()
+index()
+7. Can a Tuple Contain a List?
+
+Yes.
+
+t = (1, [2, 3], 4)
+
+The tuple itself is immutable, but the list inside it can still be modified.
+
+8. When Should You Use a Tuple Instead of a List?
+
+Use a tuple when:
+
+Data should not change.
+You want slightly better performance.
+The data represents a fixed record (e.g., coordinates, database rows).
+9. How Do You Create an Empty Tuple?
+t = ()
+10. How Do You Create a Single-Element Tuple?
+t = (100,)
+
+A dictionary is one of the most important Python data structures. It stores data in key-value pairs and is heavily used in ETL, APIs, JSON processing, Pandas, and Data Engineering.
+
+76. Create a Dictionary
+employee = {
+    "id": 101,
+    "name": "Ram",
+    "salary": 50000
+}
+
+print(employee)
+
+Output
+
+{'id': 101, 'name': 'Ram', 'salary': 50000}
+77. Access Dictionary Values
+employee = {
+    "id": 101,
+    "name": "Ram",
+    "salary": 50000
+}
+
+print(employee["name"])
+print(employee.get("salary"))
+
+Output
+
+Ram
+50000
+78. Add a New Key-Value Pair
+employee = {
+    "name": "Ram"
+}
+
+employee["city"] = "Hyderabad"
+
+print(employee)
+
+Output
+
+{'name': 'Ram', 'city': 'Hyderabad'}
+79. Update a Dictionary Value
+employee = {
+    "salary": 50000
+}
+
+employee["salary"] = 60000
+
+print(employee)
+
+Output
+
+{'salary': 60000}
+80. Delete a Key
+employee = {
+    "id": 101,
+    "name": "Ram",
+    "salary": 50000
+}
+
+del employee["salary"]
+
+print(employee)
+
+Output
+
+{'id': 101, 'name': 'Ram'}
+81. Check Whether a Key Exists
+employee = {
+    "name": "Ram",
+    "salary": 50000
+}
+
+if "salary" in employee:
+    print("Key Exists")
+else:
+    print("Key Not Found")
+
+Output
+
+Key Exists
+82. Merge Two Dictionaries
+dict1 = {
+    "a": 1,
+    "b": 2
+}
+
+dict2 = {
+    "c": 3,
+    "d": 4
+}
+
+result = dict1 | dict2   # Python 3.9+
+
+print(result)
+
+Output
+
+{'a': 1, 'b': 2, 'c': 3, 'd': 4}
+
+Alternative (Works in older Python versions)
+
+dict1.update(dict2)
+
+print(dict1)
+83. Count Word Frequency
+sentence = "python java python sql java python"
+
+words = sentence.split()
+
+frequency = {}
+
+for word in words:
+    frequency[word] = frequency.get(word, 0) + 1
+
+print(frequency)
+
+Output
+
+{'python': 3, 'java': 2, 'sql': 1}
+84. Count Character Frequency
+text = "banana"
+
+frequency = {}
+
+for ch in text:
+    frequency[ch] = frequency.get(ch, 0) + 1
+
+print(frequency)
+
+Output
+
+{'b': 1, 'a': 3, 'n': 2}
+85. Find the Key with the Maximum Value
+marks = {
+    "Ram": 90,
+    "Sai": 95,
+    "John": 80
+}
+
+highest = max(marks, key=marks.get)
+
+print(highest)
+
+Output
+
+Sai
+86. Sort Dictionary by Keys
+student = {
+    "c": 3,
+    "a": 1,
+    "b": 2
+}
+
+result = dict(sorted(student.items()))
+
+print(result)
+
+Output
+
+{'a': 1, 'b': 2, 'c': 3}
+87. Sort Dictionary by Values
+student = {
+    "Ram": 90,
+    "Sai": 75,
+    "John": 85
+}
+
+result = dict(sorted(student.items(), key=lambda item: item[1]))
+
+print(result)
+
+Output
+
+{'Sai': 75, 'John': 85, 'Ram': 90}
+88. Reverse Keys and Values
+employee = {
+    "Ram": 101,
+    "Sai": 102
+}
+
+result = {value: key for key, value in employee.items()}
+
+print(result)
+
+Output
+
+{101: 'Ram', 102: 'Sai'}
+89. Remove Duplicate Values
+data = {
+    "a": 10,
+    "b": 20,
+    "c": 10,
+    "d": 30
+}
+
+result = {}
+
+for key, value in data.items():
+    if value not in result.values():
+        result[key] = value
+
+print(result)
+
+Output
+
+{'a': 10, 'b': 20, 'd': 30}
+90. Create a Dictionary from Two Lists
+keys = ["id", "name", "salary"]
+values = [101, "Ram", 50000]
+
+employee = dict(zip(keys, values))
+
+print(employee)
+
+Output
+
+{'id': 101, 'name': 'Ram', 'salary': 50000}
+Bonus Questions
+91. Dictionary Comprehension
+numbers = [1, 2, 3, 4, 5]
+
+square = {x: x*x for x in numbers}
+
+print(square)
+
+Output
+
+{1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+92. Find Common Keys
+d1 = {"a":1,"b":2,"c":3}
+d2 = {"b":20,"c":30,"d":40}
+
+common = d1.keys() & d2.keys()
+
+print(common)
+
+Output
+
+{'b', 'c'}
+93. Find Missing Keys
+d1 = {"a":1,"b":2,"c":3}
+d2 = {"b":20,"d":40}
+
+missing = d1.keys() - d2.keys()
+
+print(missing)
+
+Output
+
+{'a', 'c'}
+94. Nested Dictionary
+students = {
+    101: {"Name":"Ram","Age":22},
+    102: {"Name":"Sai","Age":23}
+}
+
+print(students[101]["Name"])
+
+Output
+
+Ram
+95. Iterate Through Dictionary
+employee = {
+    "id":101,
+    "name":"Ram",
+    "salary":50000
+}
+
+for key, value in employee.items():
+    print(key, ":", value)
+
+Output
+
+id : 101
+name : Ram
+salary : 50000
+Frequently Asked Dictionary Interview Questions
+1. What is a Dictionary?
+
+A mutable collection that stores data as key-value pairs.
+
+2. Difference Between List and Dictionary
+List	Dictionary
+Ordered collection	Key-value pairs
+Access by index	Access by key
+Uses []	Uses {}
+3. Difference Between get() and []
+employee["age"]      # Raises KeyError if missing
+employee.get("age")  # Returns None if missing
+4. Difference Between keys(), values(), and items()
+d.keys()      # All keys
+d.values()    # All values
+d.items()     # (key, value) pairs
+5. Can Dictionary Keys Be Duplicated?
+
+❌ No.
+
+d = {"a":1, "a":2}
+
+print(d)
+
+Output
+
+{'a': 2}
+
+The last value overwrites the previous one.
+
+6. Can Dictionary Values Be Duplicated?
+
+✅ Yes.
+
+{
+ "A":10,
+ "B":10
+}
+7. Are Dictionaries Ordered?
+Python 3.7+: Yes, insertion order is preserved.
+Earlier versions: Order was not guaranteed.
+8. What Is Dictionary Comprehension?
+square = {x: x*x for x in range(5)}
+9. Time Complexity of Dictionary Lookup?
+
+Average case: O(1) because dictionaries are implemented using hash tables.
+
+10. Difference Between update() and |
+d1.update(d2)   # Modifies d1
+
+d3 = d1 | d2    # Creates a new merged dictionary (Python 3.9+)
+Real-Time ETL Example
+
+Suppose you receive JSON employee records from an API:
+
+employee = {
+    "id":101,
+    "name":"Ram",
+    "department":"IT",
+    "salary":65000
+}
+
+print(employee["department"])
+
+Dictionaries are the primary data structure for working with JSON, REST APIs, and configuration files.
+
+Persistent Systems Interview Tips
+
+Interviewers frequently ask you to:
+
+Count character or word frequencies.
+Merge two dictionaries.
+Reverse keys and values.
+Explain the difference between get() and direct indexing ([]).
+Iterate through a dictionary.
+Use dictionary comprehensions.
+Discuss why dictionary lookups are typically O(1).
+
+
+91. Create a Set
+numbers = {10, 20, 30, 40}
+
+print(numbers)
+print(type(numbers))
+Output
+{40, 10, 20, 30}
+<class 'set'>
+
+Note: Sets are unordered, so the display order may vary.
+
+92. Remove Duplicates from a List
+numbers = [10, 20, 20, 30, 40, 40, 50]
+
+result = list(set(numbers))
+
+print(result)
+Output
+[10, 20, 30, 40, 50]
+93. Add an Element
+fruits = {"Apple", "Banana"}
+
+fruits.add("Orange")
+
+print(fruits)
+Output
+{'Apple', 'Banana', 'Orange'}
+94. Remove an Element
+fruits = {"Apple", "Banana", "Orange"}
+
+fruits.remove("Banana")
+
+print(fruits)
+Output
+{'Apple', 'Orange'}
+95. Union of Two Sets
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+print(A | B)
+Output
+{1, 2, 3, 4, 5}
+
+Alternative:
+
+print(A.union(B))
+96. Intersection of Two Sets
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+print(A & B)
+Output
+{3}
+
+Alternative:
+
+print(A.intersection(B))
+97. Difference Between Two Sets
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+print(A - B)
+Output
+{1, 2}
+
+Alternative:
+
+print(A.difference(B))
+98. Symmetric Difference
+
+Elements present in one set but not both.
+
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+print(A ^ B)
+Output
+{1, 2, 4, 5}
+
+Alternative:
+
+print(A.symmetric_difference(B))
+99. Check if One Set is a Subset of Another
+A = {1, 2}
+B = {1, 2, 3, 4}
+
+print(A.issubset(B))
+Output
+True
+100. Check if Two Sets are Disjoint
+A = {1, 2}
+B = {3, 4}
+
+print(A.isdisjoint(B))
+Output
+True
+Bonus Hands-on Questions
+101. Find Unique Elements
+numbers = [1, 2, 2, 3, 4, 4, 5]
+
+unique = set(numbers)
+
+print(unique)
+Output
+{1, 2, 3, 4, 5}
+102. Find Common Elements
+list1 = [10, 20, 30, 40]
+list2 = [30, 40, 50]
+
+common = set(list1) & set(list2)
+
+print(common)
+Output
+{30, 40}
+103. Remove Duplicate Characters from a String
+text = "programming"
+
+print(set(text))
+Sample Output
+{'p', 'r', 'o', 'g', 'a', 'm', 'i', 'n'}
+
+The order is not guaranteed.
+
+104. Find Missing Elements
+expected = {1, 2, 3, 4, 5}
+actual = {2, 3, 5}
+
+print(expected - actual)
+Output
+{1, 4}
+105. Count Unique Words
+sentence = "python java python sql java"
+
+words = sentence.split()
+
+print(len(set(words)))
+Output
+3
+Frequently Asked Set Interview Questions
+1. What is a Set?
+
+A set is an unordered, mutable collection of unique elements.
+
+s = {1, 2, 3}
+2. Can a Set Contain Duplicate Values?
+
+No.
+
+s = {1, 2, 2, 3}
+
+print(s)
+Output
+{1, 2, 3}
+3. Can a Set Contain Lists?
+
+No, because lists are mutable.
+
+# Error
+s = {[1, 2], [3, 4]}
+
+Use tuples instead:
+
+s = {(1, 2), (3, 4)}
+4. Difference Between List and Set
+List	Set
+Ordered	Unordered
+Allows duplicates	No duplicates
+Mutable	Mutable
+Indexing supported	No indexing
+Search: O(n)	Search: O(1) average
+5. Difference Between remove() and discard()
+s = {1, 2, 3}
+
+s.remove(4)     # Raises KeyError
+
+s.discard(4)    # No error
+6. Difference Between pop() and remove()
+pop()	remove()
+Removes a random element	Removes a specific element
+Takes no argument	Takes the element to remove
+7. Time Complexity of Set Operations
+Operation	Complexity
+Add	O(1)
+Remove	O(1)
+Search	O(1) average
+Union	O(len(A) + len(B))
+Intersection	O(min(len(A), len(B)))
+8. When Should You Use a Set?
+
+Use a set when you need to:
+
+Remove duplicates.
+Perform fast membership checks.
+Compare collections.
+Perform union, intersection, or difference operations.
+9. Frozen Set
+
+A frozenset is an immutable version of a set.
+
+fs = frozenset([1, 2, 3])
+
+print(fs)
+
+You cannot add or remove elements from a frozenset.
+
+10. Real-Time ETL Example
+
+Suppose two CSV files contain employee IDs.
+
+employees_file1 = {101, 102, 103}
+employees_file2 = {103, 104, 105}
+
+duplicates = employees_file1 & employees_file2
+
+print(duplicates)
+Output
+{103}
+
+This is a common technique for identifying duplicate records across data sources.
+
+Persistent Systems Interview Tips
+
+Interviewers frequently ask:
+
+Why are sets faster than lists for membership tests?
+Difference between remove() and discard().
+Difference between union() and intersection().
+How do you remove duplicates from a list?
+Can a set contain mutable objects?
+What is a frozenset?
+What is the time complexity of searching in a set?
+
+Persistent Systems Python Hands-on – Part 7: Functions, Lambda, map(), filter(), reduce(), zip(), enumerate() (Questions 101–120 with Answers)
+
+These topics are very frequently asked in Persistent Systems Python interviews, especially for freshers (0–2 years).
+
+101. Write a Simple Function
+def greet():
+    print("Welcome to Python")
+
+greet()
+Output
+Welcome to Python
+102. Function with Parameters
+def add(a, b):
+    return a + b
+
+print(add(10, 20))
+Output
+30
+103. Function with Default Arguments
+def greet(name="Guest"):
+    print("Hello", name)
+
+greet()
+greet("Ram")
+Output
+Hello Guest
+Hello Ram
+104. Function with Keyword Arguments
+def employee(name, salary):
+    print(name, salary)
+
+employee(salary=50000, name="Sai")
+Output
+Sai 50000
+105. Function with Variable Arguments (*args)
+def total(*numbers):
+    print(sum(numbers))
+
+total(10, 20, 30)
+Output
+60
+106. Function with Keyword Variable Arguments (**kwargs)
+def employee(**details):
+    print(details)
+
+employee(name="Ram", age=25, city="Hyderabad")
+Output
+{'name': 'Ram', 'age': 25, 'city': 'Hyderabad'}
+107. Recursive Function – Factorial
+def factorial(n):
+    if n == 1:
+        return 1
+    return n * factorial(n - 1)
+
+print(factorial(5))
+Output
+120
+108. Lambda Function – Square
+square = lambda x: x * x
+
+print(square(5))
+Output
+25
+109. Lambda Function – Addition
+add = lambda a, b: a + b
+
+print(add(20, 30))
+Output
+50
+110. Sort Using Lambda
+students = [
+    ("Ram", 90),
+    ("Sai", 75),
+    ("John", 85)
+]
+
+students.sort(key=lambda x: x[1])
+
+print(students)
+Output
+[('Sai', 75), ('John', 85), ('Ram', 90)]
+111. map() Example – Square Numbers
+numbers = [1, 2, 3, 4, 5]
+
+result = list(map(lambda x: x*x, numbers))
+
+print(result)
+Output
+[1, 4, 9, 16, 25]
+112. map() – Convert to Uppercase
+names = ["ram", "sai", "john"]
+
+result = list(map(str.upper, names))
+
+print(result)
+Output
+['RAM', 'SAI', 'JOHN']
+113. filter() – Even Numbers
+numbers = [10, 15, 20, 25, 30]
+
+result = list(filter(lambda x: x % 2 == 0, numbers))
+
+print(result)
+Output
+[10, 20, 30]
+114. filter() – Strings Longer Than 5 Characters
+words = ["Python", "Java", "Programming", "SQL"]
+
+result = list(filter(lambda x: len(x) > 5, words))
+
+print(result)
+Output
+['Python', 'Programming']
+115. reduce() – Sum of Numbers
+from functools import reduce
+
+numbers = [1, 2, 3, 4, 5]
+
+result = reduce(lambda x, y: x + y, numbers)
+
+print(result)
+Output
+15
+116. reduce() – Find Maximum
+from functools import reduce
+
+numbers = [10, 45, 22, 90, 55]
+
+maximum = reduce(lambda a, b: a if a > b else b, numbers)
+
+print(maximum)
+Output
+90
+117. zip() – Combine Two Lists
+names = ["Ram", "Sai", "John"]
+marks = [90, 80, 95]
+
+result = list(zip(names, marks))
+
+print(result)
+Output
+[('Ram', 90), ('Sai', 80), ('John', 95)]
+118. enumerate() Example
+fruits = ["Apple", "Banana", "Orange"]
+
+for index, value in enumerate(fruits):
+    print(index, value)
+Output
+0 Apple
+1 Banana
+2 Orange
+119. zip() – Create a Dictionary
+keys = ["id", "name", "salary"]
+values = [101, "Ram", 50000]
+
+employee = dict(zip(keys, values))
+
+print(employee)
+Output
+{'id': 101, 'name': 'Ram', 'salary': 50000}
+120. enumerate() with Start Index
+languages = ["Python", "Java", "SQL"]
+
+for index, language in enumerate(languages, start=1):
+    print(index, language)
+Output
+1 Python
+2 Java
+3 SQL
+Bonus Coding Questions
+121. Function to Check Prime Number
+def is_prime(num):
+    if num < 2:
+        return False
+
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+
+    return True
+
+print(is_prime(17))
+Output
+True
+122. Lambda to Find Largest Number
+largest = lambda a, b: a if a > b else b
+
+print(largest(20, 40))
+Output
+40
+123. Filter Names Starting with "A"
+names = ["Alice", "Bob", "Andrew", "John"]
+
+result = list(filter(lambda x: x.startswith("A"), names))
+
+print(result)
+Output
+['Alice', 'Andrew']
+124. Map to Find String Length
+words = ["Python", "Java", "SQL"]
+
+lengths = list(map(len, words))
+
+print(lengths)
+Output
+[6, 4, 3]
+125. Reduce to Multiply Numbers
+from functools import reduce
+
+numbers = [2, 3, 4]
+
+result = reduce(lambda x, y: x * y, numbers)
+
+print(result)
+Output
+24
+Frequently Asked Interview Questions
+1. Difference Between map(), filter(), and reduce()
+Function	Purpose	Output
+map()	Transform every element	Same number of elements
+filter()	Select elements matching a condition	Fewer or equal elements
+reduce()	Reduce all elements to a single value	One value
+2. Difference Between *args and **kwargs
+*args	**kwargs
+Positional arguments	Keyword arguments
+Tuple	Dictionary
+3. Why Use Lambda Functions?
+Short, anonymous functions.
+Useful with map(), filter(), sorted(), and reduce().
+4. What Does zip() Do?
+
+Combines multiple iterables element by element.
+
+Example:
+
+zip([1, 2], ["A", "B"])
+
+Output:
+
+[(1, 'A'), (2, 'B')]
+5. What Does enumerate() Do?
+
+Returns both the index and the value while iterating.
+
+6. Difference Between return and print
+return	print
+Sends a value back to the caller	Displays output on the screen
+Can be reused in expressions	Cannot be reused directly
+7. Can a Function Return Multiple Values?
+
+Yes.
+
+def student():
+    return "Ram", 25
+
+name, age = student()
+
+print(name, age)
+8. What Is Recursion?
+
+A function calling itself until a base condition is reached.
+
+9. What Happens If reduce() Is Used on an Empty List?
+
+It raises a TypeError unless an initial value is provided.
+
+10. What Is the Difference Between a Lambda Function and a Normal Function?
+Normal Function	Lambda Function
+Defined using def	Defined using lambda
+Can contain multiple statements	Limited to a single expression
+Can have a name	Usually anonymous
+Persistent Systems Interview Tips
+
+Interviewers commonly ask you to:
+
+Write programs using lambda, map, filter, and reduce.
+Explain the differences between them.
+Demonstrate *args and **kwargs.
+Use zip() to combine lists or create dictionaries.
+Use enumerate() in loops.
+Explain recursion and write recursive functions.
+
+121. Create a Class and Object
+class Employee:
+
+    def display(self):
+        print("Welcome to Persistent Systems")
+
+emp = Employee()
+emp.display()
+Output
+Welcome to Persistent Systems
+122. Constructor (__init__)
+class Employee:
+
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+
+    def display(self):
+        print(self.name, self.salary)
+
+emp = Employee("Ram", 50000)
+emp.display()
+Output
+Ram 50000
+123. Class Variables and Instance Variables
+class Employee:
+
+    company = "Persistent"
+
+    def __init__(self, name):
+        self.name = name
+
+emp1 = Employee("Ram")
+emp2 = Employee("Sai")
+
+print(emp1.company)
+print(emp2.company)
+Output
+Persistent
+Persistent
+124. Single Inheritance
+class Animal:
+
+    def sound(self):
+        print("Animal Sound")
+
+class Dog(Animal):
+    pass
+
+d = Dog()
+d.sound()
+Output
+Animal Sound
+125. Multilevel Inheritance
+class A:
+
+    def display(self):
+        print("Class A")
+
+class B(A):
+    pass
+
+class C(B):
+    pass
+
+obj = C()
+obj.display()
+Output
+Class A
+126. Multiple Inheritance
+class Father:
+
+    def house(self):
+        print("House")
+
+class Mother:
+
+    def car(self):
+        print("Car")
+
+class Child(Father, Mother):
+    pass
+
+c = Child()
+
+c.house()
+c.car()
+Output
+House
+Car
+127. Method Overriding
+class Animal:
+
+    def sound(self):
+        print("Animal Sound")
+
+class Dog(Animal):
+
+    def sound(self):
+        print("Dog Barks")
+
+dog = Dog()
+
+dog.sound()
+Output
+Dog Barks
+128. Method Overloading (Using Default Arguments)
+class Calculator:
+
+    def add(self, a, b=0):
+        return a + b
+
+c = Calculator()
+
+print(c.add(10))
+print(c.add(10, 20))
+Output
+10
+30
+129. Encapsulation (Private Variables)
+class Employee:
+
+    def __init__(self):
+        self.__salary = 50000
+
+    def get_salary(self):
+        return self.__salary
+
+emp = Employee()
+
+print(emp.get_salary())
+Output
+50000
+130. Abstraction
+from abc import ABC, abstractmethod
+
+class Vehicle(ABC):
+
+    @abstractmethod
+    def start(self):
+        pass
+
+class Car(Vehicle):
+
+    def start(self):
+        print("Car Started")
+
+c = Car()
+c.start()
+Output
+Car Started
+131. Polymorphism
+class Dog:
+
+    def sound(self):
+        print("Dog Barks")
+
+class Cat:
+
+    def sound(self):
+        print("Cat Meows")
+
+for animal in [Dog(), Cat()]:
+    animal.sound()
+Output
+Dog Barks
+Cat Meows
+132. super() Keyword
+class Parent:
+
+    def __init__(self):
+        print("Parent Constructor")
+
+class Child(Parent):
+
+    def __init__(self):
+        super().__init__()
+        print("Child Constructor")
+
+Child()
+Output
+Parent Constructor
+Child Constructor
+133. Class Method
+class Employee:
+
+    company = "Persistent"
+
+    @classmethod
+    def show_company(cls):
+        print(cls.company)
+
+Employee.show_company()
+Output
+Persistent
+134. Static Method
+class Math:
+
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+print(Math.add(10, 20))
+Output
+30
+135. Property Decorator
+class Student:
+
+    def __init__(self):
+        self._marks = 90
+
+    @property
+    def marks(self):
+        return self._marks
+
+s = Student()
+
+print(s.marks)
+Output
+90
+136. Operator Overloading
+class Number:
+
+    def __init__(self, value):
+        self.value = value
+
+    def __add__(self, other):
+        return self.value + other.value
+
+n1 = Number(10)
+n2 = Number(20)
+
+print(n1 + n2)
+Output
+30
+137. Object Comparison
+class Employee:
+
+    def __init__(self, salary):
+        self.salary = salary
+
+e1 = Employee(50000)
+e2 = Employee(60000)
+
+print(e1.salary < e2.salary)
+Output
+True
+138. Destructor
+class Demo:
+
+    def __del__(self):
+        print("Object Destroyed")
+
+obj = Demo()
+
+del obj
+Sample Output
+Object Destroyed
+139. Check Object Type
+class Employee:
+    pass
+
+emp = Employee()
+
+print(isinstance(emp, Employee))
+Output
+True
+140. Check Class Relationship
+class Animal:
+    pass
+
+class Dog(Animal):
+    pass
+
+print(issubclass(Dog, Animal))
+Output
+True
+Frequently Asked OOP Interview Questions
+1. What is OOP?
+
+Object-Oriented Programming is a programming paradigm based on objects and classes.
+
+2. Four Pillars of OOP
+Encapsulation
+Inheritance
+Polymorphism
+Abstraction
+3. Difference Between Class and Object
+Class	Object
+Blueprint	Instance of a class
+Logical entity	Physical entity
+4. What is self?
+
+self refers to the current object.
+
+5. Difference Between @staticmethod and @classmethod
+Static Method	Class Method
+No self or cls	Uses cls
+Cannot access class variables automatically	Can access class variables
+6. Difference Between Method Overloading and Overriding
+Overloading	Overriding
+Same method name, different parameters (simulated in Python)	Child class redefines parent method
+7. Why Doesn't Python Support Traditional Method Overloading?
+
+Python keeps only the last method definition with a given name. Overloading is usually achieved using default arguments or *args.
+
+8. What is super()?
+
+It allows a child class to access the parent class's methods or constructor.
+
+9. What is Name Mangling?
+
+Private variables prefixed with __ are internally renamed to reduce accidental access.
+
+Example:
+
+class Employee:
+    def __init__(self):
+        self.__salary = 50000
+
+emp = Employee()
+
+print(emp._Employee__salary)
+10. Difference Between Abstraction and Encapsulation
+Abstraction	Encapsulation
+Hides implementation details	Hides internal data
+Achieved using abstract classes	Achieved using private members
+Real-Time Data Engineering Example
+class ETLPipeline:
+
+    def extract(self):
+        print("Extracting Data")
+
+    def transform(self):
+        print("Transforming Data")
+
+    def load(self):
+        print("Loading Data")
+
+pipeline = ETLPipeline()
+
+pipeline.extract()
+pipeline.transform()
+pipeline.load()
+Output
+Extracting Data
+Transforming Data
+Loading Data
+
+This models the three stages of an ETL process using object-oriented design.
+
+Persistent Systems Interview Tips
+
+Interviewers commonly ask:
+
+Explain the four pillars of OOP with examples.
+What is the difference between a class and an object?
+What is the purpose of self?
+Explain inheritance and its types.
+What is method overriding?
+Does Python support method overloading?
+Explain super() with an example.
+What are class methods and static methods?
+Explain abstraction using the abc module.
+What is encapsulation and why is it important?
+
+For coding rounds, be prepared to write programs demonstrating:
+
+Class creation
+Constructors
+Inheritance
+Polymorphism
+Encapsulation
+Abstraction
+super()
+@classmethod
+@staticmethod
+
+141. Create and Write Data into a File
+file = open("employee.txt", "w")
+
+file.write("101,Ram,50000")
+
+file.close()
+Output File (employee.txt)
+101,Ram,50000
+142. Read a File
+file = open("employee.txt", "r")
+
+data = file.read()
+
+print(data)
+
+file.close()
+Output
+101,Ram,50000
+143. Read File Line by Line
+file = open("employee.txt", "r")
+
+for line in file:
+    print(line)
+
+file.close()
+Output
+101,Ram,50000
+102,Sai,60000
+144. Use with open() (Best Practice)
+with open("employee.txt", "r") as file:
+    data = file.read()
+
+print(data)
+Advantage:
+Automatically closes the file.
+No need to call close().
+145. Append Data to a File
+with open("employee.txt", "a") as file:
+    file.write("\n103,John,70000")
+File Content
+101,Ram,50000
+102,Sai,60000
+103,John,70000
+146. Read First N Characters
+with open("employee.txt", "r") as file:
+
+    data = file.read(10)
+
+    print(data)
+Output
+101,Ram,50
+147. Read Using readline()
+with open("employee.txt", "r") as file:
+
+    line = file.readline()
+
+    print(line)
+Output
+101,Ram,50000
+148. Read Using readlines()
+with open("employee.txt", "r") as file:
+
+    lines = file.readlines()
+
+    print(lines)
+Output
+[
+'101,Ram,50000\n',
+'102,Sai,60000'
+]
+149. Count Number of Lines in a File
+count = 0
+
+with open("employee.txt", "r") as file:
+
+    for line in file:
+        count += 1
+
+print("Lines:", count)
+Output
+Lines: 2
+150. Count Words in a File
+
+File:
+
+Python is easy
+Python is powerful
+
+Program:
+
+count = 0
+
+with open("sample.txt","r") as file:
+
+    data = file.read()
+
+    words = data.split()
+
+    count = len(words)
+
+print(count)
+Output
+6
+151. Count Characters in a File
+with open("sample.txt","r") as file:
+
+    data = file.read()
+
+print(len(data))
+152. Search a Word in a File
+search_word = "Python"
+
+with open("sample.txt","r") as file:
+
+    data = file.read()
+
+    if search_word in data:
+        print("Word Found")
+    else:
+        print("Not Found")
+Output
+Word Found
+153. Copy One File to Another
+with open("source.txt","r") as source:
+
+    data = source.read()
+
+
+with open("target.txt","w") as target:
+
+    target.write(data)
+154. Count Frequency of Words in a File
+frequency = {}
+
+with open("sample.txt","r") as file:
+
+    words = file.read().split()
+
+    for word in words:
+        frequency[word] = frequency.get(word,0)+1
+
+print(frequency)
+Output
+{'Python':2,'is':2,'easy':1}
+155. Remove Blank Lines from a File
+with open("input.txt","r") as file:
+
+    lines = file.readlines()
+
+
+with open("output.txt","w") as file:
+
+    for line in lines:
+        if line.strip():
+            file.write(line)
+156. Count Number of Empty Lines
+count = 0
+
+with open("sample.txt","r") as file:
+
+    for line in file:
+
+        if line.strip()=="":
+            count += 1
+
+print(count)
+157. Read CSV File Using Python
+
+File:
+
+id,name,salary
+101,Ram,50000
+102,Sai,60000
+
+Program:
+
+import csv
+
+with open("employee.csv") as file:
+
+    reader = csv.reader(file)
+
+    for row in reader:
+        print(row)
+Output
+['id','name','salary']
+['101','Ram','50000']
+['102','Sai','60000']
+158. Write Data into CSV File
+import csv
+
+data = [
+    ["id","name"],
+    [101,"Ram"],
+    [102,"Sai"]
+]
+
+
+with open("employee.csv","w") as file:
+
+    writer = csv.writer(file)
+
+    writer.writerows(data)
+159. Handle File Not Found Exception
+try:
+
+    file = open("abc.txt","r")
+
+    print(file.read())
+
+except FileNotFoundError:
+
+    print("File does not exist")
+Output
+File does not exist
+160. Check File Exists Before Reading
+import os
+
+filename = "employee.txt"
+
+if os.path.exists(filename):
+
+    with open(filename) as file:
+        print(file.read())
+
+else:
+    print("File Not Found")
+Bonus Real-Time ETL File Handling Examples
+161. Process Large File Using Generator
+def read_large_file(filename):
+
+    with open(filename,"r") as file:
+
+        for line in file:
+            yield line
+
+
+for record in read_large_file("large.csv"):
+    print(record)
+Advantage:
+Reads one line at a time.
+Saves memory.
+162. Find Duplicate Records in CSV
+import csv
+
+records = set()
+
+with open("employee.csv") as file:
+
+    reader = csv.reader(file)
+
+    for row in reader:
+
+        data = tuple(row)
+
+        if data in records:
+            print("Duplicate:", row)
+
+        records.add(data)
+163. Convert Text File to Uppercase
+with open("input.txt","r") as file:
+
+    data = file.read()
+
+
+with open("output.txt","w") as file:
+
+    file.write(data.upper())
+164. Count Error Messages from Log File
+count = 0
+
+with open("app.log") as file:
+
+    for line in file:
+
+        if "ERROR" in line:
+            count += 1
+
+print(count)
+Frequently Asked File Handling Interview Questions
+1. What are different file modes?
+Mode	Purpose
+r	Read
+w	Write (overwrite)
+a	Append
+x	Create new file
+rb	Read binary
+wb	Write binary
+2. Difference Between read(), readline(), and readlines()
+Method	Description
+read()	Reads complete file
+readline()	Reads one line
+readlines()	Reads all lines as list
+3. Why Use with open()?
+
+Because it automatically closes the file.
+
+Example:
+
+with open("data.txt") as file:
+    data=file.read()
+4. Difference Between w and a Mode
+w	a
+Overwrites existing data	Adds data at end
+Creates file if missing	Creates file if missing
+5. What is File Pointer?
+
+The position where Python is currently reading/writing in a file.
+
+6. What Does seek() Do?
+
+Moves the file pointer.
+
+Example:
+
+file.seek(0)
+
+Moves pointer to beginning.
+
+7. What Does tell() Do?
+
+Returns current file pointer position.
+
+file.tell()
+8. Difference Between Text and Binary Files
+Text File	Binary File
+Human readable	Machine readable
+.txt, .csv	.jpg, .pdf, .exe
+9. How to Handle Large Files?
+
+Use:
+
+Generators
+Reading line by line
+Chunk processing
+10. Real-Time ETL Example
+
+Reading a CSV file:
+
+with open("sales.csv") as file:
+
+    for row in file:
+        process(row)
+
+Used in:
+
+Data migration
+Batch processing
+Log analysis
+ETL pipelines
+Persistent Systems Interview Tips
+
+Prepare these coding scenarios:
+
+✅ Read CSV and filter records
+✅ Count words in a file
+✅ Find duplicate records
+✅ Process large files efficiently
+✅ Handle missing files
+✅ Read logs and extract errors
+✅ Explain file modes (r, w, a)
+✅ Explain why with open() is preferred
+
+
+try:
+    a = 10
+    b = 0
+    print(a / b)
+
+except:
+    print("Something went wrong")
+Output
+Something went wrong
+166. Handle Specific Exception
+try:
+    num = int("abc")
+
+except ValueError:
+    print("Invalid number conversion")
+Output
+Invalid number conversion
+167. Handle Multiple Exceptions
+try:
+    a = int(input("Enter number: "))
+    b = int(input("Enter divisor: "))
+
+    print(a / b)
+
+except ValueError:
+    print("Enter only numbers")
+
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+168. Using Multiple Exceptions in One Block
+try:
+    num = int("abc")
+    result = 10 / 0
+
+except (ValueError, ZeroDivisionError):
+    print("Error occurred")
+Output
+Error occurred
+169. Using else Block
+
+else executes when no exception occurs.
+
+try:
+    a = 10
+    b = 5
+
+    result = a / b
+
+except ZeroDivisionError:
+    print("Error")
+
+else:
+    print("Result:", result)
+Output
+Result: 2.0
+170. Using finally Block
+
+finally always executes.
+
+try:
+    file = open("data.txt")
+
+except FileNotFoundError:
+    print("File not found")
+
+finally:
+    print("Execution completed")
+Output
+File not found
+Execution completed
+171. Exception Handling with File Operations
+try:
+    with open("employee.txt","r") as file:
+        data=file.read()
+        print(data)
+
+except FileNotFoundError:
+    print("File does not exist")
+172. Catch Exception Message
+try:
+    x = 10 / 0
+
+except Exception as e:
+    print(e)
+Output
+division by zero
+173. Find Exception Type
+try:
+    x = int("Python")
+
+except Exception as e:
+    print(type(e))
+Output
+<class 'ValueError'>
+174. Raise an Exception Manually
+age = -5
+
+if age < 0:
+    raise Exception("Age cannot be negative")
+Output
+Exception: Age cannot be negative
+175. Raise Specific Exception
+salary = 0
+
+if salary == 0:
+    raise ValueError("Salary cannot be zero")
+176. Custom Exception Class
+class InvalidAgeException(Exception):
+    pass
+
+
+age = 15
+
+if age < 18:
+    raise InvalidAgeException("Not eligible")
+Output
+InvalidAgeException: Not eligible
+177. Exception Handling in Function
+def divide(a,b):
+
+    try:
+        return a/b
+
+    except ZeroDivisionError:
+        return "Cannot divide by zero"
+
+
+print(divide(10,0))
+Output
+Cannot divide by zero
+178. Nested Try Except
+try:
+
+    try:
+        print(10/0)
+
+    except ZeroDivisionError:
+        print("Inner Exception")
+
+except:
+    print("Outer Exception")
+Output
+Inner Exception
+179. Handle Index Error
+numbers = [10,20,30]
+
+try:
+    print(numbers[5])
+
+except IndexError:
+    print("Index not available")
+Output
+Index not available
+180. Handle Key Error
+employee = {
+    "name":"Ram"
+}
+
+try:
+    print(employee["salary"])
+
+except KeyError:
+    print("Key missing")
+Output
+Key missing
+181. Handle Type Error
+try:
+    result = "10" + 5
+
+except TypeError:
+    print("Invalid operation")
+Output
+Invalid operation
+182. Exception Handling in ETL Pipeline
+def load_data():
+
+    try:
+        print("Loading data")
+
+        # database operation
+        raise Exception("Database connection failed")
+
+    except Exception as e:
+        print("Load Failed:", e)
+
+    finally:
+        print("Closing connection")
+
+
+load_data()
+Output
+Loading data
+Load Failed: Database connection failed
+Closing connection
+183. Retry Mechanism Using Exception Handling
+import time
+
+attempt = 0
+
+while attempt < 3:
+
+    try:
+        print("Connecting...")
+        raise ConnectionError()
+
+    except ConnectionError:
+        attempt += 1
+        print("Retry:", attempt)
+        time.sleep(1)
+Output
+Connecting...
+Retry: 1
+Connecting...
+Retry: 2
+Connecting...
+Retry: 3
+184. Exception Logging
+import logging
+
+logging.basicConfig(filename="error.log",
+                    level=logging.ERROR)
+
+
+try:
+    x = 10/0
+
+except Exception as e:
+    logging.error(e)
+
+Creates:
+
+error.log
+185. Complete Real-Time ETL Error Handling Example
+import pandas as pd
+
+try:
+
+    df = pd.read_csv("sales.csv")
+
+    df["amount"] = df["price"] * df["quantity"]
+
+    df.to_csv("output.csv")
+
+    print("ETL Completed")
+
+except FileNotFoundError:
+
+    print("Input file missing")
+
+except KeyError:
+
+    print("Column missing")
+
+except Exception as e:
+
+    print("Unknown Error:", e)
+
+finally:
+
+    print("Pipeline Finished")
+Frequently Asked Exception Handling Interview Questions
+1. What is an Exception?
+
+An exception is an error that occurs during program execution and interrupts normal flow.
+
+Example:
+
+10 / 0
+2. Difference Between Error and Exception
+Error	Exception
+Serious issue	Runtime problem
+Usually cannot recover	Can be handled
+Example: SyntaxError	Example: ValueError
+3. Difference Between try and except
+try	except
+Contains risky code	Handles error
+4. Difference Between finally and else
+else	finally
+Runs only if no exception	Always executes
+5. Why Should We Avoid Empty Except?
+
+Bad:
+
+try:
+    code
+
+except:
+    pass
+
+Reason:
+
+Hides errors
+Difficult debugging
+6. What is the Base Exception Class?
+Exception
+
+Most built-in exceptions inherit from it.
+
+7. Common Built-in Exceptions
+Exception	Example
+ValueError	Invalid value
+TypeError	Wrong data type
+ZeroDivisionError	Divide by zero
+FileNotFoundError	Missing file
+IndexError	Invalid index
+KeyError	Missing dictionary key
+AttributeError	Invalid attribute
+8. Difference Between raise and except
+raise	except
+Creates an exception	Handles an exception
+9. Can We Have Multiple Except Blocks?
+
+Yes.
+
+Example:
+
+try:
+    code
+
+except ValueError:
+    pass
+
+except TypeError:
+    pass
+10. Real-Time Interview Scenario
+Question:
+
+"Your ETL pipeline failed because the input CSV file is missing. How will you handle it?"
+
+Answer:
+try:
+    df = pd.read_csv("sales.csv")
+
+except FileNotFoundError:
+    print("Send alert: File missing")
+
+finally:
+    print("Pipeline execution completed")
+Persistent Systems Interview Tips
+
+Frequently asked:
+
+✅ Difference between Error and Exception
+✅ try-except-finally flow
+✅ Multiple exception handling
+✅ Custom exceptions
+✅ raise keyword
+✅ File handling exceptions
+✅ Database/API failure handling
+✅ Logging errors
+✅ Retry mechanisms
+
+

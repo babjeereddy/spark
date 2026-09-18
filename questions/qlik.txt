@@ -1,0 +1,249 @@
+1What is QVD in Qlik Sense?
+
+QVD is Qlik's native, optimized data-storage format, primarily used to store extracted/transformed data and improve 
+reload performance, reduce source-system load, and support incremental loading.
+
+2 type of load
+
+ Load type            | Purpose                                                                                                               
+-------------------- | --------------------------------------------------------------------
+**LOAD**             | Load data from a file/table/result                                                                
+**Resident Load**    | Load data from an already loaded table                               `                              
+**Preceding Load**   | Transform data before loading into the final table                   
+**Binary Load**      | Load the data model from another Qlik app                             
+**Inline Load**      | Create small data directly inside the script                          
+**Autogenerate**     | Generate records without an external data source                      
+**Crosstable Load**  | Convert cross-tab/pivot-style data into normalized rows               
+**Generic Load**     | Handle attribute-value/pivot-style data                               
+**Mapping Load**     | Create a mapping table for lookups/replacements                       
+**Join Load**        | Join one table with another                                           
+**Concatenate Load** | Append records to another table                                       
+**Keep Load**        | Reduce tables based on matching keys without physically joining them 
+
+
+3 1. What is a Synthetic Key?
+
+A Synthetic Key is automatically created by Qlik Sense when two or more tables have two or more common field names.
+
+However, an unnecessary or complex synthetic key can cause:
+
+Poor application performance
+Increased memory consumption
+Complex data model
+Unexpected associations
+Incorrect results in some data models
+
+Method 1 — Rename fields
+
+Method 2 — Remove unnecessary fields
+
+Method 3 — Create a Composite Key
+
+4 what is loop and circular reference
+When there is more than one possible path to travel from one table to another, Qlik can create a circular relationship called a loop.
+
+2. Rename unrelated fields
+
+3. Remove unnecessary associations
+4. Create a Link Table
+
+5 Qlik Sense is a modern self-service Business Intelligence and data visualization platform used to load, associate, analyze, and visualize data through interactive dashboards and reports.
+
+Associative Engine – explores relationships between data.
+Data Integration – connects to databases, files, APIs, etc.
+Visualization – charts, KPIs, tables, maps.
+Self-Service BI – business users can explore data without heavy coding.
+Interactive Analysis – selections dynamically update relate
+
+6 “QlikView is mainly used for developer-built, guided BI applications, whereas Qlik Sense focuses on self-service, interactive analytics and modern cloud-based BI.”
+
+7 what is associated model
+The Associative Model is Qlik Sense's data model that automatically associates related tables through common field names, allowing users to explore data across different dimensions without predefined drill-down paths.
+
+7 what is Associative Search
+
+Searches across the entire associative data model.
+
+Example:
+
+Search John
+
+Qlik can find matching values across fields such as Customer Name, Employee Name, Salesperson, etc.
+
+8 What is Smart Search
+
+The global search feature that lets users search across the application and associated data.
+
+9 color code in associated search
+ | Color         | Meaning                |
+| ------------- | ---------------------- |
+| 🟢 **Green**  | **Selected values**    |
+| ⚪ **White**   | **Possible values**    |
+| 🔘 **Gray**   | **Excluded values**    |
+| 🟡 **Yellow** | **Alternative values** |
+
+10 What is an App in Qlik Sense? — Interview Answer
+
+A Qlik Sense App is a container that contains the data model, load script, sheets, visualizations, dimensions, measures, and business logic used to analyze data.
+
+11 Qlik Sense Hub
+
+The user-facing portal.
+
+Users use the Hub to:
+
+Open apps
+Create apps
+View sheets
+Analyze dashboards
+Access shared/managed content
+
+12 Qlik Engine Service(QES)
+“The Qlik Engine is responsible for loading data into memory and performing associative calculations and analytics.”
+
+13 Qlik Repository Service (QRS)
+“QRS manages the metadata and configuration of the Qlik Sense environment.”
+
+14 Qlik Management Console (QMC)
+“QMC is the administration interface used to configure and manage the Qlik Sense environment.”
+
+15 data manager 
+Data Manager is a user-friendly interface in Qlik Sense that allows users to load, prepare, associate, and manage data without writing much scripting code.
+
+16 data load editor
+Data Load Editor is a script-based development environment in Qlik Sense used to load, transform, and prepare data using Qlik scripting language.
+
+17 data model 
+A Qlik Sense Data Model is the structure that defines how different tables are loaded and associated with each other using common fields. It is used by the Qlik Associative Engine to connect and analyze data.
+
+18 snapshot
+A Snapshot in Qlik Sense is a static copy of a visualization at a particular point in time, used mainly when creating stories.
+
+19 Qlik Sense Stories is a presentation feature used to present and communicate insights from your data using snapshots of visualizations.
+
+20 alternative state
+“Alternate State in Qlik Sense allows us to maintain independent selections within the same app, mainly to compare different selections such as Region A vs Region B or Year 2024 vs Year 2025.”
+
+21 what is calculated dimension
+A Calculated Dimension is a dimension created using a Qlik expression instead of directly using a field from the data model.
+
+22 difference between sum and aggr
+Sum() is an aggregation function used to calculate the total of a numeric field, while Aggr() is a nested aggregation function that first calculates an expression at a specified dimension level and then allows another aggregation on that result.
+Aggr(Sum(Sales), Customer)
+
+23 what is auto generate
+AutoGenerate is a Qlik script feature used to automatically generate a specified number of rows without requiring an external data source.
+
+24 ApplyMap() is a Qlik Sense function used to look up a value from a mapping table and return the corresponding value.
+
+24 Join vs Concatenate vs Keep in Qlik Sense
+
+
+
+JOIN = combine columns
+CONCATENATE = combine rows
+KEEP = filter/associate tables without physically joining them
+
+25 NoConcatenate is a Qlik Sense script prefix used to prevent automatic concatenation of two tables that have the same field structure.
+
+
+
+26 Link table
+A Link Table is a separate table used to connect multiple fact tables through common dimensions, especially when the fact tables have different sets of keys.
+
+27 3. What is a Bookmark?
+
+A Bookmark saves a particular selection state of an app.
+
+28 How do you improve Qlik Sense App Performance?
+
+“I improve Qlik Sense application performance by reducing the amount of data loaded, optimizing the data model, using QVDs, minimizing expensive calculations, avoiding synthetic keys and circular references, optimizing expressions, and reducing the number of unnecessary visualizations.”
+
+
+28 Spatial functions in Qlik Sense are functions used to work with geographical/location data, such as points, lines, areas, and distances. They are mainly useful when building maps and location-based analysis.
+
+Important Spatial Functions
+Function	Purpose	Example
+GeoMakePoint()	Creates a geographic point from Latitude & Longitude	
+GeoMakePoint()	Converts latitude/longitude into a point representation	
+GeoDistance()	Calculates distance between two geographic points	
+
+29. Why do we use Set Analysis?
+
+We use Set Analysis when we want a calculation to consider a specific set of records, independent of or in addition to the user's current selections.
+
+Common use cases:
+
+Current Year Sales
+Previous Year Sales
+YTD Sales
+MTD Sales
+Sales for a particular region
+Sales excluding a particular region
+
+
+$ represents the current selection state.
+1 represents the entire data set, ignoring the current selections.
+$1 represents the previous selection state.
+$2 Selection before $1
+$0 — Current Selection?
++= — Add Values In Set Analysis, += is used with a field assignment to add values to the existing set.
+
+Sum({<Region += {'South'}>} Sales)
+Keep the existing Region values and add South.
+
+-= removes values from the existing set.
+Sum({<Region -= {'South'}>} Sales)
+Keep the existing Region selection, but remove South.
+
+
+Most important examples
+
+➡️ Current selection  Sum(Sales)
+
+➡️ Current selection Sum({$} Sales)
+
+➡️ All data Sum({1} Sales)
+
+➡️ Previous selection Sum({$1} Sales)
+
+➡️ Replace Region with South Sum({<Region={'South'}>} Sales)
+
+➡️ Add South Sum({<Region += {'South'}>} Sales)
+
+➡️ Remove South Sum({<Region -= {'South'}>} Sales)
+
+
+Qlik Answers is a GenAI-powered conversational assistant in Qlik Cloud that allows users to ask natural-language questions and receive answers, insights, charts, and sheets from structured and unstructured data.
+
+Qlik Assist is Qlik’s AI-powered conversational analytics assistant. It allows users to ask questions about their business data using natural language instead of manually building charts or writing expressions.
+
+Simple example
+
+Suppose your Qlik Sense app contains sales data.
+
+You can ask:
+
+“What are the total sales by region?”
+
+Qlik Assist can understand the question and provide an analytical response, such as a chart or table.
+
+You can then ask:
+
+“Which region has the highest sales?”
+
+A Qlik Knowledge Base is a collection of documents and information that Qlik Assist can use as a source of knowledge when answering questions.
+
+Think of it as giving Qlik Assist a company-specific knowledge library.
+
+Simple example
+
+Suppose your company has these PDF documents:
+
+Sales_Policy.pdf
+Product_Catalog.pdf
+Company_FAQ.pdf
+Customer_Return_Policy.pdf
+
+You can add these documents to a Knowledge Base.
+

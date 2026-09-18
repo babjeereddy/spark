@@ -1,0 +1,4882 @@
+What is a Database?
+
+Answer
+
+A database is an organized collection of data that allows users to store, retrieve, update, and manage information efficiently.
+
+2. What is DBMS?
+
+DBMS stands for
+
+Database Management System
+
+It is software used to create and manage databases.
+
+Examples
+
+MySQL
+SQL Server
+Oracle
+PostgreSQL
+SQLite
+
+Responsibilities of DBMS
+Store data
+Retrieve data
+Update data
+Delete data
+Security
+Backup
+Recovery
+
+What is RDBMS?
+
+RDBMS stands for
+
+Relational Database Management System
+
+It stores data in the form of tables.
+
+Tables are related using
+
+Primary Key
+Foreign Key
+
+Examples
+SQL Server
+Oracle
+MySQL
+PostgreSQL
+
+Difference between DBMS and RDBMS?
+
+Expected answer:
+
+RDBMS supports relationships, normalization, transactions, and constraints while DBMS generally does not.
+
+
+What is SQL?
+
+SQL stands for
+
+Structured Query Language
+
+Used for
+
+Creating databases
+Creating tables
+Retrieving data
+Updating data
+Deleting data
+Security
+Transactions
+What is SQL?
+
+SQL stands for
+
+Structured Query Language
+
+Used for
+
+Creating databases
+Creating tables
+Retrieving data
+Updating data
+Deleting data
+Security
+Transactions
+SQL Command Categories
+DDL
+
+Data Definition Language
+
+Commands
+
+CREATE
+ALTER
+DROP
+TRUNCATE
+
+
+DML
+
+Data Manipulation Language
+
+Commands
+
+INSERT
+UPDATE
+DELETE
+MERGE
+DQL
+
+Data Query Language
+
+Command
+
+SELECT
+
+DCL
+
+Data Control Language
+
+Commands
+
+GRANT
+REVOKE
+TCL
+
+Transaction Control Language
+
+Commands
+
+COMMIT
+ROLLBACK
+SAVEPOINT
+Interview Question
+
+How many types of SQL commands are there?
+
+Five
+
+DDL
+DML
+DQL
+DCL
+TCL
+
+
+Interview Questions (20)
+What is a database?
+What is DBMS?
+Difference between DBMS and RDBMS?
+What is SQL?
+What are SQL command types?
+What is DDL?
+What is DML?
+What is DQL?
+What is TCL?
+What is DCL?
+What is SQL Server?
+What is Oracle?
+What is MySQL?
+What is PostgreSQL?
+What is SQLite?
+Why is SQL important?
+What is a table?
+What is a row?
+What is a column?
+What is a record?
+
+
+What are Data Types?
+Interview Question
+
+What is a Data Type?
+
+Answer
+
+A data type defines the kind of data that can be stored in a column. Choosing the correct data type improves storage efficiency, data validation, and query performance.
+
+Difference Between VARCHAR and NVARCHAR
+VARCHAR			NVARCHAR
+ASCII/Non-Unicode	Unicode
+English			All languages
+Smaller storage		Larger storage
+
+
+Difference between DECIMAL and FLOAT?
+
+DECIMAL			FLOAT
+Exact precision		Approximate precision
+Financial applications	Scientific calculations
+No rounding surprises	May introduce rounding differences
+
+Constraints
+What are Constraints?
+
+Constraints enforce rules on data to maintain accuracy and consistency.
+
+Types of Constraints
+PRIMARY KEY
+FOREIGN KEY
+UNIQUE
+CHECK
+DEFAULT
+NOT NULL
+IDENTITY
+
+
+What is a Primary Key?
+
+Answer
+
+A Primary Key uniquely identifies each row in a table.
+
+Rules:
+
+Unique
+Cannot be NULL
+One Primary Key per table
+
+Can a table have multiple Primary Keys?
+
+Answer:
+
+No.
+
+A table can have only one Primary Key, but that key can consist of multiple columns (a composite primary key).
+
+
+What is a Foreign Key?
+
+Answer
+
+A Foreign Key creates a relationship between two tables
+
+Can a Foreign Key contain NULL values?
+
+Answer
+
+Yes.
+
+Unless the column is defined as NOT NULL.
+
+UNIQUE Constraint
+
+Allows duplicate NULLs? (SQL Server)
+
+Yes, only one NULL is permitted in a UNIQUE column.
+
+
+
+Difference Between PRIMARY KEY and UNIQUE
+PRIMARY KEY			UNIQUE
+One per table			Multiple allowed
+No NULL values			One NULL allowed in SQL Server
+Uniquely identifies row		Ensures unique values
+
+NOT NULL
+Name VARCHAR(100) NOT NULL
+
+This column cannot contain NULL.
+
+
+
+Where is CHECK used?
+
+Answer
+
+To validate data before insertion or update.
+
+Examples:
+
+Age ≥ 18
+Salary > 0
+Marks between 0 and 100
+
+
+DEFAULT Constraint
+Country VARCHAR(30)
+DEFAULT 'India'
+
+If no value is supplied:
+
+
+IDENTITY
+
+Auto-generated numbers.
+
+EmployeeID INT
+IDENTITY(1,1)
+
+
+Frequently Asked Interview Questions (20)
+What is a data type?
+Why are data types important?
+Difference between CHAR and VARCHAR?
+Difference between VARCHAR and NVARCHAR?
+Difference between DECIMAL and FLOAT?
+What is a constraint?
+What is a Primary Key?
+Can a Primary Key contain NULL?
+Can a table have multiple Primary Keys?
+What is a composite Primary Key?
+What is a Foreign Key?
+Why do we use Foreign Keys?
+Can a Foreign Key be NULL?
+Difference between Primary Key and Unique?
+What is a CHECK constraint?
+What is a DEFAULT constraint?
+What is an IDENTITY column?
+Difference between NOT NULL and CHECK?
+What happens if you violate a constraint?
+Which constraints improve data integrity?
+
+
+What is DDL?
+
+DDL (Data Definition Language) is a set of SQL commands used to define and manage the structure of database objects.
+
+Think of a database as a newly constructed building.
+
+CREATE → Builds the building.
+ALTER → Renovates or extends the building.
+TRUNCATE → Removes all furniture but keeps the building.
+DROP → Demolishes the building completely.
+
+Key Point: DDL changes the database schema, not the business data itself.
+
+CREATE Command
+Definition
+
+The CREATE command is used to create new database objects.
+
+It can create:
+
+Database
+Table
+View
+Index
+Schema
+Stored Procedure
+Function
+
+
+Q: Can CREATE insert data?
+
+Answer:
+
+No.
+
+CREATE only creates the table structure.
+
+INSERT is used to add records.
+
+ALTER Command
+Definition
+
+The ALTER command changes an existing table without recreating it.
+
+Real-Time Scenario
+
+Initially the company stores only:
+
+Employee ID
+Name
+
+Later management requests:
+
+Email
+Mobile Number
+City
+
+Instead of recreating the table, we use ALTER.
+
+Add a Column
+ALTER TABLE Employee
+ADD Email VARCHAR(100);
+Add Multiple Columns
+ALTER TABLE Employee
+ADD Mobile VARCHAR(15),
+    City VARCHAR(50);
+Change Data Type
+ALTER TABLE Employee
+ALTER COLUMN EmployeeName VARCHAR(150);
+Add a Constraint
+ALTER TABLE Employee
+ADD CONSTRAINT UQ_Email UNIQUE (Email);
+Remove a Constraint
+ALTER TABLE Employee
+DROP CONSTRAINT UQ_Email;
+Interview Question
+
+Q: Does ALTER delete existing records?
+
+Answer:
+
+No.
+
+ALTER changes only the table structure.
+
+Topic 3 – DROP Command
+Definition
+
+DROP permanently removes an object from the database.
+
+Objects include:
+
+Tables
+Databases
+Views
+Indexes
+Stored Procedures
+Example
+DROP TABLE Employee;
+What Happens?
+
+Before DROP
+
+Employee Table
+
+101 John
+102 David
+103 Lisa
+
+After DROP
+
+Employee Table
+
+Does Not Exist
+Real-Time Scenario
+
+A temporary table created during testing is no longer needed.
+
+The DBA removes it using DROP.
+
+Interview Question
+
+Q: Can a dropped table be recovered?
+
+Answer:
+
+Generally, no.
+
+Recovery depends on backups or database recovery features.
+
+Topic 4 – TRUNCATE Command
+Definition
+
+TRUNCATE removes all records from a table but keeps the table structure
+
+Q: Can TRUNCATE delete only one row?
+
+Answer:
+
+No.
+
+TRUNCATE always removes every row.
+
+Topic 5 – RENAME Command
+
+Different database systems use different syntax.
+
+Comparison 2 – DROP vs TRUNCATE vs DELETE
+Feature	DELETE	TRUNCATE	DROP
+Removes Data	✅	✅	✅
+Removes Table Structure	❌	❌	✅
+WHERE Clause	✅	❌	❌
+Faster	No	Yes	Yes
+Removes Selected Rows	✅	❌	❌
+
+
+What is DDL?
+What are DDL commands?
+What is CREATE?
+What objects can CREATE create?
+What is ALTER?
+Why do we use ALTER?
+What is DROP?
+What is TRUNCATE?
+Difference between DROP and TRUNCATE?
+Difference between DELETE and TRUNCATE?
+Difference between CREATE and ALTER?
+Can ALTER change a column's data type?
+Can ALTER add constraints?
+Can CREATE insert records?
+Which command removes only data?
+Which command removes both data and structure?
+Why is TRUNCATE faster than DELETE?
+Which command supports a WHERE clause?
+How do you rename a table in SQL Server?
+When would you choose TRUNCATE instead of DELETE?
+
+
+What is DML?
+
+DML (Data Manipulation Language) is used to manipulate the data stored inside database tables.
+
+Unlike DDL, DML does not change the table structure. Instead, it works with the records (rows).
+
+DML Commands
+Command	Purpose
+INSERT	Add new records
+UPDATE	Modify existing records
+DELETE	Remove records
+MERGE	Insert, Update, or Delete based on matching conditions
+DDL vs DML
+DDL	DML
+Changes Structure	Changes Data
+CREATE TABLE	INSERT
+ALTER TABLE	UPDATE
+DROP TABLE	DELETE
+TRUNCATE TABLE	MERGE
+
+
+INSERT Command
+Definition
+
+The INSERT statement adds new rows into a table.
+
+Syntax
+INSERT INTO table_name
+VALUES(value1,value2,value3);
+Example
+
+Create Employee Table
+
+CREATE TABLE Employee
+(
+EmployeeID INT PRIMARY KEY,
+EmployeeName VARCHAR(100),
+Department VARCHAR(50),
+Salary DECIMAL(10,2)
+);
+
+Insert one record
+
+INSERT INTO Employee
+VALUES
+(101,'John','IT',65000);
+Insert Multiple Records
+INSERT INTO Employee
+VALUES
+(102,'David','HR',55000),
+(103,'Lisa','Finance',75000),
+(104,'Peter','Sales',45000),
+(105,'Mary','IT',70000);
+
+
+Topic 2 – UPDATE Command
+Definition
+
+UPDATE modifies existing records.
+
+Syntax
+UPDATE table_name
+SET column=value
+WHERE condition;
+Example
+
+Increase John's salary.
+
+UPDATE Employee
+SET Salary=70000
+WHERE EmployeeID=101;
+
+
+What happens if UPDATE is executed without WHERE?
+
+Every row in the table is updated.
+
+This is one of the most common production mistakes.
+
+
+Topic 3 – DELETE Command
+Definition
+
+DELETE removes rows from a table.
+
+Syntax
+DELETE FROM Employee
+WHERE EmployeeID=101;
+Output
+
+Employee 101 is removed.
+
+
+DELETE vs TRUNCATE
+DELETE	TRUNCATE
+WHERE allowed	WHERE not allowed
+Deletes selected rows	Deletes all rows
+Slower	Faster
+Logs each row	Minimal logging
+Structure remains	Structure remains
+
+
+Frequently Asked Interview Questions
+What is DML?
+Which commands belong to DML?
+Difference between DDL and DML?
+Difference between DELETE and TRUNCATE?
+Difference between DELETE and DROP?
+What happens if UPDATE runs without WHERE?
+What happens if DELETE runs without WHERE?
+Why specify column names in INSERT?
+Can INSERT add multiple rows?
+What is MERGE?
+Why is MERGE used?
+What are the advantages of MERGE?
+Can MERGE perform INSERT and UPDATE together?
+What is the ON clause in MERGE?
+What is WHEN MATCHED?
+What is WHEN NOT MATCHED?
+What is WHEN NOT MATCHED BY SOURCE?
+When is MERGE commonly used?
+Which command updates existing data?
+Which command removes specific rows?
+
+
+What is DQL?
+
+DQL (Data Query Language) is used to retrieve data from database tables.
+
+The most important DQL command is:
+
+SELECT
+
+Almost every SQL interview starts with SELECT-based questions.
+
+Topic 1 – SELECT Statement
+Definition
+
+SELECT retrieves data from one or more tables.
+
+Syntax
+SELECT column_name
+FROM table_name;
+Example
+SELECT *
+FROM Employee;
+Output
+
+Returns all rows and all columns.
+
+Select Specific Columns
+SELECT EmployeeName,
+       Salary
+FROM Employee;
+
+
+Difference between
+SELECT *
+
+and
+
+SELECT EmployeeName, Salary
+Answer
+
+SELECT * retrieves every column.
+
+Selecting only required columns improves performance, reduces network traffic, and improves readability.
+
+T
+
+DISTINCT removes duplicate values.
+
+Example
+
+SELECT DISTINCT Department
+FROM Employee;
+
+Output
+
+Department
+IT
+HR
+Finance
+Sales
+
+Without DISTINCT
+
+IT
+HR
+Finance
+IT
+Sales
+IT
+Finance
+HR
+Interview Question
+
+
+Can DISTINCT remove duplicate rows?
+
+Yes.
+
+DISTINCT returns unique combinations of the selected columns.
+
+
+TOP
+
+(SQL Server)
+
+Returns the first N rows.
+
+SELECT TOP 5 *
+FROM Employee;
+
+Highest-paid employees
+
+SELECT TOP 3 *
+FROM Employee
+ORDER BY Salary DESC;
+
+
+Can TOP be used without ORDER BY?
+
+Yes.
+
+But the returned rows are not guaranteed to be in any meaningful order.
+
+Topic 4 – WHERE Clause
+Definition
+
+Filters rows based on conditions.
+
+Syntax
+SELECT *
+FROM Employee
+WHERE Department='IT';
+
+Multiple Conditions
+SELECT *
+FROM Employee
+WHERE Salary>60000;
+SELECT *
+FROM Employee
+WHERE Experience>=5;
+Interview Question
+
+Which clause filters rows?
+
+Answer:
+
+WHERE
+
+Topic 5 – ORDER BY
+
+Sorts data.
+
+
+Arithmetic Expressions
+SELECT EmployeeName,
+       Salary,
+       Salary*12 AS AnnualSalary
+FROM Employee;
+
+Topic 8 – Logical Operators
+AND
+SELECT *
+FROM Employee
+WHERE Department='IT'
+AND Salary>60000;
+
+
+Topic 10 – SQL Query Execution Order
+
+Many candidates think SQL executes queries from top to bottom.
+
+That is incorrect.
+
+Logical execution order is:
+
+FROM
+↓
+WHERE
+↓
+GROUP BY
+↓
+HAVING
+↓
+SELECT
+↓
+DISTINCT
+↓
+ORDER BY
+↓
+TOP/LIMIT
+
+
+Frequently Asked Interview Questions
+What is DQL?
+What is SELECT?
+Difference between SELECT * and selecting specific columns?
+What is DISTINCT?
+Does DISTINCT remove duplicate rows?
+What is TOP?
+Difference between TOP and LIMIT?
+What is ORDER BY?
+Difference between ASC and DESC?
+What is WHERE?
+Difference between WHERE and HAVING?
+What is an alias?
+Can aliases be used in ORDER BY?
+What is the default sort order?
+What is the SQL query execution order?
+Can TOP be used without ORDER BY?
+What are comparison operators?
+What are logical operators?
+Why should SELECT * be avoided in production?
+How do you retrieve only unique values?
+
+
+SQL Operators Overview
+Operator Type	Examples
+Arithmetic	+, -, *, /, %
+Comparison	=, >, <, >=, <=, <>
+Logical	AND, OR, NOT
+Special	IN, BETWEEN, LIKE, EXISTS, ANY, ALL, IS NULL
+
+
+Topic 1 – IN Operator
+What is IN?
+
+The IN operator checks whether a value exists in a specified list.
+
+Instead of writing multiple OR conditions, use IN.
+
+SELECT *
+FROM Employee
+WHERE Department IN ('IT','HR');
+
+Interview Question
+
+Which is better: IN or multiple OR conditions?
+
+Answer:
+
+IN is easier to read and maintain when comparing one column against multiple values.
+
+Topic 2 – NOT IN
+
+Returns records not matching the given list.
+
+SELECT *
+FROM Employee
+WHERE Department NOT IN ('IT','HR');
+
+Output
+
+Sales
+
+Finance
+
+Marketing
+
+Real-Time Example
+
+Display employees who do not belong to the IT department.
+
+Topic 3 – BETWEEN
+
+Used to retrieve values within a range.
+
+Syntax
+SELECT *
+FROM Employee
+WHERE Salary BETWEEN 50000 AND 70000;
+
+Output
+
+Name	Salary
+John	65000
+Peter	60000
+Mary	55000
+Robert	62000
+Date Example
+SELECT *
+FROM Orders
+WHERE OrderDate
+BETWEEN '2026-01-01'
+AND '2026-12-31';
+Important
+
+BETWEEN includes both boundary values.
+
+Example
+
+BETWEEN 10 AND 20
+
+Returns
+
+10
+
+11
+
+12
+
+...
+
+20
+Interview Question
+
+Is BETWEEN inclusive?
+
+Answer
+
+Yes.
+
+Topic 4 – NOT BETWEEN
+SELECT *
+FROM Employee
+WHERE Salary NOT BETWEEN 50000 AND 70000;
+
+Returns employees earning below 50000 or above 70000.
+
+Topic 5 – LIKE Operator
+
+Used for pattern matching.
+
+Wildcards
+Wildcard	Meaning
+%	Any number of characters
+_	Exactly one character
+Starts With
+SELECT *
+FROM Employee
+WHERE EmployeeName LIKE 'J%';
+
+Returns
+
+John
+
+James
+
+Ends With
+SELECT *
+FROM Employee
+WHERE EmployeeName LIKE '%a';
+Contains
+SELECT *
+FROM Employee
+WHERE EmployeeName LIKE '%ar%';
+
+Returns
+
+Mary
+
+One Character
+SELECT *
+FROM Employee
+WHERE EmployeeName LIKE '_ohn';
+
+Returns
+
+John
+
+SQL Server Pattern Matching
+
+Starts with A, B or C
+
+SELECT *
+FROM Employee
+WHERE EmployeeName LIKE '[ABC]%';
+
+Not A, B or C
+
+SELECT *
+FROM Employee
+WHERE EmployeeName LIKE '[^ABC]%';
+Interview Question
+
+Difference between % and _?
+
+%	_
+Zero or more characters	Exactly one character
+Topic 6 – IS NULL
+
+NULL means unknown or missing value.
+
+Example
+
+SELECT *
+FROM Employee
+WHERE ManagerID IS NULL;
+IS NOT NULL
+SELECT *
+FROM Employee
+WHERE ManagerID IS NOT NULL;
+Interview Question
+
+Can we write
+
+WHERE ManagerID = NULL;
+
+Answer
+
+No.
+
+Always use:
+
+IS NULL
+
+or
+
+IS NOT NULL
+Topic 7 – EXISTS
+
+Checks whether a subquery returns at least one row.
+
+Example
+
+SELECT *
+FROM Department D
+WHERE EXISTS
+(
+SELECT 1
+FROM Employee E
+WHERE E.Department = D.DepartmentName
+);
+
+Meaning
+
+Show departments that have employees.
+
+Topic 8 – NOT EXISTS
+
+Returns rows when the subquery returns no records.
+
+Example
+
+SELECT *
+FROM Department D
+WHERE NOT EXISTS
+(
+SELECT 1
+FROM Employee E
+WHERE E.Department = D.DepartmentName
+);
+
+Meaning
+
+Show departments with no employees.
+
+Interview Question
+
+Difference between EXISTS and IN?
+
+EXISTS	IN
+Uses subqueries	Uses values or subqueries
+Stops after first match	Evaluates the full set
+Often better for correlated subqueries	Simpler for small lists
+Topic 9 – ANY Operator
+
+Compare against at least one value.
+
+Example
+
+SELECT *
+FROM Employee
+WHERE Salary >
+ANY
+(
+SELECT Salary
+FROM Employee
+WHERE Department='HR'
+);
+
+Meaning
+
+Return employees whose salary is greater than at least one HR employee's salary.
+
+Topic 10 – ALL Operator
+
+Compare against every value.
+
+Example
+
+SELECT *
+FROM Employee
+WHERE Salary >
+ALL
+(
+SELECT Salary
+FROM Employee
+WHERE Department='HR'
+);
+
+Meaning
+
+Return employees whose salary is greater than every HR employee's salary.
+
+Interview Question
+
+Difference between ANY and ALL?
+
+ANY	ALL
+At least one value	Every value
+Topic 11 – Operator Precedence
+
+SQL evaluates conditions in this order:
+
+()
+NOT
+AND
+OR
+
+Example
+
+SELECT *
+FROM Employee
+WHERE Department='IT'
+OR Department='HR'
+AND Salary>50000;
+
+Actual evaluation
+
+Department='IT'
+
+OR
+
+(
+Department='HR'
+AND Salary>50000
+)
+
+Correct way
+
+SELECT *
+FROM Employee
+WHERE
+(
+Department='IT'
+OR Department='HR'
+)
+AND Salary>50000;
+Real-Time Business Scenarios
+Scenario 1
+
+Find employees from IT, HR, and Finance.
+
+SELECT *
+FROM Employee
+WHERE Department IN ('IT','HR','Finance');
+Scenario 2
+
+Find employees earning between 60000 and 90000.
+
+SELECT *
+FROM Employee
+WHERE Salary BETWEEN 60000 AND 90000;
+Scenario 3
+
+Find employees whose names start with S.
+
+SELECT *
+FROM Employee
+WHERE EmployeeName LIKE 'S%';
+Scenario 4
+
+Find employees without a manager.
+
+SELECT *
+FROM Employee
+WHERE ManagerID IS NULL;
+Scenario 5
+
+Display departments that have employees.
+
+SELECT *
+FROM Department D
+WHERE EXISTS
+(
+SELECT 1
+FROM Employee E
+WHERE D.DepartmentName=E.Department
+);
+Common Interview Mistakes
+Mistake 1
+
+Using
+
+WHERE Department='IT'
+OR Department='HR'
+OR Department='Finance'
+
+Instead of
+
+WHERE Department IN ('IT','HR','Finance')
+Mistake 2
+
+Writing
+
+WHERE Salary >=50000
+AND Salary<=70000
+
+Instead of
+
+WHERE Salary BETWEEN 50000 AND 70000
+Mistake 3
+
+Using
+
+WHERE Name=NULL
+
+Instead of
+
+WHERE Name IS NULL
+Mistake 4
+
+Forgetting parentheses when mixing AND and OR.
+
+Hands-On Exercises
+Beginner
+Find all IT employees.
+Find employees from IT or HR.
+Find employees not in Finance.
+Find salaries between 50000 and 70000.
+Find names starting with J.
+Intermediate
+Find names ending with "a".
+Find names containing "ar".
+Find employees with NULL managers.
+Find employees with non-NULL managers.
+Find employees from Chennai or Bangalore.
+Advanced
+Use EXISTS to find departments with employees.
+Use NOT EXISTS to find empty departments.
+Compare salaries using ANY.
+Compare salaries using ALL.
+Rewrite OR conditions using IN.
+Coding Challenges
+Challenge 1
+
+Find employees working in IT, HR, or Sales.
+
+Challenge 2
+
+Find employees whose salaries are not between 50000 and 80000.
+
+Challenge 3
+
+Find employees whose names contain the letter "e".
+
+Challenge 4
+
+Display departments without employees.
+
+Challenge 5
+
+Find employees earning more than all HR employees.
+
+Frequently Asked Interview Questions
+What is the IN operator?
+Difference between IN and OR?
+What is BETWEEN?
+Is BETWEEN inclusive?
+What is LIKE?
+Difference between % and _?
+What is NULL?
+Difference between NULL and 0?
+Why can't we use = NULL?
+What is EXISTS?
+Difference between EXISTS and IN?
+What is NOT EXISTS?
+What is ANY?
+What is ALL?
+Difference between ANY and ALL?
+What is operator precedence?
+Why use parentheses with AND/OR?
+Can LIKE be used with numbers?
+When would you use NOT IN?
+What are SQL wildcards?
+
+
+Find employees whose names start with "A" and end with "n".
+
+SELECT *
+FROM Employee
+WHERE EmployeeName LIKE 'A%n';
+
+Display employees whose salaries are greater than all employees in the HR department.
+
+SELECT *
+FROM Employee
+WHERE Salary >
+ALL
+(
+SELECT Salary
+FROM Employee
+WHERE Department='HR'
+);
+
+Find departments that have no employees.
+
+SELECT *
+FROM Department D
+WHERE NOT EXISTS
+(
+SELECT 1
+FROM Employee E
+WHERE E.Department=D.DepartmentName
+);
+
+What are SQL Functions?
+
+A SQL Function is a predefined function that performs a specific operation on data and returns a value.
+
+Functions help us:
+
+Manipulate text
+Perform mathematical calculations
+Work with dates
+Handle NULL values
+Convert data types
+Perform aggregation
+Types of SQL Functions
+Function Type	Purpose
+String Functions	Manipulate text
+Numeric Functions	Mathematical calculations
+Date Functions	Work with dates and time
+Aggregate Functions	Perform calculations on multiple rows
+Conversion Functions	Convert one data type to another
+NULL Functions	Handle NULL values
+Sample Employee Table
+EmployeeID	EmployeeName	Department	Salary	JoiningDate	Bonus
+101	John Smith	IT	65000	2022-01-15	5000
+102	David Roy	HR	45000	2023-05-20	NULL
+103	Lisa John	Finance	75000	2021-11-01	7000
+104	Peter Paul	IT	60000	2024-02-10	NULL
+105	Mary Jane	Sales	55000	2020-09-05	6000
+PART 1 – STRING FUNCTIONS
+1. UPPER()
+
+Converts text into uppercase.
+
+SELECT UPPER(EmployeeName)
+FROM Employee;
+
+Output
+
+EmployeeName
+JOHN SMITH
+DAVID ROY
+2. LOWER()
+
+Converts text into lowercase.
+
+SELECT LOWER(EmployeeName)
+FROM Employee;
+3. LEN()
+
+Returns the number of characters.
+
+SELECT EmployeeName,
+LEN(EmployeeName) AS Length
+FROM Employee;
+
+Output
+
+EmployeeName	Length
+John Smith	10
+Interview Question
+
+Difference between LEN() and DATALENGTH()?
+
+LEN()	DATALENGTH()
+Returns character count	Returns bytes used
+4. LEFT()
+
+Returns characters from the left.
+
+SELECT LEFT(EmployeeName,4)
+FROM Employee;
+
+Output
+
+John
+
+5. RIGHT()
+SELECT RIGHT(EmployeeName,5)
+FROM Employee;
+
+Output
+
+Smith
+
+6. SUBSTRING()
+SELECT SUBSTRING(EmployeeName,6,5)
+FROM Employee;
+
+Output
+
+Smith
+
+7. REPLACE()
+SELECT REPLACE(EmployeeName,'John','Jonathan')
+FROM Employee;
+8. CONCAT()
+SELECT CONCAT(EmployeeName,' - ',Department)
+FROM Employee;
+
+Output
+
+John Smith - IT
+
+9. TRIM()
+
+Removes leading and trailing spaces.
+
+SELECT TRIM('   SQL Interview   ');
+
+Output
+
+SQL Interview
+10. REVERSE()
+SELECT REVERSE(EmployeeName)
+FROM Employee;
+11. CHARINDEX()
+
+Finds the position of a string.
+
+SELECT CHARINDEX('Smith',EmployeeName);
+Real-Time Scenario
+
+Generate Employee Code
+
+SELECT CONCAT(
+'EMP',
+RIGHT(EmployeeID,3)
+)
+FROM Employee;
+
+Output
+
+EMP101
+
+PART 2 – NUMERIC FUNCTIONS
+ABS()
+
+Returns absolute value.
+
+SELECT ABS(-250);
+
+Output
+
+250
+
+ROUND()
+SELECT ROUND(4567.8976,2);
+
+Output
+
+4567.90
+
+CEILING()
+
+Rounds upward.
+
+SELECT CEILING(25.10);
+
+Output
+
+26
+
+FLOOR()
+
+Rounds downward.
+
+SELECT FLOOR(25.99);
+
+Output
+
+25
+
+POWER()
+SELECT POWER(5,3);
+
+Output
+
+125
+
+SQRT()
+SELECT SQRT(64);
+
+Output
+
+8
+
+RAND()
+SELECT RAND();
+
+Returns a random number between 0 and 1.
+
+PART 3 – DATE FUNCTIONS
+GETDATE()
+
+Returns current date and time.
+
+SELECT GETDATE();
+YEAR()
+SELECT YEAR(GETDATE());
+MONTH()
+SELECT MONTH(GETDATE());
+DAY()
+SELECT DAY(GETDATE());
+DATEADD()
+
+Add 30 days.
+
+SELECT DATEADD(DAY,30,GETDATE());
+DATEDIFF()
+
+Difference between two dates.
+
+SELECT DATEDIFF
+(
+DAY,
+'2025-01-01',
+'2025-01-31'
+);
+
+Output
+
+30
+
+EOMONTH()
+
+Returns the last day of the month.
+
+SELECT EOMONTH(GETDATE());
+Real-Time Example
+
+Find employees who joined in the last 365 days.
+
+SELECT *
+FROM Employee
+WHERE JoiningDate >= DATEADD(DAY,-365,GETDATE());
+PART 4 – AGGREGATE FUNCTIONS
+
+Aggregate functions operate on multiple rows and return a single value.
+
+COUNT()
+SELECT COUNT(*)
+FROM Employee;
+
+Output
+
+5
+
+SUM()
+SELECT SUM(Salary)
+FROM Employee;
+AVG()
+SELECT AVG(Salary)
+FROM Employee;
+MIN()
+SELECT MIN(Salary)
+FROM Employee;
+MAX()
+SELECT MAX(Salary)
+FROM Employee;
+Real-Time Scenario
+
+HR wants to know:
+
+Total Employees
+Total Salary
+Average Salary
+Highest Salary
+Lowest Salary
+SELECT
+COUNT(*) AS TotalEmployees,
+SUM(Salary) AS TotalSalary,
+AVG(Salary) AS AverageSalary,
+MIN(Salary) AS LowestSalary,
+MAX(Salary) AS HighestSalary
+FROM Employee;
+PART 5 – NULL FUNCTIONS
+ISNULL() (SQL Server)
+
+Replace NULL values.
+
+SELECT
+EmployeeName,
+ISNULL(Bonus,0) AS Bonus
+FROM Employee;
+
+Output
+
+Employee	Bonus
+David Roy	0
+COALESCE()
+
+Returns the first non-NULL value.
+
+SELECT
+COALESCE
+(
+Bonus,
+Salary,
+0
+)
+FROM Employee;
+ISNULL vs COALESCE
+ISNULL()	COALESCE()
+SQL Server specific	ANSI SQL standard
+Accepts 2 arguments	Accepts multiple arguments
+PART 6 – CONVERSION FUNCTIONS
+CAST()
+SELECT
+CAST(125.75 AS INT);
+
+Output
+
+125
+
+CONVERT()
+SELECT
+CONVERT
+(
+VARCHAR,
+GETDATE(),
+103
+);
+
+Output
+
+27/07/2026
+TRY_CAST()
+
+Returns NULL if conversion fails.
+
+SELECT TRY_CAST('ABC' AS INT);
+
+Output
+
+NULL
+
+SQL Function Execution Order Example
+SELECT
+UPPER(EmployeeName),
+ROUND(Salary,0),
+YEAR(JoiningDate)
+FROM Employee;
+
+Output
+
+Employee	Salary	Year
+JOHN SMITH	65000	2022
+Common Interview Mistakes
+Mistake 1
+
+Using COUNT(column) instead of COUNT(*) when counting all rows.
+
+Remember:
+
+COUNT(*) counts all rows.
+COUNT(column) ignores NULL values.
+Mistake 2
+
+Using = to compare NULL values.
+
+Wrong
+
+WHERE Bonus = NULL
+
+Correct
+
+WHERE Bonus IS NULL
+Mistake 3
+
+Confusing ROUND(), CEILING(), and FLOOR().
+
+Function	Result for 25.6
+ROUND(25.6,0)	26
+CEILING(25.6)	26
+FLOOR(25.6)	25
+Mistake 4
+
+Using CONVERT() styles incorrectly.
+
+Always verify the required date format style code.
+
+Hands-On Exercises
+Beginner
+Convert employee names to uppercase.
+Display employee names in lowercase.
+Find the length of each employee name.
+Display the first three characters of each name.
+Display the last four characters of each name.
+Intermediate
+Replace "John" with "Jonathan".
+Concatenate employee name and department.
+Find employees who joined this year.
+Display the last day of the current month.
+Display salaries rounded to the nearest whole number.
+Advanced
+Find total salary by department.
+Display average salary for employees with a bonus.
+Replace NULL bonuses with 0.
+Convert the current date to dd/mm/yyyy format.
+Calculate the number of days each employee has worked.
+Coding Challenges
+Challenge 1
+
+Generate employee IDs in the format EMP001, EMP002, etc.
+
+Challenge 2
+
+Display employees who joined within the last two years.
+
+Challenge 3
+
+Calculate a 10% salary increment for each employee.
+
+Challenge 4
+
+Replace NULL bonuses with 5% of salary using COALESCE().
+
+Challenge 5
+
+Display the employee with the longest name.
+
+Frequently Asked Interview Questions
+What are SQL functions?
+What are scalar functions?
+What are aggregate functions?
+Difference between COUNT(*) and COUNT(column)?
+Difference between ISNULL() and COALESCE()?
+Difference between CAST() and CONVERT()?
+Difference between LEN() and DATALENGTH()?
+Difference between ROUND(), CEILING(), and FLOOR()?
+What does DATEADD() do?
+What does DATEDIFF() do?
+What is EOMONTH()?
+What does UPPER() return?
+What does SUBSTRING() do?
+How is CHARINDEX() used?
+How do you concatenate strings in SQL?
+How do aggregate functions handle NULL values?
+Which function returns the current date and time in SQL Server?
+What is the purpose of TRY_CAST()?
+Which function returns the first non-NULL value?
+Which functions are most commonly used in ETL pipelines?
+
+
+What is GROUP BY?
+
+The GROUP BY clause groups rows having the same values into summary groups.
+
+It is commonly used with aggregate functions such as:
+
+COUNT()
+SUM()
+AVG()
+MIN()
+MAX()
+Why Do We Use GROUP BY?
+
+Imagine a company has 10,000 employees.
+
+Management asks:
+
+How many employees are in each department?
+What is the average salary by department?
+Which department has the highest salary expense?
+
+Instead of calculating manually, GROUP BY provides summarized results.
+
+Sample Employee Table
+EmployeeID	EmployeeName	Department	City	Salary	Experience
+101	John	IT	Chennai	65000	5
+102	David	HR	Bangalore	45000	2
+103	Lisa	Finance	Hyderabad	75000	6
+104	Peter	IT	Chennai	60000	4
+105	Mary	Sales	Mumbai	55000	3
+106	Steve	IT	Pune	85000	8
+107	James	Finance	Delhi	72000	5
+108	Nancy	HR	Chennai	50000	3
+109	Robert	Marketing	Hyderabad	62000	4
+110	Emma	IT	Bangalore	90000	10
+SQL Logical Execution Order
+
+Many interviewers ask this question.
+
+SQL executes in this order:
+
+FROM
+↓
+WHERE
+↓
+GROUP BY
+↓
+HAVING
+↓
+SELECT
+↓
+ORDER BY
+Topic 1 – GROUP BY
+Syntax
+SELECT Department,
+       COUNT(*) AS EmployeeCount
+FROM Employee
+GROUP BY Department;
+Output
+Department	EmployeeCount
+IT	4
+HR	2
+Finance	2
+Sales	1
+Marketing	1
+Interview Question
+
+Why is GROUP BY used?
+
+Answer
+
+It groups rows with identical values and returns one summary row per group.
+
+Topic 2 – GROUP BY with SUM()
+
+Find total salary by department.
+
+SELECT Department,
+       SUM(Salary) AS TotalSalary
+FROM Employee
+GROUP BY Department;
+Output
+Department	TotalSalary
+IT	300000
+HR	95000
+Finance	147000
+Sales	55000
+Marketing	62000
+Real-Time Scenario
+
+The Finance department wants to know how much salary is paid to each department every month.
+
+GROUP BY with SUM() solves this requirement.
+
+Topic 3 – GROUP BY with AVG()
+
+Average salary.
+
+SELECT Department,
+       AVG(Salary) AS AverageSalary
+FROM Employee
+GROUP BY Department;
+Output
+Department	AverageSalary
+IT	75000
+HR	47500
+Finance	73500
+Sales	55000
+Marketing	62000
+Topic 4 – GROUP BY with MIN() and MAX()
+SELECT Department,
+       MIN(Salary) AS LowestSalary,
+       MAX(Salary) AS HighestSalary
+FROM Employee
+GROUP BY Department;
+Output
+Department	LowestSalary	HighestSalary
+IT	60000	90000
+HR	45000	50000
+Finance	72000	75000
+Topic 5 – Multiple Columns in GROUP BY
+
+Group by Department and City.
+
+SELECT Department,
+       City,
+       COUNT(*) AS Employees
+FROM Employee
+GROUP BY Department, City;
+Output
+Department	City	Employees
+IT	Chennai	2
+IT	Pune	1
+IT	Bangalore	1
+HR	Chennai	1
+HR	Bangalore	1
+Interview Question
+
+Can GROUP BY have multiple columns?
+
+Answer
+
+Yes.
+
+Rows are grouped based on the unique combination of all specified columns.
+
+Topic 6 – HAVING Clause
+What is HAVING?
+
+HAVING filters grouped data.
+
+WHERE filters individual rows.
+
+HAVING filters groups.
+
+Example
+
+Departments with more than two employees.
+
+SELECT Department,
+       COUNT(*) AS EmployeeCount
+FROM Employee
+GROUP BY Department
+HAVING COUNT(*) > 2;
+Output
+Department	EmployeeCount
+IT	4
+WHERE vs HAVING
+WHERE	HAVING
+Filters rows	Filters groups
+Before GROUP BY	After GROUP BY
+Cannot use aggregate functions directly	Can use aggregate functions
+Example
+WHERE
+SELECT *
+FROM Employee
+WHERE Salary > 60000;
+HAVING
+SELECT Department,
+       AVG(Salary) AS AvgSalary
+FROM Employee
+GROUP BY Department
+HAVING AVG(Salary) > 70000;
+Interview Question
+
+Why can't aggregate functions normally be used in WHERE?
+
+Answer
+
+Because WHERE executes before grouping and aggregation.
+
+Aggregate values do not exist at that stage.
+
+Topic 7 – GROUP BY with WHERE
+
+Employees having salary above 50000.
+
+SELECT Department,
+       COUNT(*) AS EmployeeCount
+FROM Employee
+WHERE Salary > 50000
+GROUP BY Department;
+
+Execution:
+
+Step 1 → FROM
+Step 2 → WHERE
+Step 3 → GROUP BY
+Step 4 → SELECT
+Step 5 → ORDER BY
+Topic 8 – GROUP BY with ORDER BY
+SELECT Department,
+       AVG(Salary) AS AvgSalary
+FROM Employee
+GROUP BY Department
+ORDER BY AvgSalary DESC;
+Output
+Department	AvgSalary
+IT	75000
+Finance	73500
+Marketing	62000
+Sales	55000
+HR	47500
+Topic 9 – ROLLUP
+
+ROLLUP generates subtotal rows and a grand total.
+
+SELECT Department,
+       SUM(Salary) AS TotalSalary
+FROM Employee
+GROUP BY ROLLUP(Department);
+Output
+Department	TotalSalary
+Finance	147000
+HR	95000
+IT	300000
+Marketing	62000
+Sales	55000
+NULL (Grand Total)	659000
+Real-Time Example
+
+Monthly sales report:
+
+Sales by region
+Grand total sales
+Topic 10 – CUBE
+
+CUBE generates every possible subtotal combination.
+
+SELECT Department,
+       City,
+       SUM(Salary) AS TotalSalary
+FROM Employee
+GROUP BY CUBE(Department, City);
+Produces
+Department totals
+City totals
+Department + City totals
+Grand total
+Real-Time Example
+
+A retail company wants:
+
+Sales by city
+Sales by department
+Sales by city and department
+Overall sales
+Topic 11 – GROUPING SETS
+
+Generate only required grouping combinations.
+
+SELECT Department,
+       City,
+       SUM(Salary) AS TotalSalary
+FROM Employee
+GROUP BY GROUPING SETS
+(
+(Department),
+(City),
+(Department, City),
+()
+);
+Advantage
+
+Unlike CUBE, GROUPING SETS returns only the specified groupings, making reports more efficient.
+
+GROUP BY Interview Flow Diagram
+Employee Table
+      │
+      ▼
+GROUP BY Department
+      │
+      ▼
+Create Groups
+      │
+      ▼
+Apply Aggregate Functions
+      │
+      ▼
+Apply HAVING Filter
+      │
+      ▼
+Display Result
+Real-Time Business Scenarios
+Scenario 1
+
+Find the total salary paid to each department.
+
+SELECT Department,
+       SUM(Salary)
+FROM Employee
+GROUP BY Department;
+Scenario 2
+
+Find the average salary by city.
+
+SELECT City,
+       AVG(Salary)
+FROM Employee
+GROUP BY City;
+Scenario 3
+
+Find departments having more than three employees.
+
+SELECT Department,
+       COUNT(*)
+FROM Employee
+GROUP BY Department
+HAVING COUNT(*) > 3;
+Scenario 4
+
+Display the highest salary in each department.
+
+SELECT Department,
+       MAX(Salary)
+FROM Employee
+GROUP BY Department;
+Scenario 5
+
+Generate a salary summary with subtotals and a grand total.
+
+Use ROLLUP.
+
+Common Interview Mistakes
+Mistake 1
+
+Selecting non-grouped columns.
+
+Incorrect:
+
+SELECT Department,
+       EmployeeName,
+       SUM(Salary)
+FROM Employee
+GROUP BY Department;
+
+Why incorrect?
+
+EmployeeName is neither grouped nor aggregated.
+
+Correct
+SELECT Department,
+       SUM(Salary)
+FROM Employee
+GROUP BY Department;
+Mistake 2
+
+Using HAVING instead of WHERE.
+
+Wrong:
+
+HAVING Salary > 50000
+
+Better:
+
+WHERE Salary > 50000
+
+Use WHERE for row filtering before grouping whenever possible.
+
+Mistake 3
+
+Using WHERE with aggregate functions.
+
+Incorrect:
+
+WHERE AVG(Salary) > 60000
+
+Correct:
+
+HAVING AVG(Salary) > 60000
+Hands-on Exercises
+Beginner
+Count employees in each department.
+Find the total salary by department.
+Find the average salary by city.
+Display the highest salary in each department.
+Display the lowest salary by department.
+Intermediate
+Count employees by department and city.
+Display departments having more than two employees.
+Display cities with average salary above 60000.
+Sort departments by total salary.
+Display department-wise minimum and maximum salary.
+Advanced
+Generate department subtotals using ROLLUP.
+Generate all combinations using CUBE.
+Create a report using GROUPING SETS.
+Compare WHERE and HAVING in one query.
+Find the department with the highest average salary.
+Coding Challenges
+Challenge 1
+
+Find departments where the average salary is greater than 70000.
+
+Challenge 2
+
+Display the top three departments based on total salary.
+
+Challenge 3
+
+Find cities that have more than one employee.
+
+Challenge 4
+
+Generate a salary report with department subtotals and a grand total.
+
+Challenge 5
+
+Find departments where the highest salary exceeds 80000.
+
+Frequently Asked Interview Questions
+What is GROUP BY?
+Why do we use GROUP BY?
+Which functions are commonly used with GROUP BY?
+What is HAVING?
+Difference between WHERE and HAVING?
+Can HAVING be used without GROUP BY?
+Why can't aggregate functions usually be used in WHERE?
+What is ROLLUP?
+What is CUBE?
+Difference between ROLLUP and CUBE?
+What is GROUPING SETS?
+Can GROUP BY contain multiple columns?
+What happens if you select a column that isn't grouped or aggregated?
+What is the execution order of GROUP BY queries?
+Can ORDER BY be used with GROUP BY?
+Which clause executes first: WHERE or GROUP BY?
+Which clause executes first: HAVING or ORDER BY?
+How do you count employees by department?
+How do you find the department with the highest average salary?
+When should you prefer WHERE over HAVING?
+Top MNC Scenario Questions
+TCS
+
+Display the total salary paid by each department.
+
+SELECT Department,
+       SUM(Salary) AS TotalSalary
+FROM Employee
+GROUP BY Department;
+Infosys
+
+Find departments with an average salary greater than 70000.
+
+SELECT Department,
+       AVG(Salary) AS AverageSalary
+FROM Employee
+GROUP BY Department
+HAVING AVG(Salary) > 70000;
+Cognizant
+
+Find the city with the maximum number of employees.
+
+SELECT TOP 1 City,
+       COUNT(*) AS EmployeeCount
+FROM Employee
+GROUP BY City
+ORDER BY EmployeeCount DESC;
+
+
+What is a JOIN?
+
+A JOIN combines rows from two or more tables based on a related column.
+
+Topic 1 – INNER JOIN
+Definition
+
+Returns only matching rows from both tables.
+
+Syntax
+SELECT
+E.EmployeeName,
+D.DepartmentName
+FROM Employee E
+INNER JOIN Department D
+ON E.DepartmentID = D.DepartmentID;
+Output
+Employee	Department
+John	IT
+David	HR
+Lisa	Finance
+Peter	IT
+Mary	Sales
+Visualization
+Employee        Department
+
+John ------> IT
+David -----> HR
+Lisa ------> Finance
+
+Only Matching Records
+Real-Time Scenario
+
+An HR manager wants to generate an employee report showing employee names with department names.
+
+Use INNER JOIN.
+
+Topic 2 – LEFT JOIN
+Definition
+
+Returns:
+
+All rows from the left table
+Matching rows from the right table
+NULL where no match exists
+Example
+
+Suppose Employee table contains:
+
+Employee	DepartmentID
+John	1
+David	2
+Alex	10
+
+DepartmentID 10 doesn't exist.
+
+SELECT
+E.EmployeeName,
+D.DepartmentName
+FROM Employee E
+LEFT JOIN Department D
+ON E.DepartmentID=D.DepartmentID;
+Output
+Employee	Department
+John	IT
+David	HR
+Alex	NULL
+Interview Question
+
+Why is Alex shown?
+
+Because LEFT JOIN always returns all rows from the left table.
+
+Topic 3 – RIGHT JOIN
+
+Returns
+
+All rows from the right table
+Matching rows from the left table
+
+Example
+
+Department table contains Marketing but no employees.
+
+Output
+
+Department	Employee
+Marketing	NULL
+SELECT
+D.DepartmentName,
+E.EmployeeName
+FROM Employee E
+RIGHT JOIN Department D
+ON E.DepartmentID=D.DepartmentID;
+Topic 4 – FULL OUTER JOIN
+
+Returns
+
+All rows from both tables
+Matching rows
+Non-matching rows with NULL values
+SELECT
+E.EmployeeName,
+D.DepartmentName
+FROM Employee E
+FULL OUTER JOIN Department D
+ON E.DepartmentID=D.DepartmentID;
+Visualization
+Employee          Department
+
+John ------- IT
+
+David ------ HR
+
+Alex ------- NULL
+
+NULL ------- Marketing
+Topic 5 – CROSS JOIN
+
+Returns every possible combination.
+
+Formula
+
+Rows Returned
+
+=
+
+Rows in Table A
+
+×
+
+Rows in Table B
+
+Example
+
+Employee
+
+5 rows
+
+Department
+
+4 rows
+
+Output
+
+20 rows
+
+SELECT *
+FROM Employee
+CROSS JOIN Department;
+Real-Time Example
+
+Generate:
+
+Product × Color
+Product × Size
+Calendar × Employees
+Topic 6 – SELF JOIN
+
+A table joins with itself.
+
+Employee Table
+EmployeeID	EmployeeName	ManagerID
+101	John	NULL
+102	David	101
+103	Lisa	101
+104	Peter	102
+Query
+SELECT
+E.EmployeeName,
+M.EmployeeName AS Manager
+FROM Employee E
+LEFT JOIN Employee M
+ON E.ManagerID=M.EmployeeID;
+Output
+Employee	Manager
+John	NULL
+David	John
+Lisa	John
+Peter	David
+Real-Time Scenario
+
+Organization chart.
+
+Employee → Manager
+
+Topic 7 – Multiple Table JOIN
+
+Three tables.
+
+Employee
+
+Department
+
+Location
+
+SELECT
+E.EmployeeName,
+D.DepartmentName,
+L.City
+FROM Employee E
+JOIN Department D
+ON E.DepartmentID=D.DepartmentID
+JOIN Location L
+ON D.LocationID=L.LocationID;
+SQL JOIN Execution Flow
+Employee Table
+
+↓
+
+Read Department Table
+
+↓
+
+Compare JOIN Condition
+
+↓
+
+Match Rows
+
+↓
+
+Generate Result
+
+↓
+
+Apply WHERE
+
+↓
+
+ORDER BY
+
+↓
+
+Display Result
+Join Execution Order
+FROM
+
+↓
+
+JOIN
+
+↓
+
+ON
+
+↓
+
+WHERE
+
+↓
+
+GROUP BY
+
+↓
+
+HAVING
+
+↓
+
+SELECT
+
+↓
+
+ORDER BY
+Difference Between JOIN Types
+INNER	LEFT	RIGHT	FULL
+Matching rows only	All left rows	All right rows	All rows
+Visual Comparison
+Employee           Department
+
+INNER
+
+✔ Matching only
+
+LEFT
+
+✔ Left All
+
+✔ Matching
+
+RIGHT
+
+✔ Right All
+
+✔ Matching
+
+FULL
+
+✔ Everything
+Real-Time Business Scenarios
+Banking
+
+Customer
+
+Account
+
+Find customer account details.
+
+Use
+
+INNER JOIN
+
+Hospital
+
+Patient
+
+Doctor
+
+Display patient doctor mapping.
+
+E-Commerce
+
+Orders
+
+Customers
+
+Products
+
+Multiple JOINs
+
+HR
+
+Employee
+
+Manager
+
+SELF JOIN
+
+Retail
+
+Products
+
+Sizes
+
+Colors
+
+CROSS JOIN
+
+Common Interview Mistakes
+Mistake 1
+
+Missing ON condition
+
+SELECT *
+FROM Employee
+JOIN Department;
+
+Produces an error (or behaves like a Cartesian product in some SQL dialects if written differently).
+
+Mistake 2
+
+Using LEFT JOIN instead of INNER JOIN.
+
+Produces unnecessary NULL rows.
+
+Mistake 3
+
+Wrong JOIN condition.
+
+ON EmployeeID=DepartmentID
+
+Instead of
+
+ON Employee.DepartmentID=Department.DepartmentID
+Mistake 4
+
+Using SELECT *
+
+Retrieve only required columns.
+
+Performance Tips
+1. Index Join Columns
+
+Example
+
+DepartmentID
+
+EmployeeID
+
+2. Filter Early
+SELECT
+E.EmployeeName,
+D.DepartmentName
+FROM Employee E
+INNER JOIN Department D
+ON E.DepartmentID=D.DepartmentID
+WHERE E.Salary > 60000;
+3. Avoid SELECT *
+
+Retrieve only required columns.
+
+4. Join Small Datasets First
+
+Useful in complex reporting queries.
+
+Hands-On Exercises
+Beginner
+Perform an INNER JOIN between Employee and Department.
+Display employee names with department names.
+Find employees without departments using LEFT JOIN.
+Find departments without employees using RIGHT JOIN.
+Perform a FULL OUTER JOIN.
+Intermediate
+Create an Employee–Manager report using SELF JOIN.
+Join three tables (Employee, Department, Location).
+Count employees by department after joining tables.
+Display employees earning more than 60000 with department names.
+Sort joined data by department.
+Advanced
+Find departments with no employees.
+Display all employees including those without departments.
+Compare INNER JOIN and LEFT JOIN outputs.
+Find orphan records using LEFT JOIN.
+Optimize a multi-table join query.
+Coding Challenges
+Challenge 1
+
+Find employees who do not belong to any department.
+
+Challenge 2
+
+Display every department even if no employees exist.
+
+Challenge 3
+
+Generate an employee-manager hierarchy.
+
+Challenge 4
+
+Join Employee, Department, and Location tables to produce a complete employee report.
+
+Challenge 5
+
+Write a query to identify departments that have never had employees.
+
+Frequently Asked Interview Questions
+What is a JOIN?
+Why are joins required?
+What is an INNER JOIN?
+Difference between INNER and LEFT JOIN?
+Difference between LEFT and RIGHT JOIN?
+What is a FULL OUTER JOIN?
+What is a CROSS JOIN?
+What is a SELF JOIN?
+What is a Cartesian product?
+Which join returns all rows from both tables?
+Which join returns only matching rows?
+Can multiple joins be used in one query?
+What is the purpose of the ON clause?
+Difference between ON and WHERE?
+How do you find unmatched records?
+How do you identify orphan records?
+What are foreign keys, and how do they relate to joins?
+How can indexes improve join performance?
+What is the logical execution order for joins?
+Which join is used to build employee-manager hierarchies?
+
+
+Top MNC Scenario Questions
+TCS
+
+Display employee names along with their department names.
+
+SELECT
+E.EmployeeName,
+D.DepartmentName
+FROM Employee E
+INNER JOIN Department D
+ON E.DepartmentID = D.DepartmentID;
+Infosys
+
+Find employees who are not assigned to any department.
+
+SELECT
+E.EmployeeName
+FROM Employee E
+LEFT JOIN Department D
+ON E.DepartmentID = D.DepartmentID
+WHERE D.DepartmentID IS NULL;
+Cognizant
+
+Display all departments, including those without employees.
+
+SELECT
+D.DepartmentName,
+E.EmployeeName
+FROM Department D
+LEFT JOIN Employee E
+ON D.DepartmentID = E.DepartmentID;
+Accenture
+
+Create an employee-manager hierarchy using a SELF JOIN.
+
+SELECT
+E.EmployeeName,
+M.EmployeeName AS Manager
+FROM Employee E
+LEFT JOIN Employee M
+ON E.ManagerID = M.EmployeeID;
+Persistent Systems
+
+A reporting system combines Employees, Departments, Projects, and Locations. Explain how you would design the joins, choose the appropriate join types, and optimize the query for performance.
+
+
+What is a Subquery?
+
+A Subquery is a query written inside another SQL query.
+
+It is also known as:
+
+Inner Query
+Nested Query
+Inner SELECT
+
+The outer query uses the result of the inner query.
+
+General Syntax
+SELECT column_name
+FROM table_name
+WHERE column_name OPERATOR
+(
+    SELECT column_name
+    FROM another_table
+);
+Execution Flow
+Outer Query
+
+↓
+
+Waits for
+
+↓
+
+Inner Query
+
+↓
+
+Inner Query Executes First
+
+↓
+
+Result Returned
+
+↓
+
+Outer Query Executes
+Sample Database
+Employee Table
+EmployeeID	EmployeeName	DepartmentID	Salary	ManagerID
+101	John	1	65000	201
+102	David	2	45000	202
+103	Lisa	3	75000	201
+104	Peter	1	60000	203
+105	Mary	4	55000	202
+106	Steve	1	85000	201
+107	James	3	72000	203
+108	Nancy	2	50000	202
+Department Table
+DepartmentID	DepartmentName
+1	IT
+2	HR
+3	Finance
+4	Sales
+Types of Subqueries
+Type	Returns
+Single-row Subquery	One row
+Multiple-row Subquery	Multiple rows
+Correlated Subquery	Executes once per outer row
+Nested Subquery	Multiple levels
+Scalar Subquery	One value
+Inline View	Subquery in FROM clause
+Topic 1 – Single-Row Subquery
+Definition
+
+Returns exactly one row.
+
+Example
+
+Find employees earning more than the average salary.
+
+SELECT *
+FROM Employee
+WHERE Salary >
+(
+SELECT AVG(Salary)
+FROM Employee
+);
+Execution
+
+Step 1
+
+SELECT AVG(Salary)
+FROM Employee;
+
+Output
+
+63875
+
+Step 2
+
+Outer query becomes
+
+SELECT *
+FROM Employee
+WHERE Salary > 63875;
+Output
+Employee	Salary
+John	65000
+Lisa	75000
+Steve	85000
+James	72000
+Interview Question
+
+Why does this work?
+
+Because the subquery returns one value.
+
+Topic 2 – Multiple-Row Subquery
+
+Returns multiple rows.
+
+Example
+
+Find employees working in IT or Finance.
+
+SELECT *
+FROM Employee
+WHERE DepartmentID IN
+(
+SELECT DepartmentID
+FROM Department
+WHERE DepartmentName
+IN ('IT','Finance')
+);
+Inner Query Output
+1
+
+3
+
+Outer query
+
+WHERE DepartmentID IN (1,3)
+Topic 3 – Correlated Subquery
+Definition
+
+A correlated subquery depends on the outer query.
+
+It executes once for every row processed by the outer query.
+
+Example
+
+Employees earning more than the average salary of their own department.
+
+SELECT *
+FROM Employee E
+WHERE Salary >
+(
+SELECT AVG(Salary)
+FROM Employee
+WHERE DepartmentID = E.DepartmentID
+);
+Visualization
+Employee Row
+
+↓
+
+Find Department
+
+↓
+
+Calculate Department Average
+
+↓
+
+Compare Salary
+
+↓
+
+Return Row
+Real-Time Scenario
+
+Find employees performing better than the average employee in their own department.
+
+Interview Question
+
+Difference between normal and correlated subqueries?
+
+Normal	Correlated
+Executes once	Executes for every outer row
+Faster in many cases	Can be slower on large datasets
+Topic 4 – Nested Subquery
+
+Subquery inside another subquery.
+
+Example
+
+SELECT *
+FROM Employee
+WHERE DepartmentID =
+(
+SELECT DepartmentID
+FROM Department
+WHERE DepartmentName =
+(
+SELECT MAX(DepartmentName)
+FROM Department
+)
+);
+
+Nested execution
+
+Level 3
+
+↓
+
+Level 2
+
+↓
+
+Level 1
+Topic 5 – Scalar Subquery
+
+Returns exactly one value.
+
+Example
+
+Display every employee with company average salary.
+
+SELECT
+EmployeeName,
+Salary,
+(
+SELECT AVG(Salary)
+FROM Employee
+) AS CompanyAverage
+FROM Employee;
+
+Output
+
+Employee	Salary	CompanyAverage
+John	65000	63875
+Lisa	75000	63875
+Topic 6 – Subquery in FROM Clause (Inline View)
+SELECT *
+FROM
+(
+SELECT
+DepartmentID,
+AVG(Salary) AS AvgSalary
+FROM Employee
+GROUP BY DepartmentID
+) AS AvgDept
+WHERE AvgSalary > 60000;
+Output
+
+Departments with average salary greater than 60000.
+
+Topic 7 – EXISTS
+
+Returns TRUE if the subquery returns at least one row.
+
+Example
+
+Find departments having employees.
+
+SELECT *
+FROM Department D
+WHERE EXISTS
+(
+SELECT 1
+FROM Employee E
+WHERE D.DepartmentID=E.DepartmentID
+);
+Topic 8 – NOT EXISTS
+
+Departments without employees.
+
+SELECT *
+FROM Department D
+WHERE NOT EXISTS
+(
+SELECT 1
+FROM Employee E
+WHERE D.DepartmentID=E.DepartmentID
+);
+Topic 9 – IN vs EXISTS
+IN
+SELECT *
+FROM Employee
+WHERE DepartmentID IN
+(
+SELECT DepartmentID
+FROM Department
+);
+EXISTS
+SELECT *
+FROM Department D
+WHERE EXISTS
+(
+SELECT 1
+FROM Employee E
+WHERE D.DepartmentID=E.DepartmentID
+);
+Difference
+IN	EXISTS
+Compares values	Checks row existence
+Better for small result sets	Often better for correlated queries and large datasets
+Evaluates the returned values	Stops searching after the first match
+Topic 10 – ANY
+
+Greater than at least one value.
+
+SELECT *
+FROM Employee
+WHERE Salary >
+ANY
+(
+SELECT Salary
+FROM Employee
+WHERE DepartmentID=2
+);
+Topic 11 – ALL
+
+Greater than every value.
+
+SELECT *
+FROM Employee
+WHERE Salary >
+ALL
+(
+SELECT Salary
+FROM Employee
+WHERE DepartmentID=2
+);
+SQL Execution Order
+FROM
+
+↓
+
+WHERE
+
+↓
+
+Subquery Executes
+
+↓
+
+Outer Query Executes
+
+↓
+
+SELECT
+
+↓
+
+ORDER BY
+Real-Time Business Scenarios
+Scenario 1
+
+Employees earning more than the company average.
+
+SELECT *
+FROM Employee
+WHERE Salary >
+(
+SELECT AVG(Salary)
+FROM Employee
+);
+Scenario 2
+
+Employees working in the IT department.
+
+SELECT *
+FROM Employee
+WHERE DepartmentID IN
+(
+SELECT DepartmentID
+FROM Department
+WHERE DepartmentName='IT'
+);
+Scenario 3
+
+Departments without employees.
+
+SELECT *
+FROM Department D
+WHERE NOT EXISTS
+(
+SELECT 1
+FROM Employee E
+WHERE D.DepartmentID=E.DepartmentID
+);
+Scenario 4
+
+Employees earning more than their department average.
+
+Use a correlated subquery.
+
+Scenario 5
+
+Display every employee along with the company average salary.
+
+Use a scalar subquery.
+
+Common Interview Mistakes
+Mistake 1
+
+Using = when the subquery returns multiple rows.
+
+Incorrect
+
+SELECT *
+FROM Employee
+WHERE DepartmentID =
+(
+SELECT DepartmentID
+FROM Department
+);
+
+Error: The subquery returns multiple values.
+
+Correct
+
+SELECT *
+FROM Employee
+WHERE DepartmentID IN
+(
+SELECT DepartmentID
+FROM Department
+);
+Mistake 2
+
+Using correlated subqueries unnecessarily.
+
+Sometimes a JOIN with GROUP BY is more efficient.
+
+Mistake 3
+
+Ignoring NULL values when using NOT IN.
+
+If the subquery returns a NULL, NOT IN can produce unexpected results. In such cases, NOT EXISTS is often safer.
+
+Mistake 4
+
+Writing complex nested subqueries that reduce readability.
+
+Consider Common Table Expressions (CTEs) for clarity when supported.
+
+Performance Tips
+1. Prefer JOINs for large datasets when appropriate.
+2. Use EXISTS instead of IN for large correlated queries.
+3. Index columns used in subqueries.
+
+Examples:
+
+Employee.DepartmentID
+Department.DepartmentID
+4. Avoid unnecessary nested subqueries.
+5. Review the execution plan for expensive correlated subqueries.
+Hands-on Exercises
+Beginner
+Find employees earning more than the average salary.
+Find employees working in the IT department using a subquery.
+Display departments with employees.
+Display departments without employees.
+Display employees with the company average salary.
+Intermediate
+Find employees earning more than their department average.
+Use a subquery in the FROM clause.
+Compare IN and EXISTS.
+Use ANY to compare salaries.
+Use ALL to compare salaries.
+Advanced
+Write a correlated subquery for departmental rankings.
+Find managers with more than two direct reports.
+Use nested subqueries to retrieve department information.
+Rewrite a subquery using JOINs.
+Compare performance between JOIN and correlated subquery.
+Coding Challenges
+Challenge 1
+
+Find employees earning more than the highest salary in the HR department.
+
+Challenge 2
+
+Display departments that have no employees.
+
+Challenge 3
+
+Display employees whose salary is above their department average.
+
+Challenge 4
+
+Rewrite a correlated subquery using an INNER JOIN and GROUP BY.
+
+Challenge 5
+
+Find the department with the highest average salary using a subquery.
+
+Frequently Asked Interview Questions
+What is a subquery?
+Why do we use subqueries?
+What is a single-row subquery?
+What is a multiple-row subquery?
+What is a correlated subquery?
+Difference between correlated and non-correlated subqueries?
+What is a scalar subquery?
+What is an inline view?
+Can a subquery be used in the SELECT clause?
+Can a subquery be used in the FROM clause?
+Can a subquery be used in the WHERE clause?
+Difference between IN and EXISTS?
+Difference between ANY and ALL?
+Why can correlated subqueries be slower?
+What happens if a single-row subquery returns multiple rows?
+Why can NOT IN behave unexpectedly with NULL values?
+When should you use a JOIN instead of a subquery?
+How do indexes help subquery performance?
+What is the execution order of a subquery?
+How would you optimize a slow correlated subquery?
+Top MNC Scenario Questions
+TCS
+
+Find employees whose salary is greater than the company average.
+
+SELECT *
+FROM Employee
+WHERE Salary >
+(
+SELECT AVG(Salary)
+FROM Employee
+);
+Infosys
+
+Display departments that do not have any employees.
+
+SELECT *
+FROM Department D
+WHERE NOT EXISTS
+(
+SELECT 1
+FROM Employee E
+WHERE D.DepartmentID = E.DepartmentID
+);
+Cognizant
+
+Find employees earning more than the average salary in their own department.
+
+SELECT *
+FROM Employee E
+WHERE Salary >
+(
+SELECT AVG(Salary)
+FROM Employee
+WHERE DepartmentID = E.DepartmentID
+);
+Accenture
+
+Rewrite the following subquery using an INNER JOIN for better readability and performance.
+
+SELECT *
+FROM Employee
+WHERE DepartmentID IN
+(
+SELECT DepartmentID
+FROM Department
+WHERE DepartmentName = 'IT'
+);
+
+Possible JOIN solution:
+
+SELECT E.*
+FROM Employee E
+INNER JOIN Department D
+ON E.DepartmentID = D.DepartmentID
+WHERE D.DepartmentName = 'IT';
+Persistent Systems
+
+A report requires employees whose salaries exceed the average salary of their department. Explain the difference between solving this using a correlated subquery versus a JOIN with GROUP BY, including the performance considerations.
+
+What are SQL Set Operators?
+
+Set Operators combine the results of two or more SELECT statements into a single result set.
+
+Unlike JOINs:
+
+JOIN combines columns.
+Set Operators combine rows.
+Types of Set Operators
+Operator	Purpose
+UNION	Combines results and removes duplicates
+UNION ALL	Combines all results including duplicates
+INTERSECT	Returns common rows
+EXCEPT (SQL Server) / MINUS (Oracle)	Returns rows present in the first query but not in the second
+Rules for Using Set Operators
+
+Before using any Set Operator:
+
+Rule 1
+
+Both SELECT statements must return the same number of columns.
+
+Rule 2
+
+Columns must have compatible data types.
+
+Rule 3
+
+The order of columns must be the same.
+
+Example
+
+Correct
+
+SELECT EmployeeID, EmployeeName
+FROM CurrentEmployees
+
+UNION
+
+SELECT EmployeeID, EmployeeName
+FROM FormerEmployees;
+
+Incorrect
+
+SELECT EmployeeID
+FROM Employee
+
+UNION
+
+SELECT EmployeeID, EmployeeName
+FROM EmployeeHistory;
+
+Different number of columns.
+
+Sample Tables
+CurrentEmployees
+EmployeeID	EmployeeName
+101	John
+102	David
+103	Lisa
+104	Peter
+FormerEmployees
+EmployeeID	EmployeeName
+103	Lisa
+104	Peter
+105	Mary
+106	Steve
+Topic 1 – UNION
+Definition
+
+Returns:
+
+All unique rows
+Removes duplicate records automatically
+Syntax
+SELECT EmployeeID, EmployeeName
+FROM CurrentEmployees
+
+UNION
+
+SELECT EmployeeID, EmployeeName
+FROM FormerEmployees;
+Output
+EmployeeID	EmployeeName
+101	John
+102	David
+103	Lisa
+104	Peter
+105	Mary
+106	Steve
+
+Duplicates removed.
+
+Execution Flow
+Query 1
+
+↓
+
+Query 2
+
+↓
+
+Combine Results
+
+↓
+
+Remove Duplicates
+
+↓
+
+Display Output
+Topic 2 – UNION ALL
+
+Returns:
+
+All rows
+Does NOT remove duplicates
+SELECT EmployeeID, EmployeeName
+FROM CurrentEmployees
+
+UNION ALL
+
+SELECT EmployeeID, EmployeeName
+FROM FormerEmployees;
+Output
+EmployeeID	EmployeeName
+101	John
+102	David
+103	Lisa
+104	Peter
+103	Lisa
+104	Peter
+105	Mary
+106	Steve
+
+Duplicates remain.
+
+Interview Question
+
+Which is faster?
+
+Answer
+
+UNION ALL
+
+Why?
+
+Because SQL does not spend time removing duplicate rows.
+
+UNION vs UNION ALL
+UNION	UNION ALL
+Removes duplicates	Keeps duplicates
+Slower	Faster
+Performs DISTINCT internally	No duplicate checking
+Best when unique rows are required	Best when duplicates are acceptable
+Topic 3 – INTERSECT
+
+Returns rows common to both queries.
+
+SELECT EmployeeID, EmployeeName
+FROM CurrentEmployees
+
+INTERSECT
+
+SELECT EmployeeID, EmployeeName
+FROM FormerEmployees;
+Output
+EmployeeID	EmployeeName
+103	Lisa
+104	Peter
+
+Only common rows.
+
+Real-Time Example
+
+Find customers who purchased in both 2024 and 2025.
+
+Topic 4 – EXCEPT (SQL Server)
+
+Returns rows in the first query that do not exist in the second query.
+
+SELECT EmployeeID, EmployeeName
+FROM CurrentEmployees
+
+EXCEPT
+
+SELECT EmployeeID, EmployeeName
+FROM FormerEmployees;
+Output
+EmployeeID	EmployeeName
+101	John
+102	David
+Oracle Equivalent
+MINUS
+EXCEPT Example
+
+Current Employees
+
+John
+
+David
+
+Lisa
+
+Peter
+
+Former Employees
+
+Lisa
+
+Peter
+
+Result
+
+John
+
+David
+SQL Execution Flow
+Execute First Query
+
+↓
+
+Execute Second Query
+
+↓
+
+Apply Set Operator
+
+↓
+
+Return Final Result
+ORDER BY with Set Operators
+
+ORDER BY should appear only once, at the end.
+
+Correct
+
+SELECT EmployeeName
+FROM CurrentEmployees
+
+UNION
+
+SELECT EmployeeName
+FROM FormerEmployees
+
+ORDER BY EmployeeName;
+
+Incorrect
+
+SELECT EmployeeName
+FROM CurrentEmployees
+ORDER BY EmployeeName
+
+UNION
+
+SELECT EmployeeName
+FROM FormerEmployees;
+Combining Multiple Set Operators
+SELECT EmployeeID
+FROM TableA
+
+UNION
+
+SELECT EmployeeID
+FROM TableB
+
+INTERSECT
+
+SELECT EmployeeID
+FROM TableC;
+
+Use parentheses to make complex logic clear when mixing operators.
+
+Real-Time Business Scenarios
+Scenario 1
+
+Combine current and former employees.
+
+Use:
+
+UNION
+
+Scenario 2
+
+Display every employee record, including duplicates.
+
+Use:
+
+UNION ALL
+
+Scenario 3
+
+Find customers who ordered from both websites.
+
+Use:
+
+INTERSECT
+
+Scenario 4
+
+Find products available in Warehouse A but not in Warehouse B.
+
+Use:
+
+EXCEPT
+
+Scenario 5
+
+Compare student enrollment lists from two semesters.
+
+Choose the appropriate Set Operator depending on the requirement.
+
+Common Interview Mistakes
+Mistake 1
+
+Different column counts.
+
+Wrong
+
+SELECT EmployeeID
+UNION
+SELECT EmployeeID, EmployeeName
+Mistake 2
+
+Different data types.
+
+INT
+
+UNION
+
+DATE
+
+Use compatible data types.
+
+Mistake 3
+
+Using UNION instead of UNION ALL.
+
+UNION removes duplicates and may reduce performance.
+
+Mistake 4
+
+Placing ORDER BY in the first SELECT.
+
+ORDER BY belongs only at the end of the combined query.
+
+Performance Tips
+UNION ALL
+
+Fastest.
+
+No duplicate removal.
+
+UNION
+
+Requires sorting or hashing to remove duplicates.
+
+Slightly slower.
+
+INTERSECT
+
+Performance improves with indexes.
+
+EXCEPT
+
+Indexes on comparison columns improve execution.
+
+Always retrieve only required columns.
+
+Avoid SELECT *.
+
+Hands-on Exercises
+Beginner
+Combine two employee tables using UNION.
+Combine two employee tables using UNION ALL.
+Find common employees using INTERSECT.
+Find employees present only in CurrentEmployees.
+Sort the UNION result.
+Intermediate
+Compare customers from two branches.
+Compare product lists.
+Display common orders from two years.
+Remove duplicate employee records.
+Compare city lists.
+Advanced
+Use three SELECT statements with UNION.
+Combine UNION and INTERSECT.
+Rewrite an EXCEPT query using NOT EXISTS.
+Compare UNION vs JOIN results.
+Analyze execution plans for UNION and UNION ALL.
+Coding Challenges
+Challenge 1
+
+Find students enrolled in both SQL and Python courses.
+
+Challenge 2
+
+Find customers who purchased only in 2025.
+
+Challenge 3
+
+Combine online and offline sales records without duplicates.
+
+Challenge 4
+
+Display all invoices, including duplicates, from two billing systems.
+
+Challenge 5
+
+Find products sold in Store A but not Store B.
+
+Frequently Asked Interview Questions
+What are SQL Set Operators?
+What is the difference between JOIN and UNION?
+What is UNION?
+What is UNION ALL?
+Which is faster: UNION or UNION ALL?
+Why is UNION slower?
+What is INTERSECT?
+What is EXCEPT?
+What is MINUS in Oracle?
+Can ORDER BY be used with UNION?
+Where should ORDER BY be written?
+What rules must be followed when using Set Operators?
+Can Set Operators combine different data types?
+Can UNION remove duplicates?
+Does UNION ALL remove duplicates?
+When should INTERSECT be used?
+How can EXCEPT be rewritten using NOT EXISTS?
+Can multiple Set Operators be used in one query?
+How do indexes affect Set Operator performance?
+What is the execution order for Set Operators?
+Top MNC Scenario Questions
+TCS
+
+Combine current and former employees without duplicates.
+
+SELECT EmployeeID, EmployeeName
+FROM CurrentEmployees
+
+UNION
+
+SELECT EmployeeID, EmployeeName
+FROM FormerEmployees;
+Infosys
+
+Display all employee records, including duplicates.
+
+SELECT EmployeeID, EmployeeName
+FROM CurrentEmployees
+
+UNION ALL
+
+SELECT EmployeeID, EmployeeName
+FROM FormerEmployees;
+Cognizant
+
+Find employees who exist in both tables.
+
+SELECT EmployeeID, EmployeeName
+FROM CurrentEmployees
+
+INTERSECT
+
+SELECT EmployeeID, EmployeeName
+FROM FormerEmployees;
+Accenture
+
+Find employees who exist only in CurrentEmployees.
+
+SELECT EmployeeID, EmployeeName
+FROM CurrentEmployees
+
+EXCEPT
+
+SELECT EmployeeID, EmployeeName
+FROM FormerEmployees;
+Persistent Systems
+
+A company has customer data from Web Portal, Mobile App, and Retail Store. Explain how you would use UNION, UNION ALL, INTERSECT, and EXCEPT to answer different business questions and discuss the performance trade-offs.
+
+
+
+What is a CTE?
+
+A Common Table Expression (CTE) is a temporary named result set that exists only during the execution of a single SQL statement.
+
+Think of a CTE as a temporary virtual table that makes complex SQL queries easier to read and maintain.
+
+Why Do We Use CTEs?
+
+Without a CTE:
+
+Long nested subqueries
+Difficult to read
+Difficult to debug
+
+With a CTE:
+
+Cleaner code
+Better readability
+Easier maintenance
+Easier debugging
+CTE Syntax
+WITH CTE_Name AS
+(
+    SELECT column1,
+           column2
+    FROM Employee
+)
+SELECT *
+FROM CTE_Name;
+Sample Employee Table
+EmployeeID	EmployeeName	Department	Salary	ManagerID
+101	John	IT	65000	201
+102	David	HR	45000	202
+103	Lisa	Finance	75000	201
+104	Peter	IT	60000	203
+105	Mary	Sales	55000	202
+106	Steve	IT	85000	201
+107	James	Finance	72000	203
+108	Nancy	HR	50000	202
+SQL Execution Flow with CTE
+WITH CTE
+
+↓
+
+CTE Executes
+
+↓
+
+Temporary Result Set Created
+
+↓
+
+Main Query Executes
+
+↓
+
+CTE Disappears
+Topic 1 – Simple CTE
+
+Display employees earning more than 60000.
+
+WITH HighSalaryEmployees AS
+(
+    SELECT *
+    FROM Employee
+    WHERE Salary > 60000
+)
+SELECT *
+FROM HighSalaryEmployees;
+Output
+Employee	Salary
+John	65000
+Lisa	75000
+Steve	85000
+James	72000
+Interview Question
+
+Is a CTE permanently stored?
+
+Answer
+
+No.
+
+It exists only for the duration of a single SQL statement.
+
+Topic 2 – CTE with Aggregate Functions
+
+Find average salary by department.
+
+WITH DepartmentAverage AS
+(
+SELECT
+Department,
+AVG(Salary) AS AvgSalary
+FROM Employee
+GROUP BY Department
+)
+SELECT *
+FROM DepartmentAverage;
+Output
+Department	AvgSalary
+IT	70000
+HR	47500
+Finance	73500
+Sales	55000
+Topic 3 – Multiple CTEs
+
+Multiple CTEs can be declared together.
+
+WITH EmployeeCount AS
+(
+SELECT
+Department,
+COUNT(*) EmployeeCount
+FROM Employee
+GROUP BY Department
+),
+
+DepartmentSalary AS
+(
+SELECT
+Department,
+SUM(Salary) TotalSalary
+FROM Employee
+GROUP BY Department
+)
+
+SELECT
+E.Department,
+EmployeeCount,
+TotalSalary
+FROM EmployeeCount E
+JOIN DepartmentSalary D
+ON E.Department=D.Department;
+Output
+Department	EmployeeCount	TotalSalary
+IT	3	210000
+HR	2	95000
+Finance	2	147000
+Sales	1	55000
+Topic 4 – CTE with ROW_NUMBER()
+
+Find Top 2 highest-paid employees.
+
+WITH RankedEmployees AS
+(
+SELECT
+EmployeeName,
+Salary,
+ROW_NUMBER()
+OVER(ORDER BY Salary DESC) AS RowNum
+FROM Employee
+)
+
+SELECT *
+FROM RankedEmployees
+WHERE RowNum<=2;
+Output
+Employee	Salary	RowNum
+Steve	85000	1
+Lisa	75000	2
+Topic 5 – Recursive CTE
+What is Recursive CTE?
+
+A Recursive CTE references itself.
+
+Used for:
+
+Employee hierarchy
+Organization chart
+Folder hierarchy
+Bill of Materials (BOM)
+Family tree
+Sample Employee Table
+EmployeeID	EmployeeName	ManagerID
+101	CEO	NULL
+102	John	101
+103	David	101
+104	Peter	102
+105	Lisa	104
+Recursive CTE Syntax
+WITH EmployeeHierarchy AS
+(
+-- Anchor Member
+SELECT
+EmployeeID,
+EmployeeName,
+ManagerID,
+0 AS Level
+FROM Employee
+WHERE ManagerID IS NULL
+
+UNION ALL
+
+-- Recursive Member
+SELECT
+E.EmployeeID,
+E.EmployeeName,
+E.ManagerID,
+EH.Level+1
+FROM Employee E
+INNER JOIN EmployeeHierarchy EH
+ON E.ManagerID=EH.EmployeeID
+)
+
+SELECT *
+FROM EmployeeHierarchy;
+Execution Flow
+CEO
+
+↓
+
+John
+
+↓
+
+Peter
+
+↓
+
+Lisa
+Output
+Employee	Level
+CEO	0
+John	1
+David	1
+Peter	2
+Lisa	3
+Interview Question
+
+What are the two parts of a Recursive CTE?
+
+Answer
+Anchor Member
+Recursive Member
+Topic 6 – CTE vs Subquery
+CTE	Subquery
+Better readability	Less readable when deeply nested
+Reusable within one statement	Repeated if referenced multiple times
+Good for complex logic	Good for simple logic
+Easier debugging	Harder debugging
+Topic 7 – CTE vs Temporary Table
+CTE	Temporary Table
+Exists for one statement	Exists for the session (or until dropped)
+Cannot be indexed directly	Can have indexes
+No manual cleanup	Can require cleanup
+Ideal for query organization	Ideal for intermediate reusable data
+Topic 8 – CTE with DELETE
+
+Delete duplicate employees while keeping the first occurrence.
+
+WITH DuplicateRows AS
+(
+SELECT *,
+ROW_NUMBER()
+OVER
+(
+PARTITION BY EmployeeName
+ORDER BY EmployeeID
+) AS RN
+FROM Employee
+)
+
+DELETE
+FROM DuplicateRows
+WHERE RN>1;
+Topic 9 – CTE with UPDATE
+
+Increase salary by 10%.
+
+WITH SalaryIncrease AS
+(
+SELECT *
+FROM Employee
+WHERE Department='IT'
+)
+
+UPDATE SalaryIncrease
+SET Salary=Salary*1.10;
+Topic 10 – CTE with INSERT
+WITH NewEmployees AS
+(
+SELECT *
+FROM EmployeeBackup
+WHERE JoiningYear=2026
+)
+
+INSERT INTO Employee
+
+SELECT *
+FROM NewEmployees;
+Real-Time Business Scenarios
+Scenario 1
+
+Display top five highest-paid employees.
+
+Use a CTE with ROW_NUMBER().
+
+Scenario 2
+
+Generate an organization chart.
+
+Use a Recursive CTE.
+
+Scenario 3
+
+Delete duplicate customer records.
+
+Use a CTE with ROW_NUMBER().
+
+Scenario 4
+
+Generate department salary reports.
+
+Use multiple CTEs.
+
+Scenario 5
+
+Compare current and previous month's sales.
+
+Use separate CTEs for each month's data and join them.
+
+Common Interview Mistakes
+Mistake 1
+
+Missing the WITH keyword.
+
+Incorrect
+
+EmployeeCTE AS
+(
+SELECT *
+FROM Employee
+)
+
+Correct
+
+WITH EmployeeCTE AS
+(
+SELECT *
+FROM Employee
+)
+Mistake 2
+
+Forgetting that the CTE must be immediately followed by a SQL statement.
+
+Mistake 3
+
+Infinite recursion.
+
+Always ensure the recursive part eventually stops returning rows.
+
+Mistake 4
+
+Using a CTE across multiple independent SQL statements.
+
+A CTE is only available to the statement immediately following it.
+
+Performance Tips
+Use CTEs primarily to improve readability and maintainability.
+Avoid unnecessary recursive CTEs on very large hierarchies.
+Consider indexes on join columns used inside recursive queries.
+For large intermediate datasets reused multiple times, temporary tables may perform better.
+Review execution plans when optimizing recursive queries.
+Hands-on Exercises
+Beginner
+Create a simple CTE.
+Display employees earning more than 60000.
+Calculate average salary by department.
+Create a CTE using GROUP BY.
+Display employees from the IT department using a CTE.
+Intermediate
+Create multiple CTEs in one query.
+Rank employees using ROW_NUMBER().
+Display the top three salaries.
+Compare CTE and subquery solutions.
+Generate a department summary using CTEs.
+Advanced
+Build an employee hierarchy using a Recursive CTE.
+Delete duplicate records using a CTE.
+Update salaries using a CTE.
+Rewrite a nested subquery using CTEs.
+Compare CTE and temporary table performance.
+Coding Challenges
+Challenge 1
+
+Find the second-highest salary using a CTE.
+
+Challenge 2
+
+Generate a complete employee hierarchy.
+
+Challenge 3
+
+Delete duplicate customer records using ROW_NUMBER().
+
+Challenge 4
+
+Create a department ranking based on total salary.
+
+Challenge 5
+
+Rewrite a complex three-level nested subquery using CTEs.
+
+Frequently Asked Interview Questions
+What is a CTE?
+Why do we use CTEs?
+What are the advantages of CTEs?
+Can a CTE be reused?
+What is a Recursive CTE?
+What are the two parts of a Recursive CTE?
+Difference between CTE and Subquery?
+Difference between CTE and Temporary Table?
+Can CTEs be used with INSERT?
+Can CTEs be used with UPDATE?
+Can CTEs be used with DELETE?
+Can a CTE reference itself?
+What is the scope of a CTE?
+Why can recursive CTEs become slow?
+How do you prevent infinite recursion?
+Can multiple CTEs be defined in one query?
+Can a CTE improve readability?
+Is a CTE stored permanently?
+Can a CTE have indexes?
+When should you choose a temporary table instead of a CTE?
+Top MNC Scenario Questions
+TCS
+
+Display the top three highest-paid employees using a CTE.
+
+WITH RankedEmployees AS
+(
+    SELECT EmployeeName,
+           Salary,
+           ROW_NUMBER() OVER (ORDER BY Salary DESC) AS RN
+    FROM Employee
+)
+SELECT *
+FROM RankedEmployees
+WHERE RN <= 3;
+Infosys
+
+Generate a department salary summary using a CTE.
+
+WITH DepartmentSummary AS
+(
+    SELECT Department,
+           SUM(Salary) AS TotalSalary
+    FROM Employee
+    GROUP BY Department
+)
+SELECT *
+FROM DepartmentSummary;
+Cognizant
+
+Build an employee-manager hierarchy using a Recursive CTE.
+
+WITH EmployeeHierarchy AS
+(
+    SELECT EmployeeID,
+           EmployeeName,
+           ManagerID,
+           0 AS Level
+    FROM Employee
+    WHERE ManagerID IS NULL
+
+    UNION ALL
+
+    SELECT E.EmployeeID,
+           E.EmployeeName,
+           E.ManagerID,
+           EH.Level + 1
+    FROM Employee E
+    INNER JOIN EmployeeHierarchy EH
+        ON E.ManagerID = EH.EmployeeID
+)
+SELECT *
+FROM EmployeeHierarchy;
+Accenture
+
+Rewrite a complex nested subquery using a CTE and explain why the CTE version is easier to read and maintain.
+
+Persistent Systems
+
+A reporting query calculates monthly sales, quarterly sales, top-performing employees, and department rankings. Design a solution using multiple CTEs and explain when a temporary table would be a better choice.
+
+
+What are Window Functions?
+
+A Window Function performs calculations across a set of rows related to the current row without collapsing the result into a single row.
+
+Unlike GROUP BY, Window Functions return one output row for every input row.
+
+GROUP BY vs Window Functions
+GROUP BY	Window Function
+Groups rows	Keeps all rows
+One row per group	One row per input row
+Aggregate result	Analytical result
+Cannot display detail rows	Displays detail rows and calculations together
+Sample Employee Table
+EmployeeID	EmployeeName	Department	Salary
+101	John	IT	65000
+102	David	HR	45000
+103	Lisa	Finance	75000
+104	Peter	IT	60000
+105	Mary	Sales	55000
+106	Steve	IT	85000
+107	James	Finance	72000
+108	Nancy	HR	50000
+What is the OVER() Clause?
+
+The OVER() clause defines the window over which the function operates.
+
+General syntax:
+
+FUNCTION_NAME(...)
+OVER (
+    PARTITION BY column_name
+    ORDER BY column_name
+)
+SQL Execution Flow with Window Functions
+FROM
+
+↓
+
+WHERE
+
+↓
+
+GROUP BY
+
+↓
+
+HAVING
+
+↓
+
+Window Functions
+
+↓
+
+SELECT
+
+↓
+
+ORDER BY
+Topic 1 – ROW_NUMBER()
+
+Assigns a unique sequential number to each row.
+
+Example
+SELECT
+EmployeeName,
+Salary,
+ROW_NUMBER() OVER(ORDER BY Salary DESC) AS RowNumber
+FROM Employee;
+Output
+Employee	Salary	RowNumber
+Steve	85000	1
+Lisa	75000	2
+James	72000	3
+John	65000	4
+Peter	60000	5
+Real-Time Scenario
+
+Display the Top 3 highest-paid employees.
+
+WITH RankedEmployees AS
+(
+SELECT *,
+ROW_NUMBER() OVER(ORDER BY Salary DESC) AS RN
+FROM Employee
+)
+
+SELECT *
+FROM RankedEmployees
+WHERE RN<=3;
+Topic 2 – RANK()
+
+Assigns rankings.
+
+Duplicate values receive the same rank.
+
+The next rank is skipped.
+
+Example
+
+Salary	Rank
+90000	1
+85000	2
+85000	2
+80000	4
+SELECT
+EmployeeName,
+Salary,
+RANK() OVER(ORDER BY Salary DESC) AS RankValue
+FROM Employee;
+Topic 3 – DENSE_RANK()
+
+Similar to RANK.
+
+No gaps.
+
+Example
+
+Salary	DenseRank
+90000	1
+85000	2
+85000	2
+80000	3
+SELECT
+EmployeeName,
+Salary,
+DENSE_RANK() OVER(ORDER BY Salary DESC) AS DenseRank
+FROM Employee;
+ROW_NUMBER vs RANK vs DENSE_RANK
+Function	Duplicate Rank	Gaps
+ROW_NUMBER	❌	No
+RANK	✅	Yes
+DENSE_RANK	✅	No
+Topic 4 – PARTITION BY
+
+Partitions data into groups.
+
+Ranking restarts for every partition.
+
+SELECT
+EmployeeName,
+Department,
+Salary,
+ROW_NUMBER()
+OVER
+(
+PARTITION BY Department
+ORDER BY Salary DESC
+)
+AS DepartmentRank
+FROM Employee;
+Output
+Department	Employee	Rank
+IT	Steve	1
+IT	John	2
+IT	Peter	3
+HR	Nancy	1
+HR	David	2
+Interview Question
+
+Difference between GROUP BY and PARTITION BY?
+
+GROUP BY	PARTITION BY
+Reduces rows	Keeps all rows
+Aggregate output	Analytical output
+Topic 5 – NTILE()
+
+Divides rows into equal groups.
+
+Example
+
+Divide employees into four salary bands.
+
+SELECT
+EmployeeName,
+Salary,
+NTILE(4)
+OVER
+(
+ORDER BY Salary DESC
+)
+AS Quartile
+FROM Employee;
+Output
+Employee	Quartile
+Steve	1
+Lisa	1
+James	2
+John	2
+Peter	3
+Mary	3
+Nancy	4
+David	4
+Topic 6 – LAG()
+
+Returns the previous row value.
+
+SELECT
+EmployeeName,
+Salary,
+LAG(Salary)
+OVER(ORDER BY Salary)
+AS PreviousSalary
+FROM Employee;
+Output
+Employee	Salary	PreviousSalary
+David	45000	NULL
+Nancy	50000	45000
+Mary	55000	50000
+Real-Time Scenario
+
+Compare current month's sales with the previous month.
+
+Topic 7 – LEAD()
+
+Returns the next row value.
+
+SELECT
+EmployeeName,
+Salary,
+LEAD(Salary)
+OVER(ORDER BY Salary)
+AS NextSalary
+FROM Employee;
+Output
+Employee	Salary	NextSalary
+David	45000	50000
+Nancy	50000	55000
+Topic 8 – FIRST_VALUE()
+
+Returns the first value in the window.
+
+SELECT
+EmployeeName,
+Department,
+Salary,
+FIRST_VALUE(Salary)
+OVER
+(
+PARTITION BY Department
+ORDER BY Salary DESC
+)
+AS HighestSalaryInDepartment
+FROM Employee;
+Topic 9 – LAST_VALUE()
+
+Returns the last value in the window.
+
+SELECT
+EmployeeName,
+Department,
+Salary,
+LAST_VALUE(Salary)
+OVER
+(
+PARTITION BY Department
+ORDER BY Salary DESC
+ROWS BETWEEN UNBOUNDED PRECEDING
+AND UNBOUNDED FOLLOWING
+)
+AS LowestSalaryInDepartment
+FROM Employee;
+
+Interview Tip: LAST_VALUE() often produces unexpected results unless the window frame is explicitly specified.
+
+Topic 10 – Running Total
+
+Calculate cumulative salary.
+
+SELECT
+EmployeeName,
+Salary,
+SUM(Salary)
+OVER
+(
+ORDER BY EmployeeID
+)
+AS RunningTotal
+FROM Employee;
+Output
+Employee	Salary	RunningTotal
+John	65000	65000
+David	45000	110000
+Lisa	75000	185000
+Topic 11 – Moving Average
+
+Calculate a 3-row moving average.
+
+SELECT
+EmployeeID,
+Salary,
+AVG(Salary)
+OVER
+(
+ORDER BY EmployeeID
+ROWS BETWEEN 2 PRECEDING
+AND CURRENT ROW
+)
+AS MovingAverage
+FROM Employee;
+Topic 12 – Window Aggregate Functions
+
+Window functions also support aggregate calculations.
+
+SELECT
+EmployeeName,
+Department,
+Salary,
+AVG(Salary)
+OVER(PARTITION BY Department) AS DepartmentAverage,
+SUM(Salary)
+OVER(PARTITION BY Department) AS DepartmentTotal
+FROM Employee;
+Real-Time Business Scenarios
+Scenario 1
+
+Find the Top 5 highest-paid employees.
+
+Use ROW_NUMBER().
+
+Scenario 2
+
+Find the highest-paid employee in every department.
+
+Use:
+
+ROW_NUMBER() + PARTITION BY
+Scenario 3
+
+Compare today's sales with yesterday's sales.
+
+Use:
+
+LAG()
+Scenario 4
+
+Forecast next month's sales.
+
+Use:
+
+LEAD()
+Scenario 5
+
+Calculate monthly cumulative revenue.
+
+Use:
+
+SUM() OVER()
+Scenario 6
+
+Find the second-highest salary in each department.
+
+WITH SalaryRank AS
+(
+SELECT *,
+DENSE_RANK()
+OVER
+(
+PARTITION BY Department
+ORDER BY Salary DESC
+) AS RankNo
+FROM Employee
+)
+
+SELECT *
+FROM SalaryRank
+WHERE RankNo=2;
+Common Interview Mistakes
+Mistake 1
+
+Using GROUP BY instead of Window Functions when detail rows are required.
+
+Mistake 2
+
+Confusing ROW_NUMBER() and RANK().
+
+Mistake 3
+
+Forgetting PARTITION BY.
+
+Results may be calculated across the entire dataset instead of within each group.
+
+Mistake 4
+
+Using LAST_VALUE() without defining the window frame.
+
+Mistake 5
+
+Filtering directly on a window function in the WHERE clause.
+
+Incorrect:
+
+SELECT *,
+ROW_NUMBER() OVER(ORDER BY Salary DESC) AS RN
+FROM Employee
+WHERE RN <= 3;
+
+Correct:
+
+WITH RankedEmployees AS
+(
+SELECT *,
+ROW_NUMBER() OVER(ORDER BY Salary DESC) AS RN
+FROM Employee
+)
+SELECT *
+FROM RankedEmployees
+WHERE RN <= 3;
+Performance Tips
+Create indexes on columns used in PARTITION BY and ORDER BY.
+Avoid unnecessary sorting operations.
+Use ROW_NUMBER() when unique numbering is required.
+Use DENSE_RANK() when ranking without gaps is needed.
+Review execution plans for large analytical queries.
+Hands-on Exercises
+Beginner
+Assign row numbers to employees.
+Rank employees by salary.
+Display dense ranks.
+Find department-wise row numbers.
+Divide employees into four salary groups using NTILE().
+Intermediate
+Find the previous salary using LAG().
+Find the next salary using LEAD().
+Calculate department averages using window aggregates.
+Find the highest salary in each department.
+Calculate running totals.
+Advanced
+Find the second-highest salary in each department.
+Calculate a three-month moving average.
+Identify salary changes between consecutive employees.
+Build a sales trend report using LAG() and LEAD().
+Compare GROUP BY and Window Function solutions for the same problem.
+Coding Challenges
+Challenge 1
+
+Find the Top 3 highest-paid employees in every department.
+
+Challenge 2
+
+Find employees whose salary is above the department average.
+
+Challenge 3
+
+Calculate month-over-month sales growth using LAG().
+
+Challenge 4
+
+Generate quarterly customer segments using NTILE(4).
+
+Challenge 5
+
+Calculate cumulative sales by department ordered by transaction date.
+
+Frequently Asked Interview Questions
+What are Window Functions?
+Why do we use the OVER() clause?
+Difference between GROUP BY and Window Functions?
+What is ROW_NUMBER()?
+Difference between ROW_NUMBER() and RANK()?
+Difference between RANK() and DENSE_RANK()?
+What is PARTITION BY?
+What is NTILE()?
+What is LAG()?
+What is LEAD()?
+What is FIRST_VALUE()?
+What is LAST_VALUE()?
+What is a running total?
+What is a moving average?
+Can aggregate functions be used as Window Functions?
+Why is LAST_VALUE() tricky?
+How do you find the second-highest salary in each department?
+Can Window Functions be used in the WHERE clause?
+How do indexes improve Window Function performance?
+When should you choose Window Functions instead of GROUP BY?
+Top MNC Scenario Questions
+TCS
+
+Find the Top 5 highest-paid employees.
+
+WITH RankedEmployees AS
+(
+SELECT *,
+ROW_NUMBER() OVER(ORDER BY Salary DESC) AS RN
+FROM Employee
+)
+SELECT *
+FROM RankedEmployees
+WHERE RN <= 5;
+Infosys
+
+Find the highest-paid employee in every department.
+
+WITH DepartmentRank AS
+(
+SELECT *,
+ROW_NUMBER()
+OVER
+(
+PARTITION BY Department
+ORDER BY Salary DESC
+) AS RN
+FROM Employee
+)
+SELECT *
+FROM DepartmentRank
+WHERE RN = 1;
+Cognizant
+
+Calculate running salary totals ordered by employee ID.
+
+SELECT
+EmployeeID,
+EmployeeName,
+Salary,
+SUM(Salary)
+OVER
+(
+ORDER BY EmployeeID
+) AS RunningTotal
+FROM Employee;
+Accenture
+
+Compare each employee's salary with the previous employee's salary.
+
+SELECT
+EmployeeName,
+Salary,
+LAG(Salary)
+OVER(ORDER BY Salary) AS PreviousSalary
+FROM Employee;
+Persistent Systems
+
+A retail company needs a report showing:
+
+Department-wise salary rankings
+Top 3 employees per department
+Running salary totals
+Comparison with previous employee salary
+Department average salary
+
+
+Frequently Asked Interview Questions
+What is a View?
+Why do we use Views?
+Does a View store data?
+What is a Simple View?
+What is a Complex View?
+What is an Updatable View?
+What are the limitations of updating a View?
+What is an Indexed View?
+What is WITH SCHEMABINDING?
+What is a Materialized View?
+Difference between View and Table?
+Difference between View and CTE?
+Difference between View and Temporary Table?
+Difference between Indexed View and Materialized View?
+Can a View improve security?
+Can a View contain JOINs?
+Can a View contain aggregate functions?
+Why can nested Views affect performance?
+When should you refresh a Materialized View?
+When would you avoid using a View?
+Top MNC Scenario Questions
+TCS
+
+Create a View to hide employee salary details.
+
+CREATE VIEW EmployeePublic AS
+SELECT EmployeeID,
+       EmployeeName,
+       Department
+FROM Employee;
+Infosys
+
+Create a View that displays average salary by department.
+
+CREATE VIEW DepartmentAverage AS
+SELECT Department,
+       AVG(Salary) AS AverageSalary
+FROM Employee
+GROUP BY Department;
+Cognizant
+
+Explain the differences between a View, CTE, and Temporary Table, and identify which one you would choose for reusable reporting.
+
+Accenture
+
+A dashboard is slow because it repeatedly executes the same aggregation query. Compare using an Indexed View (SQL Server) versus a Materialized View (Oracle/PostgreSQL).
+
+Persistent Systems
+
+An HR application must:
+
+Hide confidential employee data.
+Provide fast reporting.
+Support department-level analytics.
+
+Design a solution using Views and explain where Indexed or Materialized Views would be appropriate.
+
+
+
+
+

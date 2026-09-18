@@ -1,0 +1,846 @@
+Microsoft Fabric Interview Questions & Answers
+1. What is Microsoft Fabric?
+
+Answer:
+
+Microsoft Fabric is an end-to-end SaaS analytics platform from Microsoft that integrates data engineering, data integration, data warehousing, data science, real-time analytics, and Power BI into a single platform.
+
+Main workloads
+Data Factory – Data integration and pipelines
+Data Engineering – Spark, notebooks, Lakehouse
+Data Warehouse – SQL-based analytics
+Data Science – Machine learning
+Real-Time Intelligence – Streaming and real-time analytics
+Power BI – Reporting and visualization
+
+Interview point:
+
+"Microsoft Fabric provides a unified analytics platform where data can be ingested, transformed, stored, analyzed and visualized using a common data foundation called OneLake."
+
+2. What is OneLake?
+
+Answer:
+
+OneLake is the centralized data lake for Microsoft Fabric.
+
+Think of it as:
+
+                Microsoft Fabric
+                       |
+                    OneLake
+                       |
+        --------------------------------
+        |              |               |
+     Lakehouse      Warehouse     Other workloads
+        |
+     Files/Tables
+
+OneLake provides a single logical data lake across the organization.
+
+Key points
+Built into Fabric
+Organization-wide data lake
+Uses Delta Lake for Fabric Lakehouse tables
+Reduces data duplication
+Supports multiple Fabric workloads
+Interview answer
+
+"OneLake is the single, centralized data lake of Microsoft Fabric. It provides a common storage layer for Fabric workloads and eliminates the need for every team to maintain separate data lakes."
+
+3. What is a Lakehouse?
+
+Answer:
+
+A Lakehouse combines the capabilities of a Data Lake and Data Warehouse.
+
+It allows us to store:
+
+Files
+Structured data
+Semi-structured data
+Tables
+
+A Fabric Lakehouse has two major areas:
+
+Lakehouse
+   |
+   +---- Files
+   |
+   +---- Tables
+Files
+
+Used for raw/unstructured or semi-structured data:
+
+CSV
+JSON
+Parquet
+Excel
+Tables
+
+Used for structured analytical data.
+
+Fabric Lakehouse tables are generally stored using Delta Lake format.
+
+4. What is a Warehouse in Microsoft Fabric?
+
+Answer:
+
+Fabric Warehouse is a SQL-based analytical data store designed primarily for structured relational data and analytical workloads.
+
+You can use T-SQL to:
+
+Create tables
+Create views
+Query data
+Create stored procedures
+Perform analytical queries
+
+Example:
+
+SELECT
+    CustomerID,
+    SUM(SalesAmount) AS TotalSales
+FROM Sales
+GROUP BY CustomerID;
+Lakehouse vs Warehouse
+Lakehouse	Warehouse
+Data lake + tables	SQL analytical warehouse
+Supports files and tables	Primarily structured tables
+Spark + SQL	T-SQL
+Data engineering friendly	SQL/BI friendly
+Good for raw + curated data	Good for curated relational data
+5. What is the SQL Endpoint?
+
+This is an important interview question.
+
+Answer:
+
+The SQL analytics endpoint is the SQL interface provided for querying tables in a Fabric Lakehouse.
+
+For example, if your Lakehouse contains:
+
+Customer
+Product
+Sales
+
+you can query them using SQL.
+
+SELECT *
+FROM Sales;
+Important distinction
+
+Don't confuse:
+
+Lakehouse SQL Analytics Endpoint
+
+with
+
+Fabric Warehouse.
+
+The Lakehouse SQL endpoint provides read-oriented SQL access to Lakehouse tables, whereas a Fabric Warehouse is a separate SQL-based data warehouse workload.
+
+6. How do you create tables in a Fabric Lakehouse?
+
+There are several approaches.
+
+Method 1 – Load data through UI
+
+For example:
+
+Lakehouse
+   ↓
+Files
+   ↓
+Select CSV
+   ↓
+Load to Tables
+
+Fabric can create a table from the file.
+
+Method 2 – SQL
+
+Using the SQL analytics endpoint, you can query existing Lakehouse tables.
+
+For table creation/transformation scenarios, you can also use Spark/Notebook depending on the workload.
+
+Example PySpark:
+
+df.write.format("delta").mode("overwrite").saveAsTable("Sales")
+
+This creates a Delta table called:
+
+Sales
+7. How do you load data from Lakehouse Files into Tables?
+
+Suppose your Lakehouse has:
+
+Files
+ |
+ +-- employee.csv
+ +-- customer.csv
+ +-- sales.csv
+
+You can load the files into Lakehouse tables.
+
+UI approach
+Lakehouse
+   ↓
+Files
+   ↓
+Select CSV
+   ↓
+Load to Tables
+   ↓
+Table created
+
+For example:
+
+employee.csv
+      ↓
+employee table
+Pipeline approach
+
+You can also use:
+
+Pipeline
+   ↓
+Copy Activity
+   ↓
+Lakehouse Files
+   ↓
+Lakehouse Table
+Notebook approach
+df = spark.read.csv(
+    "Files/employee.csv",
+    header=True,
+    inferSchema=True
+)
+
+df.write.format("delta").mode("overwrite").saveAsTable("employee")
+8. What is Data Factory in Microsoft Fabric?
+
+Answer:
+
+Fabric Data Factory is used for data integration and orchestration.
+
+It allows us to:
+
+Extract data
+Transform data
+Load data
+Schedule jobs
+Orchestrate multiple activities
+Connect different data sources
+
+Example:
+
+SQL Server
+    ↓
+Data Factory Pipeline
+    ↓
+Lakehouse
+    ↓
+Power BI
+9. What is a Pipeline?
+
+Answer:
+
+A pipeline is a workflow that orchestrates data movement and processing activities.
+
+For example:
+
+Lookup
+   ↓
+Filter
+   ↓
+ForEach
+   ↓
+Copy Data
+   ↓
+Notebook
+
+The pipeline controls what should happen, in what order, and under what conditions.
+
+10. What is Copy Data Activity?
+
+Answer:
+
+Copy Data activity is used to move data from a source to a destination.
+
+Example:
+
+SQL Server
+    |
+    | Copy Data
+    ↓
+Fabric Lakehouse
+Source examples
+SQL Server
+Oracle
+CSV
+Azure Storage
+REST APIs
+Other supported sources
+Destination examples
+Lakehouse
+Warehouse
+Azure storage
+Other supported destinations
+11. What is Dataflow Gen2?
+
+Answer:
+
+Dataflow Gen2 is a low-code/no-code data transformation tool in Microsoft Fabric, based on Power Query.
+
+It is useful when we need to:
+
+Clean data
+Remove duplicates
+Handle null values
+Change data types
+Filter rows
+Merge datasets
+Transform columns
+
+Example:
+
+CSV
+ ↓
+Dataflow Gen2
+ ↓
+Remove duplicates
+ ↓
+Handle nulls
+ ↓
+Change datatype
+ ↓
+Lakehouse/Warehouse
+Interview difference
+
+Copy Activity:
+
+Mainly used for moving data.
+
+Dataflow Gen2:
+
+Mainly used for transforming and preparing data.
+
+12. What is Filter Activity?
+
+Answer:
+
+Filter activity is used to filter an array of items based on a condition inside a pipeline.
+
+For example, suppose a Lakehouse folder contains:
+
+employee.csv
+customer.csv
+sales.xlsx
+product.json
+department.csv
+
+We only want .csv files.
+
+Filter expression:
+
+@and(
+    equals(item().type,'File'),
+    endsWith(toLower(item().name),'.csv')
+)
+
+Result:
+
+employee.csv
+customer.csv
+department.csv
+Interview explanation
+
+"I use Filter activity when I have a collection of items and want to continue processing only the items that satisfy a particular condition."
+
+13. What is item() in Fabric Pipeline?
+
+Answer:
+
+item() represents the current item being processed in activities such as Filter and ForEach.
+
+For example:
+
+employee.csv
+customer.csv
+sales.xlsx
+
+When processing:
+
+employee.csv
+
+item().name returns:
+
+employee.csv
+
+Similarly:
+
+item().type
+
+returns the type of the current item.
+
+14. What are Pipeline Parameters?
+
+Answer:
+
+Pipeline parameters are input values that make a pipeline reusable and dynamic.
+
+Instead of hardcoding:
+
+employee.csv
+
+we can create:
+
+FileName
+
+as a parameter.
+
+Then pass:
+
+employee.csv
+
+during execution.
+
+Example
+
+Parameter:
+
+FileName = employee.csv
+
+Pipeline:
+
+FileName
+   ↓
+Copy Activity
+   ↓
+Target
+
+The same pipeline can then process:
+
+employee.csv
+customer.csv
+sales.csv
+
+without creating separate pipelines.
+
+Interview answer
+
+"Pipeline parameters help make pipelines reusable, dynamic and configurable instead of hardcoding values."
+
+15. What is the Semantic Model / Semantic Layer?
+
+Answer:
+
+The semantic layer provides a business-friendly representation of data for reporting and analysis.
+
+In Fabric, a semantic model can contain:
+
+Tables
+Relationships
+Measures
+Calculated columns
+Hierarchies
+Business logic
+Security such as RLS
+
+Example:
+
+              Semantic Model
+                    |
+       ---------------------------
+       |            |            |
+    Customer      Product       Date
+       |            |            |
+       ----------- Sales ---------
+                    |
+                 Measures
+                    |
+               Power BI Report
+
+Example measure:
+
+Total Sales =
+SUM(Sales[SalesAmount])
+
+Instead of report developers repeatedly writing complex logic, business calculations can be defined centrally in the semantic model.
+
+16. What is Real-Time Analytics?
+
+Answer:
+
+Real-time analytics means analyzing data as it is generated or arrives, with very low latency.
+
+Example:
+
+IoT Sensors
+    ↓
+Streaming Data
+    ↓
+Fabric Real-Time Intelligence
+    ↓
+Real-Time Analysis
+    ↓
+Dashboard / Alert
+Examples
+IoT monitoring
+Stock/financial transactions
+Website clickstream
+Application logs
+Fraud detection
+Vehicle tracking
+17. What is Streaming Data?
+
+Answer:
+
+Streaming data is continuously generated data that arrives as a sequence of events rather than as a single batch.
+
+Example:
+
+10:01:01 → Sensor = 25°C
+10:01:02 → Sensor = 26°C
+10:01:03 → Sensor = 27°C
+10:01:04 → Sensor = 29°C
+
+Instead of waiting until the end of the day, we process the events continuously.
+
+Batch vs Streaming
+Batch	Streaming
+Data processed periodically	Data processed continuously
+Minutes/hours/days	Seconds/milliseconds
+Daily sales report	Live sensor monitoring
+ETL jobs	Event processing
+18. What is CI/CD in Microsoft Fabric?
+
+Answer:
+
+CI/CD means:
+
+Continuous Integration / Continuous Deployment
+
+It is used to move Fabric development work between environments in a controlled manner.
+
+Typical environments:
+
+Development
+     ↓
+Testing
+     ↓
+Production
+
+For example:
+
+Developer
+   ↓
+Dev Workspace
+   ↓
+Git
+   ↓
+Test Workspace
+   ↓
+Production Workspace
+CI – Continuous Integration
+
+Developers regularly integrate changes into source control.
+
+CD – Continuous Deployment
+
+Validated changes are deployed to the next environment.
+
+19. What is Git Integration in Fabric?
+
+Answer:
+
+Git integration allows Fabric workspace items to be connected with a Git repository for version control and collaboration.
+
+It helps track changes to items such as:
+
+Notebooks
+Pipelines
+Dataflows
+Semantic models
+Reports
+
+Conceptually:
+
+Developer
+   ↓
+Fabric Workspace
+   ↓
+Git Repository
+   ↓
+Version Control
+20. What is Deployment Pipeline?
+
+Answer:
+
+Fabric Deployment Pipelines help deploy content between environments.
+
+Typical setup:
+
+DEV
+ ↓
+TEST
+ ↓
+PROD
+
+For example:
+
+Development Workspace
+        ↓
+Test Workspace
+        ↓
+Production Workspace
+
+This reduces the risk of manually recreating Fabric objects in production.
+
+In Microsoft Fabric + Power BI, Row-Level Security (RLS) is implemented in the semantic model. It controls which rows a user can see, not which tables or columns they can access.
+
+1. Simple example
+
+Suppose your Sales table contains:
+
+SaleID	Region	SalesAmount
+1	South	10000
+2	North	15000
+3	South	12000
+4	West	18000
+
+You want:
+
+South manager → only South data
+North manager → only North data
+West manager → only West data
+2. Create a security mapping table
+
+For a real project, I recommend dynamic RLS.
+
+Create a table such as:
+
+UserRegion
+UserEmail	Region
+ravi@company.com	South
+kumar@company.com	North
+anil@company.com	West
+
+Your model becomes:
+
+UserRegion
+    |
+    | Region
+    ↓
+  Region
+    |
+    | 1 : *
+    ↓
+  Sales
+
+Or, if you don't have a separate Region dimension:
+
+UserRegion
+    |
+    | Region
+    ↓
+   Sales
+3. Create the relationship
+
+In the semantic model, create:
+
+UserRegion[Region]
+        1
+        |
+        *
+Sales[Region]
+
+Use the appropriate relationship/filter direction so the security filter can propagate from the security table to Sales.
+
+A dimension-based star schema is generally preferable for production models.
+
+4. Create the RLS role
+
+Open your semantic model and go to:
+
+Modeling → Manage roles
+
+Create a role:
+
+SalesSecurity
+
+Apply a filter to the UserRegion table:
+
+[UserEmail] = USERPRINCIPALNAME()
+What does this do?
+
+Suppose the logged-in user is:
+
+ravi@company.com
+
+Power BI evaluates:
+
+USERPRINCIPALNAME()
+
+and gets:
+
+ravi@company.com
+
+Therefore the security table becomes:
+
+UserEmail	Region
+ravi@company.com	South
+
+Through the relationship, only:
+
+South
+
+Sales rows are visible.
+
+5. Test the RLS
+
+In Power BI/Fabric, use:
+
+Security / Test as role
+
+Test with different users/roles.
+
+For example:
+
+ravi@company.com
+       ↓
+South
+       ↓
+Only South Sales
+6. Publish to Fabric
+
+Once your report and semantic model are ready:
+
+Power BI Desktop
+       ↓
+Publish
+       ↓
+Fabric Workspace
+       ↓
+Semantic Model
+
+The RLS role is part of the semantic model.
+
+7. Assign users to the role
+
+This is a very important interview point.
+
+Creating the role is not enough.
+
+You must assign users or groups to the role in the Fabric/Power BI service.
+
+Conceptually:
+
+SalesSecurity Role
+       |
+       +---- ravi@company.com
+       +---- kumar@company.com
+       +---- anil@company.com
+
+For an enterprise environment, using a security group is usually easier than maintaining individual users.
+
+8. Static vs Dynamic RLS
+Static RLS
+
+You hardcode the region:
+
+[Region] = "South"
+
+This role can see only South.
+
+South Role
+    ↓
+South data
+
+This works for small/simple scenarios.
+
+Dynamic RLS
+
+Instead of creating separate roles for every region, use the logged-in user's identity:
+
+[UserEmail] = USERPRINCIPALNAME()
+
+Example:
+
+User                 Region
+--------------------------------
+ravi@company.com     South
+kumar@company.com    North
+anil@company.com     West
+
+One role can handle all users.
+
+Interview answer
+
+"Static RLS uses fixed filter values such as Region = 'South', whereas dynamic RLS uses the logged-in user's identity, such as USERPRINCIPALNAME(), to determine which rows the user can access."
+
+9. Important interview scenario
+Interviewer:
+
+"Suppose I have 1,000 users and 20 regions. Would you create 20 RLS roles?"
+
+Good answer:
+
+"No. I would preferably implement dynamic RLS using a user-to-region mapping table. The mapping table would contain the user's email and permitted region. I would create one RLS role using USERPRINCIPALNAME(). The user's identity filters the mapping table, and the relationship propagates the filter to the Sales fact table."
+
+Architecture:
+
+             Logged-in User
+                    |
+                    ↓
+          USERPRINCIPALNAME()
+                    |
+                    ↓
+             UserRegion
+          +----------------+
+          | Email | Region |
+          +----------------+
+                    |
+                    ↓
+                Region
+                    |
+                    ↓
+                 Sales
+                    |
+                    ↓
+             Power BI Report
+10. What if one user has multiple regions?
+
+This is another excellent interview question.
+
+Example:
+
+UserEmail	Region
+manager@company.com	South
+manager@company.com	West
+
+The same user can therefore see:
+
+South + West
+
+The dynamic RLS filter:
+
+[UserEmail] = USERPRINCIPALNAME()
+
+returns both rows.
+
+11. RLS vs Object-Level Security
+
+Don't confuse them.
+
+RLS	OLS
+Controls rows	Controls tables/columns
+User sees selected rows	User may not see certain objects
+Example: only South sales	Example: hide Salary column
+
+RLS example:
+
+Sales
+ ├── South ← User can see
+ ├── North ← Hidden
+ └── West  ← Hidden
